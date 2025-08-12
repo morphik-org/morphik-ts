@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource workflows', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.folders.workflows.list('folder_id');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource workflows', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('associate: only required params', async () => {
     const responsePromise = client.folders.workflows.associate('workflow_id', { folder_id: 'folder_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -32,12 +32,12 @@ describe('resource workflows', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('associate: required and optional params', async () => {
     const response = await client.folders.workflows.associate('workflow_id', { folder_id: 'folder_id' });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('disassociate: only required params', async () => {
     const responsePromise = client.folders.workflows.disassociate('workflow_id', { folder_id: 'folder_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -49,7 +49,7 @@ describe('resource workflows', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('disassociate: required and optional params', async () => {
     const response = await client.folders.workflows.disassociate('workflow_id', { folder_id: 'folder_id' });
   });

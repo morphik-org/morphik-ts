@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource workflows', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.workflows.create({
       name: 'name',
@@ -24,7 +24,7 @@ describe('resource workflows', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.workflows.create({
       name: 'name',
@@ -38,7 +38,7 @@ describe('resource workflows', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.workflows.retrieve('workflow_id');
     const rawResponse = await responsePromise.asResponse();
@@ -50,7 +50,7 @@ describe('resource workflows', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.workflows.update('workflow_id', { body: { foo: 'bar' } });
     const rawResponse = await responsePromise.asResponse();
@@ -62,12 +62,12 @@ describe('resource workflows', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.workflows.update('workflow_id', { body: { foo: 'bar' } });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.workflows.list();
     const rawResponse = await responsePromise.asResponse();
@@ -79,7 +79,7 @@ describe('resource workflows', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.workflows.delete('workflow_id');
     const rawResponse = await responsePromise.asResponse();
@@ -91,7 +91,7 @@ describe('resource workflows', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('run: only required params', async () => {
     const responsePromise = client.workflows.run('document_id', { workflow_id: 'workflow_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -103,7 +103,7 @@ describe('resource workflows', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('run: required and optional params', async () => {
     const response = await client.workflows.run('document_id', { workflow_id: 'workflow_id' });
   });

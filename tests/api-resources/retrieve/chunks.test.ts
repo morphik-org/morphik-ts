@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource chunks', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.retrieve.chunks.create({ query: 'x' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource chunks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.retrieve.chunks.create({
       query: 'x',
@@ -38,7 +38,7 @@ describe('resource chunks', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createGrouped: only required params', async () => {
     const responsePromise = client.retrieve.chunks.createGrouped({ query: 'x' });
     const rawResponse = await responsePromise.asResponse();
@@ -50,7 +50,7 @@ describe('resource chunks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createGrouped: required and optional params', async () => {
     const response = await client.retrieve.chunks.createGrouped({
       query: 'x',

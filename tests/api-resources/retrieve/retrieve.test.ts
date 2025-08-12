@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource retrieve', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createDocs: only required params', async () => {
     const responsePromise = client.retrieve.createDocs({ query: 'x' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource retrieve', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createDocs: required and optional params', async () => {
     const response = await client.retrieve.createDocs({
       query: 'x',
