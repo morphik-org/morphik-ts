@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource local', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('generateUri', async () => {
     const responsePromise = client.local.generateUri();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource local', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('generateUri: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

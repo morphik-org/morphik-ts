@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource chat', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.chat.list();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource chat', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(client.chat.list({ limit: 1 }, { path: '/_stainless_unknown_path' })).rejects.toThrow(
@@ -28,7 +28,7 @@ describe('resource chat', () => {
     );
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieveHistory', async () => {
     const responsePromise = client.chat.retrieveHistory('chat_id');
     const rawResponse = await responsePromise.asResponse();
@@ -40,7 +40,7 @@ describe('resource chat', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('updateTitle: only required params', async () => {
     const responsePromise = client.chat.updateTitle('chat_id', { title: 'title' });
     const rawResponse = await responsePromise.asResponse();
@@ -52,7 +52,7 @@ describe('resource chat', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('updateTitle: required and optional params', async () => {
     const response = await client.chat.updateTitle('chat_id', { title: 'title' });
   });

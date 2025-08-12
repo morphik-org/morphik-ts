@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource cloud', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('deleteApp: only required params', async () => {
     const responsePromise = client.cloud.deleteApp({ app_name: 'app_name' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,12 +20,12 @@ describe('resource cloud', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('deleteApp: required and optional params', async () => {
     const response = await client.cloud.deleteApp({ app_name: 'app_name' });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('generateUri: only required params', async () => {
     const responsePromise = client.cloud.generateUri({ app_id: 'app_id', name: 'name', user_id: 'user_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -37,7 +37,7 @@ describe('resource cloud', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('generateUri: required and optional params', async () => {
     const response = await client.cloud.generateUri({
       app_id: 'app_id',

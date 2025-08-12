@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource ingest', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('batchIngestFiles: only required params', async () => {
     const responsePromise = client.ingest.batchIngestFiles({
       files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
@@ -22,7 +22,7 @@ describe('resource ingest', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('batchIngestFiles: required and optional params', async () => {
     const response = await client.ingest.batchIngestFiles({
       files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
@@ -34,7 +34,7 @@ describe('resource ingest', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('ingestFile: only required params', async () => {
     const responsePromise = client.ingest.ingestFile({
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
@@ -48,7 +48,7 @@ describe('resource ingest', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('ingestFile: required and optional params', async () => {
     const response = await client.ingest.ingestFile({
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
@@ -60,7 +60,7 @@ describe('resource ingest', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('ingestText: only required params', async () => {
     const responsePromise = client.ingest.ingestText({ content: 'content' });
     const rawResponse = await responsePromise.asResponse();
@@ -72,7 +72,7 @@ describe('resource ingest', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('ingestText: required and optional params', async () => {
     const response = await client.ingest.ingestText({
       content: 'content',

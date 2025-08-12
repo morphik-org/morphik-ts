@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource folders', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.folders.create({ name: 'name' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,12 +20,12 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.folders.create({ name: 'name', description: 'description' });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.folders.retrieve('folder_id');
     const rawResponse = await responsePromise.asResponse();
@@ -37,7 +37,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.folders.list();
     const rawResponse = await responsePromise.asResponse();
@@ -49,7 +49,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.folders.delete('folder_name');
     const rawResponse = await responsePromise.asResponse();
@@ -61,7 +61,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listSummaries', async () => {
     const responsePromise = client.folders.listSummaries();
     const rawResponse = await responsePromise.asResponse();
@@ -73,7 +73,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('setRule: only required params', async () => {
     const responsePromise = client.folders.setRule('folder_id', { rules: [{}] });
     const rawResponse = await responsePromise.asResponse();
@@ -85,7 +85,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('setRule: required and optional params', async () => {
     const response = await client.folders.setRule('folder_id', {
       rules: [{ schema: { foo: 'bar' }, type: 'type' }],

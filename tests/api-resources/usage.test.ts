@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource usage', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listRecent', async () => {
     const responsePromise = client.usage.listRecent();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource usage', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listRecent: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -31,7 +31,7 @@ describe('resource usage', () => {
     ).rejects.toThrow(Morphik.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieveStats', async () => {
     const responsePromise = client.usage.retrieveStats();
     const rawResponse = await responsePromise.asResponse();

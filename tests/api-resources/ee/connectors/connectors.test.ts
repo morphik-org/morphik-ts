@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource connectors', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('disconnect', async () => {
     const responsePromise = client.ee.connectors.disconnect('connector_type');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getAuthStatus', async () => {
     const responsePromise = client.ee.connectors.getAuthStatus('connector_type');
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('handleOAuthCallback', async () => {
     const responsePromise = client.ee.connectors.handleOAuthCallback('connector_type');
     const rawResponse = await responsePromise.asResponse();
@@ -44,7 +44,7 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('handleOAuthCallback: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -56,7 +56,7 @@ describe('resource connectors', () => {
     ).rejects.toThrow(Morphik.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('ingestFile: only required params', async () => {
     const responsePromise = client.ee.connectors.ingestFile('connector_type', { file_id: 'file_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -68,7 +68,7 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('ingestFile: required and optional params', async () => {
     const response = await client.ee.connectors.ingestFile('connector_type', {
       file_id: 'file_id',
@@ -79,7 +79,7 @@ describe('resource connectors', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listFiles', async () => {
     const responsePromise = client.ee.connectors.listFiles('connector_type');
     const rawResponse = await responsePromise.asResponse();
@@ -91,7 +91,7 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listFiles: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

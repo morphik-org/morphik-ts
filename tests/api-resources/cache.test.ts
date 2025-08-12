@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource cache', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.cache.create({ gguf_file: 'gguf_file', model: 'model', name: 'name' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource cache', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.cache.create({
       gguf_file: 'gguf_file',
@@ -31,7 +31,7 @@ describe('resource cache', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.cache.retrieve('name');
     const rawResponse = await responsePromise.asResponse();
@@ -43,7 +43,7 @@ describe('resource cache', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.cache.update('name');
     const rawResponse = await responsePromise.asResponse();
@@ -55,7 +55,7 @@ describe('resource cache', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('addDocs: only required params', async () => {
     const responsePromise = client.cache.addDocs('name', { body: ['string'] });
     const rawResponse = await responsePromise.asResponse();
@@ -67,12 +67,12 @@ describe('resource cache', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('addDocs: required and optional params', async () => {
     const response = await client.cache.addDocs('name', { body: ['string'] });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('query: only required params', async () => {
     const responsePromise = client.cache.query('name', { query: 'query' });
     const rawResponse = await responsePromise.asResponse();
@@ -84,7 +84,7 @@ describe('resource cache', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('query: required and optional params', async () => {
     const response = await client.cache.query('name', { query: 'query', max_tokens: 0, temperature: 0 });
   });

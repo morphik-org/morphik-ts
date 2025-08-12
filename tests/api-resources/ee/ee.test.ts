@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource ee', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createApp: only required params', async () => {
     const responsePromise = client.ee.createApp({ app_id: 'app_id', name: 'name' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource ee', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('createApp: required and optional params', async () => {
     const response = await client.ee.createApp({ app_id: 'app_id', name: 'name', expiry_days: 0 });
   });
