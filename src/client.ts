@@ -853,6 +853,7 @@ export class Morphik {
   documents: API.Documents = new API.Documents(this);
   chat: API.Chat = new API.Chat(this);
 }
+
 Morphik.Ping = Ping;
 Morphik.Models = Models;
 Morphik.Ingest = Ingest;
@@ -873,6 +874,7 @@ Morphik.Local = Local;
 Morphik.Cloud = Cloud;
 Morphik.Documents = Documents;
 Morphik.Chat = Chat;
+
 export declare namespace Morphik {
   export type RequestOptions = Opts.RequestOptions;
 
