@@ -9,6 +9,46 @@ const client = new Morphik({
 
 describe('resource connectors', () => {
   // Prism tests are disabled
+  test.skip('disconnect: only required params', async () => {
+    const responsePromise = client.ee.connectors.disconnect({ connector_type: 'connector_type' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('disconnect: required and optional params', async () => {
+    const response = await client.ee.connectors.disconnect({ connector_type: 'connector_type' });
+  });
+
+  // Prism tests are disabled
+  test.skip('finalizeAuth: only required params', async () => {
+    const responsePromise = client.ee.connectors.finalizeAuth({
+      auth_response_data: {},
+      connector_type: 'connector_type',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('finalizeAuth: required and optional params', async () => {
+    const response = await client.ee.connectors.finalizeAuth({
+      auth_response_data: {},
+      connector_type: 'connector_type',
+    });
+  });
+
+  // Prism tests are disabled
   test.skip('getAuthStatus', async () => {
     const responsePromise = client.ee.connectors.getAuthStatus('connector_type');
     const rawResponse = await responsePromise.asResponse();
@@ -66,6 +106,51 @@ describe('resource connectors', () => {
   });
 
   // Prism tests are disabled
+  test.skip('ingestRepository: only required params', async () => {
+    const responsePromise = client.ee.connectors.ingestRepository('connector_type', {
+      repo_path: 'repo_path',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('ingestRepository: required and optional params', async () => {
+    const response = await client.ee.connectors.ingestRepository('connector_type', {
+      repo_path: 'repo_path',
+      compress: true,
+      body_connector_type: 'connector_type',
+      folder_name: 'folder_name',
+      force: true,
+      ignore_patterns: ['string'],
+      include_patterns: ['string'],
+      metadata: {},
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('initiateAuth: only required params', async () => {
+    const responsePromise = client.ee.connectors.initiateAuth({ connector_type: 'connector_type' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('initiateAuth: required and optional params', async () => {
+    const response = await client.ee.connectors.initiateAuth({ connector_type: 'connector_type' });
+  });
+
+  // Prism tests are disabled
   test.skip('listFiles', async () => {
     const responsePromise = client.ee.connectors.listFiles('connector_type');
     const rawResponse = await responsePromise.asResponse();
@@ -87,5 +172,43 @@ describe('resource connectors', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Morphik.NotFoundError);
+  });
+
+  // Prism tests are disabled
+  test.skip('listFilesViaBody: only required params', async () => {
+    const responsePromise = client.ee.connectors.listFilesViaBody({ connector_type: 'connector_type' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('listFilesViaBody: required and optional params', async () => {
+    const response = await client.ee.connectors.listFilesViaBody({
+      connector_type: 'connector_type',
+      page_token: 'page_token',
+      path: 'path',
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('status: only required params', async () => {
+    const responsePromise = client.ee.connectors.status({ connector_type: 'connector_type' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('status: required and optional params', async () => {
+    const response = await client.ee.connectors.status({ connector_type: 'connector_type' });
   });
 });

@@ -4,7 +4,7 @@
 
 This library provides convenient access to the Morphik REST API from server-side TypeScript or JavaScript.
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.morphik.ai](https://docs.morphik.ai). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -67,17 +67,20 @@ import Morphik, { toFile } from 'morphik';
 const client = new Morphik();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.ingest.ingestFile({ file: fs.createReadStream('/path/to/file') });
+await client.ingest.documentQuery({ file: fs.createReadStream('/path/to/file'), prompt: 'prompt' });
 
 // Or if you have the web `File` API you can pass a `File` instance:
-await client.ingest.ingestFile({ file: new File(['my bytes'], 'file') });
+await client.ingest.documentQuery({ file: new File(['my bytes'], 'file'), prompt: 'prompt' });
 
 // You can also pass a `fetch` `Response`:
-await client.ingest.ingestFile({ file: await fetch('https://somesite/file') });
+await client.ingest.documentQuery({ file: await fetch('https://somesite/file'), prompt: 'prompt' });
 
 // Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.ingest.ingestFile({ file: await toFile(Buffer.from('my bytes'), 'file') });
-await client.ingest.ingestFile({ file: await toFile(new Uint8Array([0, 1, 2]), 'file') });
+await client.ingest.documentQuery({ file: await toFile(Buffer.from('my bytes'), 'file'), prompt: 'prompt' });
+await client.ingest.documentQuery({
+  file: await toFile(new Uint8Array([0, 1, 2]), 'file'),
+  prompt: 'prompt',
+});
 ```
 
 ## Handling errors
