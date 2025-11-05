@@ -50,11 +50,11 @@ export type BatchRetrieveChunksResponse = Array<ChunksAPI.ChunkResult>;
 export type BatchRetrieveDocumentsResponse = Array<IngestAPI.Document>;
 
 export interface BatchRetrieveChunksParams {
-  body: { [key: string]: unknown };
+  body: unknown;
 }
 
 export interface BatchRetrieveDocumentsParams {
-  body: { [key: string]: unknown };
+  body: unknown;
 }
 
 export declare namespace Batch {

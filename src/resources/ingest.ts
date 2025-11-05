@@ -15,10 +15,9 @@ export class Ingest extends APIResource {
    * background worker pool.
    *
    * Args: files: List of files to upload. metadata: Either a single JSON-string dict
-   * or list of dicts matching the number of files. rules: Either a single rules list
-   * or list-of-lists per file. use_colpali: Enable multi-vector embeddings.
-   * folder_name: Optional folder scoping for **all** files. end_user_id: Optional
-   * end-user scoping for **all** files. auth: Caller context with _write_
+   * or list of dicts matching the number of files. use_colpali: Enable multi-vector
+   * embeddings. folder_name: Optional folder scoping for **all** files. end_user_id:
+   * Optional end-user scoping for **all** files. auth: Caller context with _write_
    * permission. redis: arq redis connection to enqueue jobs.
    *
    * Returns: BatchIngestResponse summarising created documents & errors.
@@ -41,11 +40,10 @@ export class Ingest extends APIResource {
    * chunking work.
    *
    * Args: file: Uploaded file from multipart/form-data. metadata: JSON-string
-   * representing user metadata. rules: JSON-string with extraction / NL rules list.
-   * auth: Caller context – must include _write_ permission. use_colpali: Switch to
-   * multi-vector embeddings. folder_name: Optionally scope doc to a folder.
-   * end_user_id: Optionally scope doc to an end-user. redis: arq redis connection –
-   * used to enqueue the job.
+   * representing user metadata. auth: Caller context – must include _write_
+   * permission. use_colpali: Switch to multi-vector embeddings. folder_name:
+   * Optionally scope doc to a folder. end_user_id: Optionally scope doc to an
+   * end-user. redis: arq redis connection – used to enqueue the job.
    *
    * Returns: Document stub with `status='processing'`.
    */
@@ -58,9 +56,8 @@ export class Ingest extends APIResource {
    *
    * Args: request: IngestTextRequest payload containing: • content – raw text to
    * ingest. • filename – optional filename to help detect MIME-type. • metadata –
-   * optional JSON metadata dict. • rules – optional list of extraction / NL rules. •
-   * folder_name – optional folder scope. • end_user_id – optional end-user scope.
-   * auth: Decoded JWT context (injected).
+   * optional JSON metadata dict. • folder_name – optional folder scope. •
+   * end_user_id – optional end-user scope. auth: Decoded JWT context (injected).
    *
    * Returns: Document metadata row representing the newly-ingested text.
    */
@@ -75,7 +72,7 @@ export class Ingest extends APIResource {
 export interface Document {
   content_type: string;
 
-  additional_metadata?: { [key: string]: unknown };
+  additional_metadata?: unknown;
 
   app_id?: string | null;
 
@@ -89,13 +86,13 @@ export interface Document {
 
   folder_name?: string | null;
 
-  metadata?: { [key: string]: unknown };
+  metadata?: unknown;
 
   storage_files?: Array<Document.StorageFile>;
 
-  storage_info?: { [key: string]: unknown };
+  storage_info?: unknown;
 
-  system_metadata?: { [key: string]: unknown };
+  system_metadata?: unknown;
 }
 
 export namespace Document {
@@ -135,11 +132,11 @@ export interface TextRequest {
    */
   folder_name?: string | null;
 
-  metadata?: { [key: string]: unknown };
-
-  rules?: Array<{ [key: string]: unknown }>;
+  metadata?: unknown;
 
   use_colpali?: boolean | null;
+
+  [k: string]: unknown;
 }
 
 /**
@@ -160,8 +157,6 @@ export interface IngestBatchIngestFilesParams {
 
   metadata?: string;
 
-  rules?: string;
-
   use_colpali?: boolean | null;
 }
 
@@ -173,8 +168,6 @@ export interface IngestIngestFileParams {
   folder_name?: string | null;
 
   metadata?: string;
-
-  rules?: string;
 
   use_colpali?: boolean | null;
 }
@@ -194,11 +187,11 @@ export interface IngestIngestTextParams {
    */
   folder_name?: string | null;
 
-  metadata?: { [key: string]: unknown };
-
-  rules?: Array<{ [key: string]: unknown }>;
+  metadata?: unknown;
 
   use_colpali?: boolean | null;
+
+  [k: string]: unknown;
 }
 
 export declare namespace Ingest {

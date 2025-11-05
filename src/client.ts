@@ -87,8 +87,6 @@ import {
   DocumentGetDownloadURLParams,
   DocumentGetDownloadURLResponse,
   DocumentGetStatusResponse,
-  DocumentListParams,
-  DocumentListResponse,
   DocumentUpdateFileParams,
   DocumentUpdateMetadataParams,
   DocumentUpdateTextParams,
@@ -98,11 +96,8 @@ import { Ee, EeCreateAppParams, EeCreateAppResponse } from './resources/ee/ee';
 import {
   Folder,
   FolderCreateParams,
-  FolderDeleteResponse,
   FolderListResponse,
   FolderListSummariesResponse,
-  FolderSetRuleParams,
-  FolderSetRuleResponse,
   Folders,
 } from './resources/folders/folders';
 import {
@@ -135,16 +130,7 @@ import {
   RetrieveCreateDocsParams,
   RetrieveCreateDocsResponse,
 } from './resources/retrieve/retrieve';
-import {
-  Workflow,
-  WorkflowCreateParams,
-  WorkflowDeleteResponse,
-  WorkflowListResponse,
-  WorkflowRun,
-  WorkflowRunParams,
-  WorkflowUpdateParams,
-  Workflows,
-} from './resources/workflows/workflows';
+import { Workflows } from './resources/workflows/workflows';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -904,23 +890,11 @@ export declare namespace Morphik {
     Folders as Folders,
     type Folder as Folder,
     type FolderListResponse as FolderListResponse,
-    type FolderDeleteResponse as FolderDeleteResponse,
     type FolderListSummariesResponse as FolderListSummariesResponse,
-    type FolderSetRuleResponse as FolderSetRuleResponse,
     type FolderCreateParams as FolderCreateParams,
-    type FolderSetRuleParams as FolderSetRuleParams,
   };
 
-  export {
-    Workflows as Workflows,
-    type Workflow as Workflow,
-    type WorkflowRun as WorkflowRun,
-    type WorkflowListResponse as WorkflowListResponse,
-    type WorkflowDeleteResponse as WorkflowDeleteResponse,
-    type WorkflowCreateParams as WorkflowCreateParams,
-    type WorkflowUpdateParams as WorkflowUpdateParams,
-    type WorkflowRunParams as WorkflowRunParams,
-  };
+  export { Workflows as Workflows };
 
   export {
     ModelConfig as ModelConfig,
@@ -1022,11 +996,9 @@ export declare namespace Morphik {
   export {
     Documents as Documents,
     type DocumentDeleteResponse as DocumentDeleteResponse,
-    type DocumentListResponse as DocumentListResponse,
     type DocumentDownloadFileResponse as DocumentDownloadFileResponse,
     type DocumentGetDownloadURLResponse as DocumentGetDownloadURLResponse,
     type DocumentGetStatusResponse as DocumentGetStatusResponse,
-    type DocumentListParams as DocumentListParams,
     type DocumentGetByFilenameParams as DocumentGetByFilenameParams,
     type DocumentGetDownloadURLParams as DocumentGetDownloadURLParams,
     type DocumentUpdateFileParams as DocumentUpdateFileParams,

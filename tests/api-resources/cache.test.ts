@@ -27,7 +27,7 @@ describe('resource cache', () => {
       model: 'model',
       name: 'name',
       docs: ['string'],
-      filters: { foo: 'bar' },
+      filters: {},
     });
   });
 

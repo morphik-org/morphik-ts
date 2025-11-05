@@ -20,6 +20,11 @@ export class Retrieve extends APIResource {
   /**
    * Retrieve relevant documents.
    *
+   * `request.filters` supports equality checks (including scalar-to-array matches)
+   * plus `$and`, `$or`, `$nor`, `$not`, `$in`, `$nin`, `$exists`, `$regex`, and
+   * `$contains`, with arbitrary nesting. Use the same JSON structure as in
+   * `/retrieve/chunks` when expressing complex logic.
+   *
    * Args: request: RetrieveRequest containing: - query: Search query text - filters:
    * Optional metadata filters - k: Number of results (default: 4) - min_score:
    * Minimum similarity threshold (default: 0.0) - use_reranking: Whether to use
@@ -44,7 +49,7 @@ export namespace RetrieveCreateDocsResponse {
    * Query result at document level
    */
   export interface RetrieveCreateDocsResponseItem {
-    additional_metadata: { [key: string]: unknown };
+    additional_metadata: unknown;
 
     /**
      * Represents either a URL or content string
@@ -53,7 +58,7 @@ export namespace RetrieveCreateDocsResponse {
 
     document_id: string;
 
-    metadata: { [key: string]: unknown };
+    metadata: unknown;
 
     score: number;
   }
@@ -83,7 +88,7 @@ export interface RetrieveCreateDocsParams {
    */
   end_user_id?: string | null;
 
-  filters?: { [key: string]: unknown } | null;
+  filters?: unknown | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list

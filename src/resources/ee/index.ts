@@ -9,7 +9,6 @@ export {
 } from './apps';
 export {
   Connectors,
-  type ConnectorDisconnectResponse,
   type ConnectorGetAuthStatusResponse,
   type ConnectorHandleOAuthCallbackResponse,
   type ConnectorIngestFileResponse,

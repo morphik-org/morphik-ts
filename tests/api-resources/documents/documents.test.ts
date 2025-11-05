@@ -21,18 +21,6 @@ describe('resource documents', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.documents.list({});
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.documents.delete('document_id');
     const rawResponse = await responsePromise.asResponse();
@@ -131,7 +119,6 @@ describe('resource documents', () => {
     const response = await client.documents.updateFile('document_id', {
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       metadata: 'metadata',
-      rules: 'rules',
       update_strategy: 'update_strategy',
       use_colpali: true,
     });
@@ -139,7 +126,7 @@ describe('resource documents', () => {
 
   // Prism tests are disabled
   test.skip('updateMetadata: only required params', async () => {
-    const responsePromise = client.documents.updateMetadata('document_id', { body: { foo: 'bar' } });
+    const responsePromise = client.documents.updateMetadata('document_id', { body: {} });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -151,7 +138,7 @@ describe('resource documents', () => {
 
   // Prism tests are disabled
   test.skip('updateMetadata: required and optional params', async () => {
-    const response = await client.documents.updateMetadata('document_id', { body: { foo: 'bar' } });
+    const response = await client.documents.updateMetadata('document_id', { body: {} });
   });
 
   // Prism tests are disabled
@@ -174,8 +161,7 @@ describe('resource documents', () => {
       end_user_id: 'end_user_id',
       filename: 'filename',
       folder_name: 'folder_name',
-      metadata: { foo: 'bar' },
-      rules: [{ foo: 'bar' }],
+      metadata: {},
       use_colpali: true,
     });
   });

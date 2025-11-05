@@ -17,14 +17,6 @@ export class Connectors extends APIResource {
   auth: AuthAPI.Auth = new AuthAPI.Auth(this._client);
 
   /**
-   * Disconnects the user from the specified connector by removing stored
-   * credentials.
-   */
-  disconnect(connectorType: string, options?: RequestOptions): APIPromise<ConnectorDisconnectResponse> {
-    return this._client.post(path`/ee/connectors/${connectorType}/disconnect`, options);
-  }
-
-  /**
    * Checks the current authentication status for the given connector type.
    */
   getAuthStatus(connectorType: string, options?: RequestOptions): APIPromise<ConnectorGetAuthStatusResponse> {
@@ -44,14 +36,13 @@ export class Connectors extends APIResource {
   }
 
   /**
-   * Downloads a file from the connector and ingests it into Morphik via
-   * DocumentService.
+   * Ingest a single file from a connector.
    */
   ingestFile(
     connectorType: string,
     body: ConnectorIngestFileParams,
     options?: RequestOptions,
-  ): APIPromise<ConnectorIngestFileResponse> {
+  ): APIPromise<unknown> {
     return this._client.post(path`/ee/connectors/${connectorType}/ingest`, { body, ...options });
   }
 
@@ -67,8 +58,6 @@ export class Connectors extends APIResource {
   }
 }
 
-export type ConnectorDisconnectResponse = { [key: string]: unknown };
-
 export interface ConnectorGetAuthStatusResponse {
   is_authenticated: boolean;
 
@@ -79,7 +68,7 @@ export interface ConnectorGetAuthStatusResponse {
 
 export type ConnectorHandleOAuthCallbackResponse = unknown;
 
-export type ConnectorIngestFileResponse = { [key: string]: unknown };
+export type ConnectorIngestFileResponse = unknown;
 
 export interface ConnectorListFilesResponse {
   files: Array<ConnectorListFilesResponse.File>;
@@ -116,13 +105,11 @@ export interface ConnectorHandleOAuthCallbackParams {
 export interface ConnectorIngestFileParams {
   file_id: string;
 
-  metadata?: { [key: string]: unknown } | null;
+  folder_name?: string | null;
 
-  morphik_end_user_id?: string | null;
+  metadata?: unknown | null;
 
-  morphik_folder_name?: string | null;
-
-  rules?: Array<{ [key: string]: unknown }> | null;
+  [k: string]: unknown;
 }
 
 export interface ConnectorListFilesParams {
@@ -139,7 +126,6 @@ Connectors.Auth = Auth;
 
 export declare namespace Connectors {
   export {
-    type ConnectorDisconnectResponse as ConnectorDisconnectResponse,
     type ConnectorGetAuthStatusResponse as ConnectorGetAuthStatusResponse,
     type ConnectorHandleOAuthCallbackResponse as ConnectorHandleOAuthCallbackResponse,
     type ConnectorIngestFileResponse as ConnectorIngestFileResponse,

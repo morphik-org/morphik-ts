@@ -9,7 +9,6 @@ export {
 } from './auth';
 export {
   Connectors,
-  type ConnectorDisconnectResponse,
   type ConnectorGetAuthStatusResponse,
   type ConnectorHandleOAuthCallbackResponse,
   type ConnectorIngestFileResponse,

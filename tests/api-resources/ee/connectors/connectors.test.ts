@@ -9,18 +9,6 @@ const client = new Morphik({
 
 describe('resource connectors', () => {
   // Prism tests are disabled
-  test.skip('disconnect', async () => {
-    const responsePromise = client.ee.connectors.disconnect('connector_type');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
   test.skip('getAuthStatus', async () => {
     const responsePromise = client.ee.connectors.getAuthStatus('connector_type');
     const rawResponse = await responsePromise.asResponse();
@@ -72,10 +60,8 @@ describe('resource connectors', () => {
   test.skip('ingestFile: required and optional params', async () => {
     const response = await client.ee.connectors.ingestFile('connector_type', {
       file_id: 'file_id',
-      metadata: { foo: 'bar' },
-      morphik_end_user_id: 'morphik_end_user_id',
-      morphik_folder_name: 'morphik_folder_name',
-      rules: [{ foo: 'bar' }],
+      folder_name: 'folder_name',
+      metadata: {},
     });
   });
 

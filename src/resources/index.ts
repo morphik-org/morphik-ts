@@ -43,11 +43,9 @@ export {
 export {
   Documents,
   type DocumentDeleteResponse,
-  type DocumentListResponse,
   type DocumentDownloadFileResponse,
   type DocumentGetDownloadURLResponse,
   type DocumentGetStatusResponse,
-  type DocumentListParams,
   type DocumentGetByFilenameParams,
   type DocumentGetDownloadURLParams,
   type DocumentUpdateFileParams,
@@ -59,11 +57,8 @@ export {
   Folders,
   type Folder,
   type FolderListResponse,
-  type FolderDeleteResponse,
   type FolderListSummariesResponse,
-  type FolderSetRuleResponse,
   type FolderCreateParams,
-  type FolderSetRuleParams,
 } from './folders/folders';
 export {
   GraphResource,
@@ -123,13 +118,4 @@ export {
   type UsageRetrieveStatsResponse,
   type UsageListRecentParams,
 } from './usage';
-export {
-  Workflows,
-  type Workflow,
-  type WorkflowRun,
-  type WorkflowListResponse,
-  type WorkflowDeleteResponse,
-  type WorkflowCreateParams,
-  type WorkflowUpdateParams,
-  type WorkflowRunParams,
-} from './workflows/workflows';
+export { Workflows } from './workflows/workflows';

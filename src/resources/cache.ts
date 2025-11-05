@@ -17,7 +17,7 @@ export class Cache extends APIResource {
    *
    * Returns: A dictionary describing the created cache.
    */
-  create(params: CacheCreateParams, options?: RequestOptions): APIPromise<CacheCreateResponse> {
+  create(params: CacheCreateParams, options?: RequestOptions): APIPromise<unknown> {
     const { gguf_file, model, name, ...body } = params;
     return this._client.post('/cache/create', { query: { gguf_file, model, name }, body, ...options });
   }
@@ -31,7 +31,7 @@ export class Cache extends APIResource {
    * Returns: A dictionary with a boolean `exists` field indicating whether the cache
    * is loaded.
    */
-  retrieve(name: string, options?: RequestOptions): APIPromise<CacheRetrieveResponse> {
+  retrieve(name: string, options?: RequestOptions): APIPromise<unknown> {
     return this._client.get(path`/cache/${name}`, options);
   }
 
@@ -96,7 +96,7 @@ export interface CompletionResponse {
 
   finish_reason?: string | null;
 
-  metadata?: { [key: string]: unknown } | null;
+  metadata?: unknown | null;
 
   sources?: Array<CompletionResponse.Source>;
 }
@@ -114,9 +114,9 @@ export namespace CompletionResponse {
   }
 }
 
-export type CacheCreateResponse = { [key: string]: unknown };
+export type CacheCreateResponse = unknown;
 
-export type CacheRetrieveResponse = { [key: string]: unknown };
+export type CacheRetrieveResponse = unknown;
 
 export type CacheUpdateResponse = { [key: string]: boolean };
 
@@ -146,7 +146,7 @@ export interface CacheCreateParams {
   /**
    * Body param:
    */
-  filters?: { [key: string]: unknown } | null;
+  filters?: unknown | null;
 }
 
 export interface CacheAddDocsParams {
