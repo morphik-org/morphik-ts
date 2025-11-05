@@ -254,7 +254,7 @@ export class Morphik {
    * API Client for interfacing with the Morphik API.
    *
    * @param {string | null | undefined} [opts.apiKey=process.env['MORPHIK_API_KEY'] ?? null]
-   * @param {string} [opts.baseURL=process.env['MORPHIK_BASE_URL'] ?? https://api.example.com] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['MORPHIK_BASE_URL'] ?? https://api.morphik.ai] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -270,7 +270,7 @@ export class Morphik {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://api.example.com`,
+      baseURL: baseURL || `https://api.morphik.ai`,
     };
 
     this.baseURL = options.baseURL!;
@@ -316,7 +316,7 @@ export class Morphik {
    * Check whether the base URL is set to its default.
    */
   #baseURLOverridden(): boolean {
-    return this.baseURL !== 'https://api.example.com';
+    return this.baseURL !== 'https://api.morphik.ai';
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {

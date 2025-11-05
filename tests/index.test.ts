@@ -302,13 +302,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['MORPHIK_BASE_URL'] = ''; // empty
       const client = new Morphik({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api.example.com');
+      expect(client.baseURL).toEqual('https://api.morphik.ai');
     });
 
     test('blank env variable', () => {
       process.env['MORPHIK_BASE_URL'] = '  '; // blank
       const client = new Morphik({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://api.example.com');
+      expect(client.baseURL).toEqual('https://api.morphik.ai');
     });
 
     test('in request options', () => {
