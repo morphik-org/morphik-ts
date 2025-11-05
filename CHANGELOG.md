@@ -1,0 +1,34 @@
+# Changelog
+
+## 0.1.0 (2025-11-05)
+
+Full Changelog: [v0.0.1...v0.1.0](https://github.com/morphik-org/morphik-ts/compare/v0.0.1...v0.1.0)
+
+### Features
+
+* **api:** manual updates ([9986591](https://github.com/morphik-org/morphik-ts/commit/998659148493c8c7a74b510288e511d408a8c585))
+* **api:** manual updates ([73a0084](https://github.com/morphik-org/morphik-ts/commit/73a0084a6b58d266186f72706bb31180fdbbd26c))
+* **api:** update via SDK Studio ([c78d82e](https://github.com/morphik-org/morphik-ts/commit/c78d82e75024b26adcc311693f8b49ef4ef9f2dc))
+* **mcp:** add code execution tool ([69ae919](https://github.com/morphik-org/morphik-ts/commit/69ae919c238c07456f7f9c190e80a0f468e0f9a4))
+
+
+### Bug Fixes
+
+* coerce nullable values to undefined ([860b23e](https://github.com/morphik-org/morphik-ts/commit/860b23ec5a6d7069443704320045fca5f59323ec))
+
+
+### Chores
+
+* add package to package.json ([76c89eb](https://github.com/morphik-org/morphik-ts/commit/76c89ebaf4cdc0f6734269caf01be8fbb6e17ec1))
+* ci build action ([9981ea1](https://github.com/morphik-org/morphik-ts/commit/9981ea1708918700fda93920e3aeb84a384592ae))
+* **client:** qualify global Blob ([87a5454](https://github.com/morphik-org/morphik-ts/commit/87a5454180750dcb3f21cf8110f594680360644d))
+* **deps:** update dependency @types/node to v20.17.58 ([d4b8120](https://github.com/morphik-org/morphik-ts/commit/d4b812043c9bdd0c1af3709e6b3652892a5ea63f))
+* **internal:** codegen related update ([b0eec49](https://github.com/morphik-org/morphik-ts/commit/b0eec49a989217e8b2a7f6ed5b5d31570be4fae3))
+* **internal:** formatting change ([25763d0](https://github.com/morphik-org/morphik-ts/commit/25763d0ec4ead4800dc3b759fbb2d00f8b847d0e))
+* **internal:** move publish config ([f074720](https://github.com/morphik-org/morphik-ts/commit/f0747203707223cdb7bf69f8fee6ede963953e10))
+* **internal:** remove redundant imports config ([250ca52](https://github.com/morphik-org/morphik-ts/commit/250ca528d290adc06e8ee27898edac2a0bcbd03e))
+* **internal:** update comment in script ([e681df9](https://github.com/morphik-org/morphik-ts/commit/e681df95ee0672d750dc14fd61a6ff1127f91cf8))
+* **internal:** update global Error reference ([2b9bc7b](https://github.com/morphik-org/morphik-ts/commit/2b9bc7be202311de97373a8765d2b4b20c9df60a))
+* sync repo ([2173455](https://github.com/morphik-org/morphik-ts/commit/21734555d908ca2f7b2891af8480f3b27f5618d6))
+* update @stainless-api/prism-cli to v5.15.0 ([c23ccc3](https://github.com/morphik-org/morphik-ts/commit/c23ccc37cef333511c19ee7166156debb90077ae))
+* update CI script ([142032e](https://github.com/morphik-org/morphik-ts/commit/142032e941e9a8543a35b3df88dbe3a2382c3274))
