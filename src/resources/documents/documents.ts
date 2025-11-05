@@ -26,6 +26,40 @@ export class Documents extends APIResource {
   }
 
   /**
+   * List accessible documents.
+   *
+   * `request.document_filters` may include the following operators in addition to
+   * equality checks (which also match scalars inside JSON arrays): `$and`, `$or`,
+   * `$nor`, `$not`, `$in`, `$nin`, `$exists`, `$regex`, and `$contains`. Filters can
+   * be nested arbitrarily. Regex filters accept the optional `i` flag; `$contains`
+   * performs substring matches with optional `case_sensitive` overrides. Example:
+   *
+   * ```json
+   * {
+   *   "$and": [
+   *     { "department": "sales" },
+   *     {
+   *       "$or": [
+   *         { "status": "approved" },
+   *         { "priority": { "$in": ["high", "urgent"] } }
+   *       ]
+   *     }
+   *   ]
+   * }
+   * ```
+   *
+   * Args: request: Request body containing filters and pagination auth:
+   * Authentication context folder_name: Optional folder to scope the operation to
+   * end_user_id: Optional end-user ID to scope the operation to
+   *
+   * Returns: List[Document]: List of accessible documents
+   */
+  list(params: DocumentListParams, options?: RequestOptions): APIPromise<DocumentListResponse> {
+    const { end_user_id, folder_name, ...body } = params;
+    return this._client.post('/documents', { query: { end_user_id, folder_name }, body, ...options });
+  }
+
+  /**
    * Delete a document and all associated data.
    *
    * This endpoint deletes a document and all its associated data, including:
@@ -100,6 +134,53 @@ export class Documents extends APIResource {
   }
 
   /**
+   * Flexible document listing endpoint with support for aggregates, projections, and
+   * advanced pagination.
+   *
+   * `request.document_filters` supports equality plus `$and`, `$or`, `$nor`, `$not`,
+   * `$in`, `$nin`, `$exists`, `$regex`, and `$contains`, with arbitrary nesting.
+   * Scalar comparisons match array elements automatically. Example:
+   *
+   * ```json
+   * {
+   *   "$and": [
+   *     { "category": "patent" },
+   *     {
+   *       "$nor": [
+   *         { "status": "archived" },
+   *         { "priority": { "$in": ["low", "medium"] } }
+   *       ]
+   *     }
+   *   ]
+   * }
+   * ```
+   *
+   * Use the `folder_name` and `end_user_id` query parameters to scope system
+   * metadata instead of embedding those keys in the filter payload.
+   */
+  listDocs(params: DocumentListDocsParams, options?: RequestOptions): APIPromise<DocumentListDocsResponse> {
+    const { end_user_id, folder_name, ...body } = params;
+    return this._client.post('/documents/list_docs', {
+      query: { end_user_id, folder_name },
+      body,
+      ...options,
+    });
+  }
+
+  /**
+   * Extract specific pages from a document (PDF or PowerPoint) as base64-encoded
+   * images.
+   *
+   * Args: request: Request containing document_id, start_page, and end_page auth:
+   * Authentication context
+   *
+   * Returns: DocumentPagesResponse: Base64-encoded images of the requested pages
+   */
+  pages(body: DocumentPagesParams, options?: RequestOptions): APIPromise<DocumentPagesResponse> {
+    return this._client.post('/documents/pages', { body, ...options });
+  }
+
+  /**
    * Update a document with content from a file using the specified strategy.
    *
    * Args: document_id: ID of the document to update file: File to add to the
@@ -169,6 +250,8 @@ export interface DocumentDeleteResponse {
   status: string;
 }
 
+export type DocumentListResponse = Array<IngestAPI.Document>;
+
 export type DocumentDownloadFileResponse = unknown;
 
 /**
@@ -182,6 +265,82 @@ export interface DocumentGetDownloadURLResponse {
 
 export type DocumentGetStatusResponse = unknown;
 
+/**
+ * Flexible response for listing documents with aggregates.
+ */
+export interface DocumentListDocsResponse {
+  limit: number;
+
+  returned_count: number;
+
+  skip: number;
+
+  documents?: Array<unknown>;
+
+  folder_counts?: Array<DocumentListDocsResponse.FolderCount> | null;
+
+  has_more?: boolean;
+
+  next_skip?: number | null;
+
+  status_counts?: { [key: string]: number } | null;
+
+  total_count?: number | null;
+}
+
+export namespace DocumentListDocsResponse {
+  /**
+   * Count of documents grouped by folder name.
+   */
+  export interface FolderCount {
+    count: number;
+
+    folder: string | null;
+  }
+}
+
+/**
+ * Response for document pages extraction endpoint
+ */
+export interface DocumentPagesResponse {
+  document_id: string;
+
+  end_page: number;
+
+  pages: Array<string>;
+
+  start_page: number;
+
+  total_pages: number;
+}
+
+export interface DocumentListParams {
+  /**
+   * Query param:
+   */
+  end_user_id?: string | null;
+
+  /**
+   * Query param:
+   */
+  folder_name?: string | Array<string> | null;
+
+  /**
+   * Body param: Metadata filters for documents
+   */
+  document_filters?: unknown | null;
+
+  /**
+   * Body param:
+   */
+  limit?: number;
+
+  /**
+   * Body param:
+   */
+  skip?: number;
+}
+
 export interface DocumentGetByFilenameParams {
   end_user_id?: string | null;
 
@@ -193,6 +352,92 @@ export interface DocumentGetDownloadURLParams {
    * URL expiration time in seconds
    */
   expires_in?: number;
+}
+
+export interface DocumentListDocsParams {
+  /**
+   * Query param:
+   */
+  end_user_id?: string | null;
+
+  /**
+   * Query param:
+   */
+  folder_name?: string | Array<string> | null;
+
+  /**
+   * Body param: When true, only documents with completed processing status are
+   * returned and counted
+   */
+  completed_only?: boolean;
+
+  /**
+   * Body param: Metadata filters for documents
+   */
+  document_filters?: unknown | null;
+
+  /**
+   * Body param: Optional list of fields to project for each document (dot notation
+   * supported)
+   */
+  fields?: Array<string> | null;
+
+  /**
+   * Body param: Include document counts grouped by folder when true
+   */
+  include_folder_counts?: boolean;
+
+  /**
+   * Body param: Include document counts grouped by processing status when true
+   */
+  include_status_counts?: boolean;
+
+  /**
+   * Body param: Include total number of matching documents when true
+   */
+  include_total_count?: boolean;
+
+  /**
+   * Body param: Maximum number of documents to return
+   */
+  limit?: number;
+
+  /**
+   * Body param: When false, only aggregates are returned
+   */
+  return_documents?: boolean;
+
+  /**
+   * Body param: Number of documents to skip
+   */
+  skip?: number;
+
+  /**
+   * Body param: Field to sort the results by
+   */
+  sort_by?: 'created_at' | 'updated_at' | 'filename' | 'external_id' | null;
+
+  /**
+   * Body param: Sort direction for the results
+   */
+  sort_direction?: 'asc' | 'desc';
+}
+
+export interface DocumentPagesParams {
+  /**
+   * ID of the document to extract pages from
+   */
+  document_id: string;
+
+  /**
+   * Ending page number (1-indexed)
+   */
+  end_page: number;
+
+  /**
+   * Starting page number (1-indexed)
+   */
+  start_page: number;
 }
 
 export interface DocumentUpdateFileParams {
@@ -253,11 +498,17 @@ Documents.Chat = Chat;
 export declare namespace Documents {
   export {
     type DocumentDeleteResponse as DocumentDeleteResponse,
+    type DocumentListResponse as DocumentListResponse,
     type DocumentDownloadFileResponse as DocumentDownloadFileResponse,
     type DocumentGetDownloadURLResponse as DocumentGetDownloadURLResponse,
     type DocumentGetStatusResponse as DocumentGetStatusResponse,
+    type DocumentListDocsResponse as DocumentListDocsResponse,
+    type DocumentPagesResponse as DocumentPagesResponse,
+    type DocumentListParams as DocumentListParams,
     type DocumentGetByFilenameParams as DocumentGetByFilenameParams,
     type DocumentGetDownloadURLParams as DocumentGetDownloadURLParams,
+    type DocumentListDocsParams as DocumentListDocsParams,
+    type DocumentPagesParams as DocumentPagesParams,
     type DocumentUpdateFileParams as DocumentUpdateFileParams,
     type DocumentUpdateMetadataParams as DocumentUpdateMetadataParams,
     type DocumentUpdateTextParams as DocumentUpdateTextParams,

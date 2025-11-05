@@ -21,6 +21,18 @@ describe('resource documents', () => {
   });
 
   // Prism tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.documents.list({});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.documents.delete('document_id');
     const rawResponse = await responsePromise.asResponse();
@@ -98,6 +110,39 @@ describe('resource documents', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('listDocs', async () => {
+    const responsePromise = client.documents.listDocs({});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('pages: only required params', async () => {
+    const responsePromise = client.documents.pages({
+      document_id: 'document_id',
+      end_page: 1,
+      start_page: 1,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('pages: required and optional params', async () => {
+    const response = await client.documents.pages({ document_id: 'document_id', end_page: 1, start_page: 1 });
   });
 
   // Prism tests are disabled

@@ -7,10 +7,12 @@ const client = new Morphik({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource ping', () => {
+describe('resource documents', () => {
   // Prism tests are disabled
-  test.skip('check', async () => {
-    const responsePromise = client.ping.check();
+  test.skip('add: only required params', async () => {
+    const responsePromise = client.folders.documents.add('document_id', {
+      folder_id_or_name: 'folder_id_or_name',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +23,17 @@ describe('resource ping', () => {
   });
 
   // Prism tests are disabled
-  test.skip('status', async () => {
-    const responsePromise = client.ping.status();
+  test.skip('add: required and optional params', async () => {
+    const response = await client.folders.documents.add('document_id', {
+      folder_id_or_name: 'folder_id_or_name',
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('remove: only required params', async () => {
+    const responsePromise = client.folders.documents.remove('document_id', {
+      folder_id_or_name: 'folder_id_or_name',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,5 +41,12 @@ describe('resource ping', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('remove: required and optional params', async () => {
+    const response = await client.folders.documents.remove('document_id', {
+      folder_id_or_name: 'folder_id_or_name',
+    });
   });
 });
