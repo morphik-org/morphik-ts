@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (2025-11-05)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/morphik-org/morphik-ts/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** manual updates ([2e3642f](https://github.com/morphik-org/morphik-ts/commit/2e3642fc027804f83b9eb8fbf26f3df1bbee12d8))
+
 ## 0.1.0 (2025-11-05)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/morphik-org/morphik-ts/compare/v0.0.1...v0.1.0)
