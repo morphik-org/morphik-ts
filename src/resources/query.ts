@@ -50,7 +50,7 @@ export interface QueryGenerateCompletionParams {
    */
   end_user_id?: string | null;
 
-  filters?: { [key: string]: unknown } | null;
+  filters?: unknown | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -73,12 +73,18 @@ export interface QueryGenerateCompletionParams {
    */
   include_paths?: boolean | null;
 
+  /**
+   * Whether to include inline citations with filename and page number in the
+   * response
+   */
+  inline_citations?: boolean | null;
+
   k?: number;
 
   /**
    * LiteLLM-compatible model configuration (e.g., model name, API key, base URL)
    */
-  llm_config?: { [key: string]: unknown } | null;
+  llm_config?: unknown | null;
 
   max_tokens?: number | null;
 
@@ -114,7 +120,7 @@ export interface QueryGenerateCompletionParams {
   /**
    * Schema for structured output, can be a Pydantic model or JSON schema dict
    */
-  schema?: unknown | { [key: string]: unknown } | null;
+  schema?: unknown | unknown | null;
 
   /**
    * Whether to stream the response back in chunks
@@ -278,6 +284,12 @@ export namespace QueryGenerateCompletionParams {
        * format, and tone.
        */
       prompt_template?: string | null;
+
+      /**
+       * Custom system prompt that replaces Morphik's default query agent instructions.
+       * Use this to fully control the assistant's behavior when generating responses.
+       */
+      system_prompt?: string | null;
     }
   }
 }

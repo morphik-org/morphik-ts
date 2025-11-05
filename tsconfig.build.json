@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "morphik/*": ["dist/src/*"],
-      "morphik": ["dist/src/index.ts"]
+      "morphik/*": ["./dist/src/*"],
+      "morphik": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

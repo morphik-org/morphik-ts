@@ -26,20 +26,6 @@ export class Documents extends APIResource {
   }
 
   /**
-   * List accessible documents.
-   *
-   * Args: request: Request body containing filters and pagination auth:
-   * Authentication context folder_name: Optional folder to scope the operation to
-   * end_user_id: Optional end-user ID to scope the operation to
-   *
-   * Returns: List[Document]: List of accessible documents
-   */
-  list(params: DocumentListParams, options?: RequestOptions): APIPromise<DocumentListResponse> {
-    const { end_user_id, folder_name, ...body } = params;
-    return this._client.post('/documents/', { query: { end_user_id, folder_name }, body, ...options });
-  }
-
-  /**
    * Delete a document and all associated data.
    *
    * This endpoint deletes a document and all its associated data, including:
@@ -109,7 +95,7 @@ export class Documents extends APIResource {
    *
    * Returns: Dict containing status information for the document
    */
-  getStatus(documentID: string, options?: RequestOptions): APIPromise<DocumentGetStatusResponse> {
+  getStatus(documentID: string, options?: RequestOptions): APIPromise<unknown> {
     return this._client.get(path`/documents/${documentID}/status`, options);
   }
 
@@ -118,9 +104,8 @@ export class Documents extends APIResource {
    *
    * Args: document_id: ID of the document to update file: File to add to the
    * document metadata: JSON string of metadata to merge with existing metadata
-   * rules: JSON string of rules to apply to the content update_strategy: Strategy
-   * for updating the document (default: 'add') use_colpali: Whether to use
-   * multi-vector embedding auth: Authentication context
+   * update_strategy: Strategy for updating the document (default: 'add')
+   * use_colpali: Whether to use multi-vector embedding auth: Authentication context
    *
    * Returns: Document: Updated document metadata
    */
@@ -184,8 +169,6 @@ export interface DocumentDeleteResponse {
   status: string;
 }
 
-export type DocumentListResponse = Array<IngestAPI.Document>;
-
 export type DocumentDownloadFileResponse = unknown;
 
 /**
@@ -197,34 +180,7 @@ export interface DocumentGetDownloadURLResponse {
   expires_in: number;
 }
 
-export type DocumentGetStatusResponse = { [key: string]: unknown };
-
-export interface DocumentListParams {
-  /**
-   * Query param:
-   */
-  end_user_id?: string | null;
-
-  /**
-   * Query param:
-   */
-  folder_name?: string | Array<string> | null;
-
-  /**
-   * Body param: Metadata filters for documents
-   */
-  document_filters?: { [key: string]: unknown } | null;
-
-  /**
-   * Body param:
-   */
-  limit?: number;
-
-  /**
-   * Body param:
-   */
-  skip?: number;
-}
+export type DocumentGetStatusResponse = unknown;
 
 export interface DocumentGetByFilenameParams {
   end_user_id?: string | null;
@@ -244,15 +200,13 @@ export interface DocumentUpdateFileParams {
 
   metadata?: string;
 
-  rules?: string;
-
   update_strategy?: string;
 
   use_colpali?: boolean | null;
 }
 
 export interface DocumentUpdateMetadataParams {
-  body: { [key: string]: unknown };
+  body: unknown;
 }
 
 export interface DocumentUpdateTextParams {
@@ -284,17 +238,14 @@ export interface DocumentUpdateTextParams {
   /**
    * Body param:
    */
-  metadata?: { [key: string]: unknown };
-
-  /**
-   * Body param:
-   */
-  rules?: Array<{ [key: string]: unknown }>;
+  metadata?: unknown;
 
   /**
    * Body param:
    */
   use_colpali?: boolean | null;
+
+  [k: string]: unknown;
 }
 
 Documents.Chat = Chat;
@@ -302,11 +253,9 @@ Documents.Chat = Chat;
 export declare namespace Documents {
   export {
     type DocumentDeleteResponse as DocumentDeleteResponse,
-    type DocumentListResponse as DocumentListResponse,
     type DocumentDownloadFileResponse as DocumentDownloadFileResponse,
     type DocumentGetDownloadURLResponse as DocumentGetDownloadURLResponse,
     type DocumentGetStatusResponse as DocumentGetStatusResponse,
-    type DocumentListParams as DocumentListParams,
     type DocumentGetByFilenameParams as DocumentGetByFilenameParams,
     type DocumentGetDownloadURLParams as DocumentGetDownloadURLParams,
     type DocumentUpdateFileParams as DocumentUpdateFileParams,

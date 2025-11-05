@@ -9,6 +9,22 @@ export class Chunks extends APIResource {
   /**
    * Retrieve relevant chunks.
    *
+   * The optional `request.filters` payload accepts equality checks (automatically
+   * matching scalars inside JSON arrays) plus the operators `$and`, `$or`, `$nor`,
+   * `$not`, `$in`, `$nin`, `$exists`, `$regex`, and `$contains`. Regex filters allow
+   * the optional `i` flag for case-insensitive matching, while `$contains` performs
+   * substring checks (case-insensitive by default, configurable via
+   * `case_sensitive`). Filters can be nested freely, for example:
+   *
+   * ```json
+   * {
+   *   "$and": [
+   *     { "category": "policy" },
+   *     { "$or": [{ "region": "emea" }, { "priority": { "$in": ["p0", "p1"] } }] }
+   *   ]
+   * }
+   * ```
+   *
    * Args: request: RetrieveRequest containing: - query: Search query text - filters:
    * Optional metadata filters - k: Number of results (default: 4) - min_score:
    * Minimum similarity threshold (default: 0.0) - use_reranking: Whether to use
@@ -25,11 +41,15 @@ export class Chunks extends APIResource {
   /**
    * Retrieve relevant chunks with grouped response format.
    *
+   * Uses the same filter operators as `/retrieve/chunks` (equality, nested logic
+   * operators, `$regex`, `$contains`, etc.), with arbitrary nesting supported inside
+   * `request.filters`.
+   *
    * Returns both flat results (for backward compatibility) and grouped results (for
    * UI). When padding > 0, groups chunks by main matches and their padding chunks.
    *
-   * Args: request: RetrieveRequest containing query, filters, padding, etc. auth:
-   * Authentication context
+   * Args: request: RetrieveRequest containing query parameters, metadata filters,
+   * and padding instructions auth: Authentication context
    *
    * Returns: GroupedChunkResponse: Contains both flat chunks and grouped chunks
    */
@@ -53,7 +73,7 @@ export interface ChunkResult {
 
   document_id: string;
 
-  metadata: { [key: string]: unknown };
+  metadata: unknown;
 
   score: number;
 
@@ -78,7 +98,7 @@ export interface RetrieveRequest {
    */
   end_user_id?: string | null;
 
-  filters?: { [key: string]: unknown } | null;
+  filters?: unknown | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -170,7 +190,7 @@ export interface ChunkCreateParams {
    */
   end_user_id?: string | null;
 
-  filters?: { [key: string]: unknown } | null;
+  filters?: unknown | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -216,7 +236,7 @@ export interface ChunkCreateGroupedParams {
    */
   end_user_id?: string | null;
 
-  filters?: { [key: string]: unknown } | null;
+  filters?: unknown | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list

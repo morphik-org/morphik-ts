@@ -35,7 +35,7 @@ export class Usage extends APIResource {
   }
 }
 
-export type UsageListRecentResponse = Array<{ [key: string]: unknown }>;
+export type UsageListRecentResponse = Array<unknown>;
 
 export type UsageRetrieveStatsResponse = { [key: string]: number };
 

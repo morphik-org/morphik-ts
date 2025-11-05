@@ -7,10 +7,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": "./",
     "paths": {
-      "morphik/*": ["src/*"],
-      "morphik": ["src/index.ts"]
+      "morphik/*": ["./src/*"],
+      "morphik": ["./src/index.ts"]
     },
     "noEmit": true,
 

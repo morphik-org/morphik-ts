@@ -56,7 +56,7 @@ export class ModelConfig extends APIResource {
 export interface ModelConfigResponse {
   id: string;
 
-  config_data: { [key: string]: unknown };
+  config_data: unknown;
 
   created_at: string;
 
@@ -70,13 +70,13 @@ export type ModelConfigListResponse = Array<ModelConfigResponse>;
 export type ModelConfigDeleteResponse = { [key: string]: string };
 
 export interface ModelConfigCreateParams {
-  config_data: { [key: string]: unknown };
+  config_data: unknown;
 
   provider: string;
 }
 
 export interface ModelConfigUpdateParams {
-  config_data: { [key: string]: unknown };
+  config_data: unknown;
 }
 
 ModelConfig.CustomModels = CustomModels;

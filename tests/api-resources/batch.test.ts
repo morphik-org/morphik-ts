@@ -10,7 +10,7 @@ const client = new Morphik({
 describe('resource batch', () => {
   // Prism tests are disabled
   test.skip('retrieveChunks: only required params', async () => {
-    const responsePromise = client.batch.retrieveChunks({ body: { foo: 'bar' } });
+    const responsePromise = client.batch.retrieveChunks({ body: {} });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,12 +22,12 @@ describe('resource batch', () => {
 
   // Prism tests are disabled
   test.skip('retrieveChunks: required and optional params', async () => {
-    const response = await client.batch.retrieveChunks({ body: { foo: 'bar' } });
+    const response = await client.batch.retrieveChunks({ body: {} });
   });
 
   // Prism tests are disabled
   test.skip('retrieveDocuments: only required params', async () => {
-    const responsePromise = client.batch.retrieveDocuments({ body: { foo: 'bar' } });
+    const responsePromise = client.batch.retrieveDocuments({ body: {} });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -39,6 +39,6 @@ describe('resource batch', () => {
 
   // Prism tests are disabled
   test.skip('retrieveDocuments: required and optional params', async () => {
-    const response = await client.batch.retrieveDocuments({ body: { foo: 'bar' } });
+    const response = await client.batch.retrieveDocuments({ body: {} });
   });
 });

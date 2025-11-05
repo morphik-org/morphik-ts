@@ -5,7 +5,6 @@ import * as AppsAPI from './apps';
 import { AppCreateParams, AppCreateResponse, AppDeleteParams, AppDeleteResponse, Apps } from './apps';
 import * as ConnectorsAPI from './connectors/connectors';
 import {
-  ConnectorDisconnectResponse,
   ConnectorGetAuthStatusResponse,
   ConnectorHandleOAuthCallbackParams,
   ConnectorHandleOAuthCallbackResponse,
@@ -69,7 +68,6 @@ export declare namespace Ee {
 
   export {
     Connectors as Connectors,
-    type ConnectorDisconnectResponse as ConnectorDisconnectResponse,
     type ConnectorGetAuthStatusResponse as ConnectorGetAuthStatusResponse,
     type ConnectorHandleOAuthCallbackResponse as ConnectorHandleOAuthCallbackResponse,
     type ConnectorIngestFileResponse as ConnectorIngestFileResponse,

@@ -26,11 +26,11 @@ describe('resource graph', () => {
       name: 'name',
       documents: ['string'],
       end_user_id: 'end_user_id',
-      filters: { foo: 'bar' },
+      filters: {},
       folder_name: 'string',
       prompt_overrides: {
         entity_extraction: {
-          examples: [{ label: 'Example', type: 'ENTITY', properties: { foo: 'bar' } }],
+          examples: [{ label: 'Example', type: 'ENTITY', properties: {} }],
           prompt_template: 'Extract entities from the following text: {content}\n{examples}',
         },
         entity_resolution: {
