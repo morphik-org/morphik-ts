@@ -1,4 +1,4 @@
-configured_endpoints: 89
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/morphik%2Fmorphik-8d3c4a3004d103142a96eaee97699ec1c0b5df304ec1b4804d5394b99a36939d.yml
-openapi_spec_hash: b77413da8a8d6532ea04ec0198add72b
-config_hash: b3a76425ddbc7401632d1817c1f218e9
+configured_endpoints: 88
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/morphik%2Fmorphik-9ade02dd7b1d96cd6b63c63072017dc51bd74af3f60076833c8dadafe061746a.yml
+openapi_spec_hash: 56ee618a81e0f3d48ad2b999e4cce623
+config_hash: b7d25210c8d3b30d949d01687b11dd5f

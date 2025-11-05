@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource graph', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.graph.create({ name: 'name' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,17 +20,17 @@ describe('resource graph', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.graph.create({
       name: 'name',
       documents: ['string'],
       end_user_id: 'end_user_id',
-      filters: { foo: 'bar' },
+      filters: {},
       folder_name: 'string',
       prompt_overrides: {
         entity_extraction: {
-          examples: [{ label: 'Example', type: 'ENTITY', properties: { foo: 'bar' } }],
+          examples: [{ label: 'Example', type: 'ENTITY', properties: {} }],
           prompt_template: 'Extract entities from the following text: {content}\n{examples}',
         },
         entity_resolution: {
@@ -41,7 +41,7 @@ describe('resource graph', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.graph.retrieve('name');
     const rawResponse = await responsePromise.asResponse();
@@ -53,7 +53,7 @@ describe('resource graph', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -65,7 +65,7 @@ describe('resource graph', () => {
     ).rejects.toThrow(Morphik.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.graph.update('name', {});
     const rawResponse = await responsePromise.asResponse();
@@ -77,7 +77,7 @@ describe('resource graph', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.graph.list();
     const rawResponse = await responsePromise.asResponse();
@@ -89,7 +89,7 @@ describe('resource graph', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -100,7 +100,7 @@ describe('resource graph', () => {
     ).rejects.toThrow(Morphik.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.graph.delete('name');
     const rawResponse = await responsePromise.asResponse();
@@ -112,7 +112,7 @@ describe('resource graph', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('status', async () => {
     const responsePromise = client.graph.status('name');
     const rawResponse = await responsePromise.asResponse();
@@ -124,7 +124,7 @@ describe('resource graph', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('status: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -136,7 +136,7 @@ describe('resource graph', () => {
     ).rejects.toThrow(Morphik.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('visualization', async () => {
     const responsePromise = client.graph.visualization('name');
     const rawResponse = await responsePromise.asResponse();
@@ -148,7 +148,7 @@ describe('resource graph', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('visualization: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

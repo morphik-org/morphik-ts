@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource ingest', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('batchIngestFiles: only required params', async () => {
     const responsePromise = client.ingest.batchIngestFiles({
       files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
@@ -22,19 +22,43 @@ describe('resource ingest', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('batchIngestFiles: required and optional params', async () => {
     const response = await client.ingest.batchIngestFiles({
       files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
       end_user_id: 'end_user_id',
       folder_name: 'folder_name',
       metadata: 'metadata',
-      rules: 'rules',
       use_colpali: true,
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
+  test.skip('documentQuery: only required params', async () => {
+    const responsePromise = client.ingest.documentQuery({
+      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      prompt: 'prompt',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('documentQuery: required and optional params', async () => {
+    const response = await client.ingest.documentQuery({
+      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      prompt: 'prompt',
+      ingestion_options: 'ingestion_options',
+      schema: 'schema',
+    });
+  });
+
+  // Prism tests are disabled
   test.skip('ingestFile: only required params', async () => {
     const responsePromise = client.ingest.ingestFile({
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
@@ -48,19 +72,18 @@ describe('resource ingest', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('ingestFile: required and optional params', async () => {
     const response = await client.ingest.ingestFile({
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       end_user_id: 'end_user_id',
       folder_name: 'folder_name',
       metadata: 'metadata',
-      rules: 'rules',
       use_colpali: true,
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('ingestText: only required params', async () => {
     const responsePromise = client.ingest.ingestText({ content: 'content' });
     const rawResponse = await responsePromise.asResponse();
@@ -72,16 +95,27 @@ describe('resource ingest', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('ingestText: required and optional params', async () => {
     const response = await client.ingest.ingestText({
       content: 'content',
       end_user_id: 'end_user_id',
       filename: 'filename',
       folder_name: 'folder_name',
-      metadata: { foo: 'bar' },
-      rules: [{ foo: 'bar' }],
+      metadata: {},
       use_colpali: true,
     });
+  });
+
+  // Prism tests are disabled
+  test.skip('requeue', async () => {
+    const responsePromise = client.ingest.requeue({});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

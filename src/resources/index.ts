@@ -47,9 +47,13 @@ export {
   type DocumentDownloadFileResponse,
   type DocumentGetDownloadURLResponse,
   type DocumentGetStatusResponse,
+  type DocumentListDocsResponse,
+  type DocumentPagesResponse,
   type DocumentListParams,
   type DocumentGetByFilenameParams,
   type DocumentGetDownloadURLParams,
+  type DocumentListDocsParams,
+  type DocumentPagesParams,
   type DocumentUpdateFileParams,
   type DocumentUpdateMetadataParams,
   type DocumentUpdateTextParams,
@@ -60,10 +64,10 @@ export {
   type Folder,
   type FolderListResponse,
   type FolderDeleteResponse,
+  type FolderDetailsResponse,
   type FolderListSummariesResponse,
-  type FolderSetRuleResponse,
   type FolderCreateParams,
-  type FolderSetRuleParams,
+  type FolderDetailsParams,
 } from './folders/folders';
 export {
   GraphResource,
@@ -87,9 +91,13 @@ export {
   type Document,
   type TextRequest,
   type IngestBatchIngestFilesResponse,
+  type IngestDocumentQueryResponse,
+  type IngestRequeueResponse,
   type IngestBatchIngestFilesParams,
+  type IngestDocumentQueryParams,
   type IngestIngestFileParams,
   type IngestIngestTextParams,
+  type IngestRequeueParams,
 } from './ingest';
 export { Local, type LocalGenerateUriResponse, type LocalGenerateUriParams } from './local';
 export { Logs, type LogListResponse, type LogListParams } from './logs';
@@ -110,26 +118,17 @@ export {
   type ModelListCustomResponse,
   type ModelCreateParams,
 } from './models';
-export { Ping, type PingCheckResponse } from './ping';
+export { Ping, type PingCheckResponse, type PingStatusResponse } from './ping';
 export { Query, type QueryGenerateCompletionParams } from './query';
 export {
   Retrieve,
   type RetrieveCreateDocsResponse,
   type RetrieveCreateDocsParams,
 } from './retrieve/retrieve';
+export { Search, type SearchDocumentsResponse, type SearchDocumentsParams } from './search';
 export {
   Usage,
   type UsageListRecentResponse,
   type UsageRetrieveStatsResponse,
   type UsageListRecentParams,
 } from './usage';
-export {
-  Workflows,
-  type Workflow,
-  type WorkflowRun,
-  type WorkflowListResponse,
-  type WorkflowDeleteResponse,
-  type WorkflowCreateParams,
-  type WorkflowUpdateParams,
-  type WorkflowRunParams,
-} from './workflows/workflows';

@@ -17,11 +17,17 @@ export class Connectors extends APIResource {
   auth: AuthAPI.Auth = new AuthAPI.Auth(this._client);
 
   /**
-   * Disconnects the user from the specified connector by removing stored
-   * credentials.
+   * Disconnect from a connector and remove credentials.
    */
-  disconnect(connectorType: string, options?: RequestOptions): APIPromise<ConnectorDisconnectResponse> {
-    return this._client.post(path`/ee/connectors/${connectorType}/disconnect`, options);
+  disconnect(body: ConnectorDisconnectParams, options?: RequestOptions): APIPromise<unknown> {
+    return this._client.post('/ee/connectors/disconnect', { body, ...options });
+  }
+
+  /**
+   * Finalize the OAuth flow and exchange the code for a token.
+   */
+  finalizeAuth(body: ConnectorFinalizeAuthParams, options?: RequestOptions): APIPromise<unknown> {
+    return this._client.post('/ee/connectors/finalize-auth', { body, ...options });
   }
 
   /**
@@ -44,15 +50,32 @@ export class Connectors extends APIResource {
   }
 
   /**
-   * Downloads a file from the connector and ingests it into Morphik via
-   * DocumentService.
+   * Ingest a single file from a connector.
    */
   ingestFile(
     connectorType: string,
     body: ConnectorIngestFileParams,
     options?: RequestOptions,
-  ): APIPromise<ConnectorIngestFileResponse> {
+  ): APIPromise<unknown> {
     return this._client.post(path`/ee/connectors/${connectorType}/ingest`, { body, ...options });
+  }
+
+  /**
+   * Ingest an entire GitHub repository.
+   */
+  ingestRepository(
+    connectorType: string,
+    body: ConnectorIngestRepositoryParams,
+    options?: RequestOptions,
+  ): APIPromise<unknown> {
+    return this._client.post(path`/ee/connectors/${connectorType}/ingest-repository`, { body, ...options });
+  }
+
+  /**
+   * Initiate the OAuth flow for a connector.
+   */
+  initiateAuth(body: ConnectorInitiateAuthParams, options?: RequestOptions): APIPromise<unknown> {
+    return this._client.post('/ee/connectors/initiate-auth', { body, ...options });
   }
 
   /**
@@ -65,9 +88,25 @@ export class Connectors extends APIResource {
   ): APIPromise<ConnectorListFilesResponse> {
     return this._client.get(path`/ee/connectors/${connectorType}/files`, { query, ...options });
   }
+
+  /**
+   * List files from a connector.
+   */
+  listFilesViaBody(body: ConnectorListFilesViaBodyParams, options?: RequestOptions): APIPromise<unknown> {
+    return this._client.post('/ee/connectors/list-files', { body, ...options });
+  }
+
+  /**
+   * Get the authentication status for a connector.
+   */
+  status(body: ConnectorStatusParams, options?: RequestOptions): APIPromise<unknown> {
+    return this._client.post('/ee/connectors/status', { body, ...options });
+  }
 }
 
-export type ConnectorDisconnectResponse = { [key: string]: unknown };
+export type ConnectorDisconnectResponse = unknown;
+
+export type ConnectorFinalizeAuthResponse = unknown;
 
 export interface ConnectorGetAuthStatusResponse {
   is_authenticated: boolean;
@@ -79,7 +118,11 @@ export interface ConnectorGetAuthStatusResponse {
 
 export type ConnectorHandleOAuthCallbackResponse = unknown;
 
-export type ConnectorIngestFileResponse = { [key: string]: unknown };
+export type ConnectorIngestFileResponse = unknown;
+
+export type ConnectorIngestRepositoryResponse = unknown;
+
+export type ConnectorInitiateAuthResponse = unknown;
 
 export interface ConnectorListFilesResponse {
   files: Array<ConnectorListFilesResponse.File>;
@@ -103,6 +146,20 @@ export namespace ConnectorListFilesResponse {
   }
 }
 
+export type ConnectorListFilesViaBodyResponse = unknown;
+
+export type ConnectorStatusResponse = unknown;
+
+export interface ConnectorDisconnectParams {
+  connector_type: string;
+}
+
+export interface ConnectorFinalizeAuthParams {
+  auth_response_data: unknown;
+
+  connector_type: string;
+}
+
 export interface ConnectorHandleOAuthCallbackParams {
   code?: string | null;
 
@@ -116,13 +173,33 @@ export interface ConnectorHandleOAuthCallbackParams {
 export interface ConnectorIngestFileParams {
   file_id: string;
 
-  metadata?: { [key: string]: unknown } | null;
+  folder_name?: string | null;
 
-  morphik_end_user_id?: string | null;
+  metadata?: unknown | null;
 
-  morphik_folder_name?: string | null;
+  [k: string]: unknown;
+}
 
-  rules?: Array<{ [key: string]: unknown }> | null;
+export interface ConnectorIngestRepositoryParams {
+  repo_path: string;
+
+  compress?: boolean;
+
+  body_connector_type?: string;
+
+  folder_name?: string | null;
+
+  force?: boolean;
+
+  ignore_patterns?: Array<string> | null;
+
+  include_patterns?: Array<string> | null;
+
+  metadata?: unknown | null;
+}
+
+export interface ConnectorInitiateAuthParams {
+  connector_type: string;
 }
 
 export interface ConnectorListFilesParams {
@@ -135,18 +212,41 @@ export interface ConnectorListFilesParams {
   q_filter?: string | null;
 }
 
+export interface ConnectorListFilesViaBodyParams {
+  connector_type: string;
+
+  page_token?: string | null;
+
+  path?: string | null;
+}
+
+export interface ConnectorStatusParams {
+  connector_type: string;
+}
+
 Connectors.Auth = Auth;
 
 export declare namespace Connectors {
   export {
     type ConnectorDisconnectResponse as ConnectorDisconnectResponse,
+    type ConnectorFinalizeAuthResponse as ConnectorFinalizeAuthResponse,
     type ConnectorGetAuthStatusResponse as ConnectorGetAuthStatusResponse,
     type ConnectorHandleOAuthCallbackResponse as ConnectorHandleOAuthCallbackResponse,
     type ConnectorIngestFileResponse as ConnectorIngestFileResponse,
+    type ConnectorIngestRepositoryResponse as ConnectorIngestRepositoryResponse,
+    type ConnectorInitiateAuthResponse as ConnectorInitiateAuthResponse,
     type ConnectorListFilesResponse as ConnectorListFilesResponse,
+    type ConnectorListFilesViaBodyResponse as ConnectorListFilesViaBodyResponse,
+    type ConnectorStatusResponse as ConnectorStatusResponse,
+    type ConnectorDisconnectParams as ConnectorDisconnectParams,
+    type ConnectorFinalizeAuthParams as ConnectorFinalizeAuthParams,
     type ConnectorHandleOAuthCallbackParams as ConnectorHandleOAuthCallbackParams,
     type ConnectorIngestFileParams as ConnectorIngestFileParams,
+    type ConnectorIngestRepositoryParams as ConnectorIngestRepositoryParams,
+    type ConnectorInitiateAuthParams as ConnectorInitiateAuthParams,
     type ConnectorListFilesParams as ConnectorListFilesParams,
+    type ConnectorListFilesViaBodyParams as ConnectorListFilesViaBodyParams,
+    type ConnectorStatusParams as ConnectorStatusParams,
   };
 
   export {

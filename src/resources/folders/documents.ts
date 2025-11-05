@@ -10,8 +10,8 @@ export class Documents extends APIResource {
   /**
    * Add a document to a folder.
    *
-   * Args: folder_id: ID of the folder document_id: ID of the document auth:
-   * Authentication context
+   * Args: folder_id_or_name: ID or name of the folder document_id: ID of the
+   * document auth: Authentication context
    *
    * Returns: Success status
    */
@@ -20,15 +20,15 @@ export class Documents extends APIResource {
     params: DocumentAddParams,
     options?: RequestOptions,
   ): APIPromise<DocumentAddResponse> {
-    const { folder_id } = params;
-    return this._client.post(path`/folders/${folder_id}/documents/${documentID}`, options);
+    const { folder_id_or_name } = params;
+    return this._client.post(path`/folders/${folder_id_or_name}/documents/${documentID}`, options);
   }
 
   /**
    * Remove a document from a folder.
    *
-   * Args: folder_id: ID of the folder document_id: ID of the document auth:
-   * Authentication context
+   * Args: folder_id_or_name: ID or name of the folder document_id: ID of the
+   * document auth: Authentication context
    *
    * Returns: Success status
    */
@@ -37,8 +37,8 @@ export class Documents extends APIResource {
     params: DocumentRemoveParams,
     options?: RequestOptions,
   ): APIPromise<DocumentsAPI.DocumentDeleteResponse> {
-    const { folder_id } = params;
-    return this._client.delete(path`/folders/${folder_id}/documents/${documentID}`, options);
+    const { folder_id_or_name } = params;
+    return this._client.delete(path`/folders/${folder_id_or_name}/documents/${documentID}`, options);
   }
 }
 
@@ -52,11 +52,11 @@ export interface DocumentAddResponse {
 }
 
 export interface DocumentAddParams {
-  folder_id: string;
+  folder_id_or_name: string;
 }
 
 export interface DocumentRemoveParams {
-  folder_id: string;
+  folder_id_or_name: string;
 }
 
 export declare namespace Documents {

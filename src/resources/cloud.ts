@@ -13,7 +13,7 @@ export class Cloud extends APIResource {
    *
    * Returns: A summary describing how many documents and folders were removed.
    */
-  deleteApp(params: CloudDeleteAppParams, options?: RequestOptions): APIPromise<CloudDeleteAppResponse> {
+  deleteApp(params: CloudDeleteAppParams, options?: RequestOptions): APIPromise<unknown> {
     const { app_name } = params;
     return this._client.delete('/cloud/apps', { query: { app_name }, ...options });
   }
@@ -31,7 +31,7 @@ export class Cloud extends APIResource {
   }
 }
 
-export type CloudDeleteAppResponse = { [key: string]: unknown };
+export type CloudDeleteAppResponse = unknown;
 
 export type CloudGenerateUriResponse = { [key: string]: string };
 

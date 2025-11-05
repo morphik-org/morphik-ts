@@ -22,7 +22,7 @@ export class APIKeys extends APIResource {
 
 export type APIKeyCreateResponse = { [key: string]: string };
 
-export type APIKeyListResponse = { [key: string]: { [key: string]: unknown } };
+export type APIKeyListResponse = { [key: string]: unknown };
 
 export interface APIKeyCreateParams {
   api_key: string;

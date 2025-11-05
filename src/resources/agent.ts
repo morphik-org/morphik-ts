@@ -14,15 +14,12 @@ export class Agent extends APIResource {
    *
    * Returns: A dictionary with the agent's full response.
    */
-  executeQuery(
-    body: AgentExecuteQueryParams,
-    options?: RequestOptions,
-  ): APIPromise<AgentExecuteQueryResponse> {
+  executeQuery(body: AgentExecuteQueryParams, options?: RequestOptions): APIPromise<unknown> {
     return this._client.post('/agent', { body, ...options });
   }
 }
 
-export type AgentExecuteQueryResponse = { [key: string]: unknown };
+export type AgentExecuteQueryResponse = unknown;
 
 export interface AgentExecuteQueryParams {
   /**

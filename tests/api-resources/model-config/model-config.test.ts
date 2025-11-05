@@ -8,9 +8,9 @@ const client = new Morphik({
 });
 
 describe('resource modelConfig', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.modelConfig.create({ config_data: { foo: 'bar' }, provider: 'provider' });
+    const responsePromise = client.modelConfig.create({ config_data: {}, provider: 'provider' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -20,12 +20,12 @@ describe('resource modelConfig', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.modelConfig.create({ config_data: { foo: 'bar' }, provider: 'provider' });
+    const response = await client.modelConfig.create({ config_data: {}, provider: 'provider' });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.modelConfig.retrieve('config_id');
     const rawResponse = await responsePromise.asResponse();
@@ -37,9 +37,9 @@ describe('resource modelConfig', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: only required params', async () => {
-    const responsePromise = client.modelConfig.update('config_id', { config_data: { foo: 'bar' } });
+    const responsePromise = client.modelConfig.update('config_id', { config_data: {} });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -49,12 +49,12 @@ describe('resource modelConfig', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
-    const response = await client.modelConfig.update('config_id', { config_data: { foo: 'bar' } });
+    const response = await client.modelConfig.update('config_id', { config_data: {} });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.modelConfig.list();
     const rawResponse = await responsePromise.asResponse();
@@ -66,7 +66,7 @@ describe('resource modelConfig', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.modelConfig.delete('config_id');
     const rawResponse = await responsePromise.asResponse();

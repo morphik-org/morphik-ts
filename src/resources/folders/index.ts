@@ -11,16 +11,8 @@ export {
   type Folder,
   type FolderListResponse,
   type FolderDeleteResponse,
+  type FolderDetailsResponse,
   type FolderListSummariesResponse,
-  type FolderSetRuleResponse,
   type FolderCreateParams,
-  type FolderSetRuleParams,
+  type FolderDetailsParams,
 } from './folders';
-export {
-  Workflows,
-  type WorkflowListResponse,
-  type WorkflowAssociateResponse,
-  type WorkflowDisassociateResponse,
-  type WorkflowAssociateParams,
-  type WorkflowDisassociateParams,
-} from './workflows';

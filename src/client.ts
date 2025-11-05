@@ -57,8 +57,12 @@ import {
   Ingest,
   IngestBatchIngestFilesParams,
   IngestBatchIngestFilesResponse,
+  IngestDocumentQueryParams,
+  IngestDocumentQueryResponse,
   IngestIngestFileParams,
   IngestIngestTextParams,
+  IngestRequeueParams,
+  IngestRequeueResponse,
   TextRequest,
 } from './resources/ingest';
 import { Local, LocalGenerateUriParams, LocalGenerateUriResponse } from './resources/local';
@@ -72,8 +76,9 @@ import {
   ModelResponse,
   Models,
 } from './resources/models';
-import { Ping, PingCheckResponse } from './resources/ping';
+import { Ping, PingCheckResponse, PingStatusResponse } from './resources/ping';
 import { Query, QueryGenerateCompletionParams } from './resources/query';
+import { Search, SearchDocumentsParams, SearchDocumentsResponse } from './resources/search';
 import {
   Usage,
   UsageListRecentParams,
@@ -87,8 +92,12 @@ import {
   DocumentGetDownloadURLParams,
   DocumentGetDownloadURLResponse,
   DocumentGetStatusResponse,
+  DocumentListDocsParams,
+  DocumentListDocsResponse,
   DocumentListParams,
   DocumentListResponse,
+  DocumentPagesParams,
+  DocumentPagesResponse,
   DocumentUpdateFileParams,
   DocumentUpdateMetadataParams,
   DocumentUpdateTextParams,
@@ -99,10 +108,10 @@ import {
   Folder,
   FolderCreateParams,
   FolderDeleteResponse,
+  FolderDetailsParams,
+  FolderDetailsResponse,
   FolderListResponse,
   FolderListSummariesResponse,
-  FolderSetRuleParams,
-  FolderSetRuleResponse,
   Folders,
 } from './resources/folders/folders';
 import {
@@ -135,16 +144,6 @@ import {
   RetrieveCreateDocsParams,
   RetrieveCreateDocsResponse,
 } from './resources/retrieve/retrieve';
-import {
-  Workflow,
-  WorkflowCreateParams,
-  WorkflowDeleteResponse,
-  WorkflowListResponse,
-  WorkflowRun,
-  WorkflowRunParams,
-  WorkflowUpdateParams,
-  Workflows,
-} from './resources/workflows/workflows';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -486,7 +485,7 @@ export class Morphik {
     const response = await this.fetchWithTimeout(url, req, timeout, controller).catch(castToError);
     const headersTime = Date.now();
 
-    if (response instanceof Error) {
+    if (response instanceof globalThis.Error) {
       const retryMessage = `retrying, ${retriesRemaining} attempts remaining`;
       if (options.signal?.aborted) {
         throw new Errors.APIUserAbortError();
@@ -793,7 +792,7 @@ export class Morphik {
         // Preserve legacy string encoding behavior for now
         headers.values.has('content-type')) ||
       // `Blob` is superset of `File`
-      body instanceof Blob ||
+      ((globalThis as any).Blob && body instanceof (globalThis as any).Blob) ||
       // `FormData` -> `multipart/form-data`
       body instanceof FormData ||
       // `URLSearchParams` -> `application/x-www-form-urlencoded`
@@ -836,7 +835,6 @@ export class Morphik {
   models: API.Models = new API.Models(this);
   ingest: API.Ingest = new API.Ingest(this);
   folders: API.Folders = new API.Folders(this);
-  workflows: API.Workflows = new API.Workflows(this);
   modelConfig: API.ModelConfig = new API.ModelConfig(this);
   apiKeys: API.APIKeys = new API.APIKeys(this);
   logs: API.Logs = new API.Logs(this);
@@ -845,6 +843,7 @@ export class Morphik {
   ee: API.Ee = new API.Ee(this);
   retrieve: API.Retrieve = new API.Retrieve(this);
   batch: API.Batch = new API.Batch(this);
+  search: API.Search = new API.Search(this);
   query: API.Query = new API.Query(this);
   agent: API.Agent = new API.Agent(this);
   usage: API.Usage = new API.Usage(this);
@@ -853,11 +852,11 @@ export class Morphik {
   documents: API.Documents = new API.Documents(this);
   chat: API.Chat = new API.Chat(this);
 }
+
 Morphik.Ping = Ping;
 Morphik.Models = Models;
 Morphik.Ingest = Ingest;
 Morphik.Folders = Folders;
-Morphik.Workflows = Workflows;
 Morphik.ModelConfig = ModelConfig;
 Morphik.APIKeys = APIKeys;
 Morphik.Logs = Logs;
@@ -866,6 +865,7 @@ Morphik.GraphResource = GraphResource;
 Morphik.Ee = Ee;
 Morphik.Retrieve = Retrieve;
 Morphik.Batch = Batch;
+Morphik.Search = Search;
 Morphik.Query = Query;
 Morphik.Agent = Agent;
 Morphik.Usage = Usage;
@@ -873,10 +873,15 @@ Morphik.Local = Local;
 Morphik.Cloud = Cloud;
 Morphik.Documents = Documents;
 Morphik.Chat = Chat;
+
 export declare namespace Morphik {
   export type RequestOptions = Opts.RequestOptions;
 
-  export { Ping as Ping, type PingCheckResponse as PingCheckResponse };
+  export {
+    Ping as Ping,
+    type PingCheckResponse as PingCheckResponse,
+    type PingStatusResponse as PingStatusResponse,
+  };
 
   export {
     Models as Models,
@@ -893,9 +898,13 @@ export declare namespace Morphik {
     type Document as Document,
     type TextRequest as TextRequest,
     type IngestBatchIngestFilesResponse as IngestBatchIngestFilesResponse,
+    type IngestDocumentQueryResponse as IngestDocumentQueryResponse,
+    type IngestRequeueResponse as IngestRequeueResponse,
     type IngestBatchIngestFilesParams as IngestBatchIngestFilesParams,
+    type IngestDocumentQueryParams as IngestDocumentQueryParams,
     type IngestIngestFileParams as IngestIngestFileParams,
     type IngestIngestTextParams as IngestIngestTextParams,
+    type IngestRequeueParams as IngestRequeueParams,
   };
 
   export {
@@ -903,21 +912,10 @@ export declare namespace Morphik {
     type Folder as Folder,
     type FolderListResponse as FolderListResponse,
     type FolderDeleteResponse as FolderDeleteResponse,
+    type FolderDetailsResponse as FolderDetailsResponse,
     type FolderListSummariesResponse as FolderListSummariesResponse,
-    type FolderSetRuleResponse as FolderSetRuleResponse,
     type FolderCreateParams as FolderCreateParams,
-    type FolderSetRuleParams as FolderSetRuleParams,
-  };
-
-  export {
-    Workflows as Workflows,
-    type Workflow as Workflow,
-    type WorkflowRun as WorkflowRun,
-    type WorkflowListResponse as WorkflowListResponse,
-    type WorkflowDeleteResponse as WorkflowDeleteResponse,
-    type WorkflowCreateParams as WorkflowCreateParams,
-    type WorkflowUpdateParams as WorkflowUpdateParams,
-    type WorkflowRunParams as WorkflowRunParams,
+    type FolderDetailsParams as FolderDetailsParams,
   };
 
   export {
@@ -988,6 +986,12 @@ export declare namespace Morphik {
     type BatchRetrieveDocumentsParams as BatchRetrieveDocumentsParams,
   };
 
+  export {
+    Search as Search,
+    type SearchDocumentsResponse as SearchDocumentsResponse,
+    type SearchDocumentsParams as SearchDocumentsParams,
+  };
+
   export { Query as Query, type QueryGenerateCompletionParams as QueryGenerateCompletionParams };
 
   export {
@@ -1024,9 +1028,13 @@ export declare namespace Morphik {
     type DocumentDownloadFileResponse as DocumentDownloadFileResponse,
     type DocumentGetDownloadURLResponse as DocumentGetDownloadURLResponse,
     type DocumentGetStatusResponse as DocumentGetStatusResponse,
+    type DocumentListDocsResponse as DocumentListDocsResponse,
+    type DocumentPagesResponse as DocumentPagesResponse,
     type DocumentListParams as DocumentListParams,
     type DocumentGetByFilenameParams as DocumentGetByFilenameParams,
     type DocumentGetDownloadURLParams as DocumentGetDownloadURLParams,
+    type DocumentListDocsParams as DocumentListDocsParams,
+    type DocumentPagesParams as DocumentPagesParams,
     type DocumentUpdateFileParams as DocumentUpdateFileParams,
     type DocumentUpdateMetadataParams as DocumentUpdateMetadataParams,
     type DocumentUpdateTextParams as DocumentUpdateTextParams,

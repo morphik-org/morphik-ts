@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource chat', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('complete: only required params', async () => {
     const responsePromise = client.documents.chat.complete('chat_id', { message: 'message' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource chat', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('complete: required and optional params', async () => {
     const response = await client.documents.chat.complete('chat_id', {
       message: 'message',
@@ -29,7 +29,7 @@ describe('resource chat', () => {
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieveHistory', async () => {
     const responsePromise = client.documents.chat.retrieveHistory('chat_id');
     const rawResponse = await responsePromise.asResponse();

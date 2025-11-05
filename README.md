@@ -4,14 +4,14 @@
 
 This library provides convenient access to the Morphik REST API from server-side TypeScript or JavaScript.
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.morphik.ai](https://docs.morphik.ai). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:stainless-sdks/morphik-typescript.git
+npm install git+ssh://git@github.com:morphik-org/morphik-ts.git
 ```
 
 > [!NOTE]
@@ -67,17 +67,20 @@ import Morphik, { toFile } from 'morphik';
 const client = new Morphik();
 
 // If you have access to Node `fs` we recommend using `fs.createReadStream()`:
-await client.ingest.ingestFile({ file: fs.createReadStream('/path/to/file') });
+await client.ingest.documentQuery({ file: fs.createReadStream('/path/to/file'), prompt: 'prompt' });
 
 // Or if you have the web `File` API you can pass a `File` instance:
-await client.ingest.ingestFile({ file: new File(['my bytes'], 'file') });
+await client.ingest.documentQuery({ file: new File(['my bytes'], 'file'), prompt: 'prompt' });
 
 // You can also pass a `fetch` `Response`:
-await client.ingest.ingestFile({ file: await fetch('https://somesite/file') });
+await client.ingest.documentQuery({ file: await fetch('https://somesite/file'), prompt: 'prompt' });
 
 // Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.ingest.ingestFile({ file: await toFile(Buffer.from('my bytes'), 'file') });
-await client.ingest.ingestFile({ file: await toFile(new Uint8Array([0, 1, 2]), 'file') });
+await client.ingest.documentQuery({ file: await toFile(Buffer.from('my bytes'), 'file'), prompt: 'prompt' });
+await client.ingest.documentQuery({
+  file: await toFile(new Uint8Array([0, 1, 2]), 'file'),
+  prompt: 'prompt',
+});
 ```
 
 ## Handling errors
@@ -364,7 +367,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/morphik-typescript/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/morphik-org/morphik-ts/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 

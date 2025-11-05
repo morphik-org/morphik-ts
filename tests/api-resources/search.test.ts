@@ -7,10 +7,10 @@ const client = new Morphik({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource logs', () => {
+describe('resource search', () => {
   // Prism tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.logs.list();
+  test.skip('documents: only required params', async () => {
+    const responsePromise = client.search.documents({ query: 'x' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,13 +21,13 @@ describe('resource logs', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.logs.list(
-        { limit: 1, op_type: 'op_type', since: '2019-12-27T18:11:19.117Z', status: 'status' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Morphik.NotFoundError);
+  test.skip('documents: required and optional params', async () => {
+    const response = await client.search.documents({
+      query: 'x',
+      end_user_id: 'end_user_id',
+      filters: {},
+      folder_name: 'string',
+      limit: 1,
+    });
   });
 });

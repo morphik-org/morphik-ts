@@ -26,7 +26,7 @@ export class CustomModels extends APIResource {
 export interface CustomModel {
   id: string;
 
-  config: { [key: string]: unknown };
+  config: unknown;
 
   model_name: string;
 
@@ -38,7 +38,7 @@ export interface CustomModel {
 export type CustomModelListResponse = Array<CustomModel>;
 
 export interface CustomModelCreateParams {
-  config: { [key: string]: unknown };
+  config: unknown;
 
   model_name: string;
 

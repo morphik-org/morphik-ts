@@ -54,7 +54,7 @@ export class Chat extends APIResource {
   }
 }
 
-export type ChatListResponse = Array<{ [key: string]: unknown }>;
+export type ChatListResponse = Array<unknown>;
 
 export type ChatRetrieveHistoryResponse = Array<ChatRetrieveHistoryResponse.ChatRetrieveHistoryResponseItem>;
 
@@ -67,7 +67,7 @@ export namespace ChatRetrieveHistoryResponse {
 
     role: 'user' | 'assistant';
 
-    agent_data?: { [key: string]: unknown } | null;
+    agent_data?: unknown | null;
 
     timestamp?: string;
   }

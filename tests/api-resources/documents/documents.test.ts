@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource documents', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.documents.retrieve('document_id');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource documents', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.documents.list({});
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource documents', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.documents.delete('document_id');
     const rawResponse = await responsePromise.asResponse();
@@ -44,7 +44,7 @@ describe('resource documents', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('downloadFile', async () => {
     const responsePromise = client.documents.downloadFile('document_id');
     const rawResponse = await responsePromise.asResponse();
@@ -56,7 +56,7 @@ describe('resource documents', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getByFilename', async () => {
     const responsePromise = client.documents.getByFilename('filename');
     const rawResponse = await responsePromise.asResponse();
@@ -68,7 +68,7 @@ describe('resource documents', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getByFilename: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -80,7 +80,7 @@ describe('resource documents', () => {
     ).rejects.toThrow(Morphik.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getDownloadURL', async () => {
     const responsePromise = client.documents.getDownloadURL('document_id');
     const rawResponse = await responsePromise.asResponse();
@@ -92,7 +92,7 @@ describe('resource documents', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getDownloadURL: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -100,7 +100,7 @@ describe('resource documents', () => {
     ).rejects.toThrow(Morphik.NotFoundError);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('getStatus', async () => {
     const responsePromise = client.documents.getStatus('document_id');
     const rawResponse = await responsePromise.asResponse();
@@ -112,7 +112,40 @@ describe('resource documents', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
+  test.skip('listDocs', async () => {
+    const responsePromise = client.documents.listDocs({});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('pages: only required params', async () => {
+    const responsePromise = client.documents.pages({
+      document_id: 'document_id',
+      end_page: 1,
+      start_page: 1,
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('pages: required and optional params', async () => {
+    const response = await client.documents.pages({ document_id: 'document_id', end_page: 1, start_page: 1 });
+  });
+
+  // Prism tests are disabled
   test.skip('updateFile: only required params', async () => {
     const responsePromise = client.documents.updateFile('document_id', {
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
@@ -126,20 +159,19 @@ describe('resource documents', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('updateFile: required and optional params', async () => {
     const response = await client.documents.updateFile('document_id', {
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       metadata: 'metadata',
-      rules: 'rules',
       update_strategy: 'update_strategy',
       use_colpali: true,
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('updateMetadata: only required params', async () => {
-    const responsePromise = client.documents.updateMetadata('document_id', { body: { foo: 'bar' } });
+    const responsePromise = client.documents.updateMetadata('document_id', { body: {} });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -149,12 +181,12 @@ describe('resource documents', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('updateMetadata: required and optional params', async () => {
-    const response = await client.documents.updateMetadata('document_id', { body: { foo: 'bar' } });
+    const response = await client.documents.updateMetadata('document_id', { body: {} });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('updateText: only required params', async () => {
     const responsePromise = client.documents.updateText('document_id', { content: 'content' });
     const rawResponse = await responsePromise.asResponse();
@@ -166,7 +198,7 @@ describe('resource documents', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('updateText: required and optional params', async () => {
     const response = await client.documents.updateText('document_id', {
       content: 'content',
@@ -174,8 +206,7 @@ describe('resource documents', () => {
       end_user_id: 'end_user_id',
       filename: 'filename',
       folder_name: 'folder_name',
-      metadata: { foo: 'bar' },
-      rules: [{ foo: 'bar' }],
+      metadata: {},
       use_colpali: true,
     });
   });

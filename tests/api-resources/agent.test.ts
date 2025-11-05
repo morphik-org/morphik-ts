@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource agent', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('executeQuery: only required params', async () => {
     const responsePromise = client.agent.executeQuery({ query: 'query' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource agent', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('executeQuery: required and optional params', async () => {
     const response = await client.agent.executeQuery({
       query: 'query',

@@ -8,13 +8,9 @@ const client = new Morphik({
 });
 
 describe('resource models', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.models.create({
-      config: { foo: 'bar' },
-      name: 'name',
-      provider: 'provider',
-    });
+    const responsePromise = client.models.create({ config: {}, name: 'name', provider: 'provider' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,16 +20,12 @@ describe('resource models', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.models.create({
-      config: { foo: 'bar' },
-      name: 'name',
-      provider: 'provider',
-    });
+    const response = await client.models.create({ config: {}, name: 'name', provider: 'provider' });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.models.list();
     const rawResponse = await responsePromise.asResponse();
@@ -45,7 +37,7 @@ describe('resource models', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.models.delete('model_id');
     const rawResponse = await responsePromise.asResponse();
@@ -57,7 +49,7 @@ describe('resource models', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listAvailable', async () => {
     const responsePromise = client.models.listAvailable();
     const rawResponse = await responsePromise.asResponse();
@@ -69,7 +61,7 @@ describe('resource models', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listCustom', async () => {
     const responsePromise = client.models.listCustom();
     const rawResponse = await responsePromise.asResponse();

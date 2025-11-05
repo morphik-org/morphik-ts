@@ -3,10 +3,12 @@
 Types:
 
 - <code><a href="./src/resources/ping.ts">PingCheckResponse</a></code>
+- <code><a href="./src/resources/ping.ts">PingStatusResponse</a></code>
 
 Methods:
 
 - <code title="get /ping">client.ping.<a href="./src/resources/ping.ts">check</a>() -> PingCheckResponse</code>
+- <code title="get /health">client.ping.<a href="./src/resources/ping.ts">status</a>() -> PingStatusResponse</code>
 
 # Models
 
@@ -33,12 +35,16 @@ Types:
 - <code><a href="./src/resources/ingest.ts">Document</a></code>
 - <code><a href="./src/resources/ingest.ts">TextRequest</a></code>
 - <code><a href="./src/resources/ingest.ts">IngestBatchIngestFilesResponse</a></code>
+- <code><a href="./src/resources/ingest.ts">IngestDocumentQueryResponse</a></code>
+- <code><a href="./src/resources/ingest.ts">IngestRequeueResponse</a></code>
 
 Methods:
 
 - <code title="post /ingest/files">client.ingest.<a href="./src/resources/ingest.ts">batchIngestFiles</a>({ ...params }) -> IngestBatchIngestFilesResponse</code>
+- <code title="post /ingest/document/query">client.ingest.<a href="./src/resources/ingest.ts">documentQuery</a>({ ...params }) -> IngestDocumentQueryResponse</code>
 - <code title="post /ingest/file">client.ingest.<a href="./src/resources/ingest.ts">ingestFile</a>({ ...params }) -> Document</code>
 - <code title="post /ingest/text">client.ingest.<a href="./src/resources/ingest.ts">ingestText</a>({ ...params }) -> Document</code>
+- <code title="post /ingest/requeue">client.ingest.<a href="./src/resources/ingest.ts">requeue</a>({ ...params }) -> IngestRequeueResponse</code>
 
 # Folders
 
@@ -47,17 +53,17 @@ Types:
 - <code><a href="./src/resources/folders/folders.ts">Folder</a></code>
 - <code><a href="./src/resources/folders/folders.ts">FolderListResponse</a></code>
 - <code><a href="./src/resources/folders/folders.ts">FolderDeleteResponse</a></code>
+- <code><a href="./src/resources/folders/folders.ts">FolderDetailsResponse</a></code>
 - <code><a href="./src/resources/folders/folders.ts">FolderListSummariesResponse</a></code>
-- <code><a href="./src/resources/folders/folders.ts">FolderSetRuleResponse</a></code>
 
 Methods:
 
 - <code title="post /folders">client.folders.<a href="./src/resources/folders/folders.ts">create</a>({ ...params }) -> Folder</code>
-- <code title="get /folders/{folder_id}">client.folders.<a href="./src/resources/folders/folders.ts">retrieve</a>(folderID) -> Folder</code>
+- <code title="get /folders/{folder_id_or_name}">client.folders.<a href="./src/resources/folders/folders.ts">retrieve</a>(folderIDOrName) -> Folder</code>
 - <code title="get /folders">client.folders.<a href="./src/resources/folders/folders.ts">list</a>() -> FolderListResponse</code>
-- <code title="delete /folders/{folder_name}">client.folders.<a href="./src/resources/folders/folders.ts">delete</a>(folderName) -> FolderDeleteResponse</code>
+- <code title="delete /folders/{folder_id_or_name}">client.folders.<a href="./src/resources/folders/folders.ts">delete</a>(folderIDOrName) -> FolderDeleteResponse</code>
+- <code title="post /folders/details">client.folders.<a href="./src/resources/folders/folders.ts">details</a>({ ...params }) -> FolderDetailsResponse</code>
 - <code title="get /folders/summary">client.folders.<a href="./src/resources/folders/folders.ts">listSummaries</a>() -> FolderListSummariesResponse</code>
-- <code title="post /folders/{folder_id}/set_rule">client.folders.<a href="./src/resources/folders/folders.ts">setRule</a>(folderID, { ...params }) -> FolderSetRuleResponse</code>
 
 ## Documents
 
@@ -67,53 +73,8 @@ Types:
 
 Methods:
 
-- <code title="post /folders/{folder_id}/documents/{document_id}">client.folders.documents.<a href="./src/resources/folders/documents.ts">add</a>(documentID, { ...params }) -> DocumentAddResponse</code>
-- <code title="delete /folders/{folder_id}/documents/{document_id}">client.folders.documents.<a href="./src/resources/folders/documents.ts">remove</a>(documentID, { ...params }) -> DocumentDeleteResponse</code>
-
-## Workflows
-
-Types:
-
-- <code><a href="./src/resources/folders/workflows.ts">WorkflowListResponse</a></code>
-- <code><a href="./src/resources/folders/workflows.ts">WorkflowAssociateResponse</a></code>
-- <code><a href="./src/resources/folders/workflows.ts">WorkflowDisassociateResponse</a></code>
-
-Methods:
-
-- <code title="get /folders/{folder_id}/workflows">client.folders.workflows.<a href="./src/resources/folders/workflows.ts">list</a>(folderID) -> WorkflowListResponse</code>
-- <code title="post /folders/{folder_id}/workflows/{workflow_id}">client.folders.workflows.<a href="./src/resources/folders/workflows.ts">associate</a>(workflowID, { ...params }) -> WorkflowAssociateResponse</code>
-- <code title="delete /folders/{folder_id}/workflows/{workflow_id}">client.folders.workflows.<a href="./src/resources/folders/workflows.ts">disassociate</a>(workflowID, { ...params }) -> WorkflowDisassociateResponse</code>
-
-# Workflows
-
-Types:
-
-- <code><a href="./src/resources/workflows/workflows.ts">Workflow</a></code>
-- <code><a href="./src/resources/workflows/workflows.ts">WorkflowRun</a></code>
-- <code><a href="./src/resources/workflows/workflows.ts">WorkflowListResponse</a></code>
-- <code><a href="./src/resources/workflows/workflows.ts">WorkflowDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /workflows">client.workflows.<a href="./src/resources/workflows/workflows.ts">create</a>({ ...params }) -> Workflow</code>
-- <code title="get /workflows/{workflow_id}">client.workflows.<a href="./src/resources/workflows/workflows.ts">retrieve</a>(workflowID) -> Workflow</code>
-- <code title="put /workflows/{workflow_id}">client.workflows.<a href="./src/resources/workflows/workflows.ts">update</a>(workflowID, { ...params }) -> Workflow</code>
-- <code title="get /workflows">client.workflows.<a href="./src/resources/workflows/workflows.ts">list</a>() -> WorkflowListResponse</code>
-- <code title="delete /workflows/{workflow_id}">client.workflows.<a href="./src/resources/workflows/workflows.ts">delete</a>(workflowID) -> WorkflowDeleteResponse</code>
-- <code title="post /workflows/{workflow_id}/run/{document_id}">client.workflows.<a href="./src/resources/workflows/workflows.ts">run</a>(documentID, { ...params }) -> WorkflowRun</code>
-
-## Runs
-
-Types:
-
-- <code><a href="./src/resources/workflows/runs.ts">RunListResponse</a></code>
-- <code><a href="./src/resources/workflows/runs.ts">RunDeleteResponse</a></code>
-
-Methods:
-
-- <code title="get /workflows/runs/{run_id}">client.workflows.runs.<a href="./src/resources/workflows/runs.ts">retrieve</a>(runID) -> WorkflowRun</code>
-- <code title="get /workflows/{workflow_id}/runs">client.workflows.runs.<a href="./src/resources/workflows/runs.ts">list</a>(workflowID) -> RunListResponse</code>
-- <code title="delete /workflows/runs/{run_id}">client.workflows.runs.<a href="./src/resources/workflows/runs.ts">delete</a>(runID) -> RunDeleteResponse</code>
+- <code title="post /folders/{folder_id_or_name}/documents/{document_id}">client.folders.documents.<a href="./src/resources/folders/documents.ts">add</a>(documentID, { ...params }) -> DocumentAddResponse</code>
+- <code title="delete /folders/{folder_id_or_name}/documents/{document_id}">client.folders.documents.<a href="./src/resources/folders/documents.ts">remove</a>(documentID, { ...params }) -> DocumentDeleteResponse</code>
 
 # ModelConfig
 
@@ -177,8 +138,8 @@ Types:
 
 Methods:
 
-- <code title="post /cache/create">client.cache.<a href="./src/resources/cache.ts">create</a>({ ...params }) -> CacheCreateResponse</code>
-- <code title="get /cache/{name}">client.cache.<a href="./src/resources/cache.ts">retrieve</a>(name) -> CacheRetrieveResponse</code>
+- <code title="post /cache/create">client.cache.<a href="./src/resources/cache.ts">create</a>({ ...params }) -> unknown</code>
+- <code title="get /cache/{name}">client.cache.<a href="./src/resources/cache.ts">retrieve</a>(name) -> unknown</code>
 - <code title="post /cache/{name}/update">client.cache.<a href="./src/resources/cache.ts">update</a>(name) -> CacheUpdateResponse</code>
 - <code title="post /cache/{name}/add_docs">client.cache.<a href="./src/resources/cache.ts">addDocs</a>(name, [ ...body ]) -> CacheAddDocsResponse</code>
 - <code title="post /cache/{name}/query">client.cache.<a href="./src/resources/cache.ts">query</a>(name, { ...params }) -> CompletionResponse</code>
@@ -202,9 +163,9 @@ Methods:
 - <code title="get /graph/{name}">client.graph.<a href="./src/resources/graph/graph.ts">retrieve</a>(name, { ...params }) -> Graph</code>
 - <code title="post /graph/{name}/update">client.graph.<a href="./src/resources/graph/graph.ts">update</a>(name, { ...params }) -> Graph</code>
 - <code title="get /graph/">client.graph.<a href="./src/resources/graph/graph.ts">list</a>({ ...params }) -> GraphListResponse</code>
-- <code title="delete /graph/{name}">client.graph.<a href="./src/resources/graph/graph.ts">delete</a>(name) -> GraphDeleteResponse</code>
-- <code title="get /graph/{name}/status">client.graph.<a href="./src/resources/graph/graph.ts">status</a>(name, { ...params }) -> GraphStatusResponse</code>
-- <code title="get /graph/{name}/visualization">client.graph.<a href="./src/resources/graph/graph.ts">visualization</a>(name, { ...params }) -> GraphVisualizationResponse</code>
+- <code title="delete /graph/{name}">client.graph.<a href="./src/resources/graph/graph.ts">delete</a>(name) -> unknown</code>
+- <code title="get /graph/{name}/status">client.graph.<a href="./src/resources/graph/graph.ts">status</a>(name, { ...params }) -> unknown</code>
+- <code title="get /graph/{name}/visualization">client.graph.<a href="./src/resources/graph/graph.ts">visualization</a>(name, { ...params }) -> unknown</code>
 
 ## Workflow
 
@@ -214,7 +175,7 @@ Types:
 
 Methods:
 
-- <code title="get /graph/workflow/{workflow_id}/status">client.graph.workflow.<a href="./src/resources/graph/workflow.ts">status</a>(workflowID, { ...params }) -> WorkflowStatusResponse</code>
+- <code title="get /graph/workflow/{workflow_id}/status">client.graph.workflow.<a href="./src/resources/graph/workflow.ts">status</a>(workflowID, { ...params }) -> unknown</code>
 
 # Ee
 
@@ -243,18 +204,28 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/ee/connectors/connectors.ts">ConnectorDisconnectResponse</a></code>
+- <code><a href="./src/resources/ee/connectors/connectors.ts">ConnectorFinalizeAuthResponse</a></code>
 - <code><a href="./src/resources/ee/connectors/connectors.ts">ConnectorGetAuthStatusResponse</a></code>
 - <code><a href="./src/resources/ee/connectors/connectors.ts">ConnectorHandleOAuthCallbackResponse</a></code>
 - <code><a href="./src/resources/ee/connectors/connectors.ts">ConnectorIngestFileResponse</a></code>
+- <code><a href="./src/resources/ee/connectors/connectors.ts">ConnectorIngestRepositoryResponse</a></code>
+- <code><a href="./src/resources/ee/connectors/connectors.ts">ConnectorInitiateAuthResponse</a></code>
 - <code><a href="./src/resources/ee/connectors/connectors.ts">ConnectorListFilesResponse</a></code>
+- <code><a href="./src/resources/ee/connectors/connectors.ts">ConnectorListFilesViaBodyResponse</a></code>
+- <code><a href="./src/resources/ee/connectors/connectors.ts">ConnectorStatusResponse</a></code>
 
 Methods:
 
-- <code title="post /ee/connectors/{connector_type}/disconnect">client.ee.connectors.<a href="./src/resources/ee/connectors/connectors.ts">disconnect</a>(connectorType) -> ConnectorDisconnectResponse</code>
+- <code title="post /ee/connectors/disconnect">client.ee.connectors.<a href="./src/resources/ee/connectors/connectors.ts">disconnect</a>({ ...params }) -> unknown</code>
+- <code title="post /ee/connectors/finalize-auth">client.ee.connectors.<a href="./src/resources/ee/connectors/connectors.ts">finalizeAuth</a>({ ...params }) -> unknown</code>
 - <code title="get /ee/connectors/{connector_type}/auth_status">client.ee.connectors.<a href="./src/resources/ee/connectors/connectors.ts">getAuthStatus</a>(connectorType) -> ConnectorGetAuthStatusResponse</code>
 - <code title="get /ee/connectors/{connector_type}/oauth2callback">client.ee.connectors.<a href="./src/resources/ee/connectors/connectors.ts">handleOAuthCallback</a>(connectorType, { ...params }) -> unknown</code>
-- <code title="post /ee/connectors/{connector_type}/ingest">client.ee.connectors.<a href="./src/resources/ee/connectors/connectors.ts">ingestFile</a>(connectorType, { ...params }) -> ConnectorIngestFileResponse</code>
+- <code title="post /ee/connectors/{connector_type}/ingest">client.ee.connectors.<a href="./src/resources/ee/connectors/connectors.ts">ingestFile</a>(connectorType, { ...params }) -> unknown</code>
+- <code title="post /ee/connectors/{connector_type}/ingest-repository">client.ee.connectors.<a href="./src/resources/ee/connectors/connectors.ts">ingestRepository</a>(connectorType, { ...params }) -> unknown</code>
+- <code title="post /ee/connectors/initiate-auth">client.ee.connectors.<a href="./src/resources/ee/connectors/connectors.ts">initiateAuth</a>({ ...params }) -> unknown</code>
 - <code title="get /ee/connectors/{connector_type}/files">client.ee.connectors.<a href="./src/resources/ee/connectors/connectors.ts">listFiles</a>(connectorType, { ...params }) -> ConnectorListFilesResponse</code>
+- <code title="post /ee/connectors/list-files">client.ee.connectors.<a href="./src/resources/ee/connectors/connectors.ts">listFilesViaBody</a>({ ...params }) -> unknown</code>
+- <code title="post /ee/connectors/status">client.ee.connectors.<a href="./src/resources/ee/connectors/connectors.ts">status</a>({ ...params }) -> unknown</code>
 
 ### Auth
 
@@ -265,7 +236,7 @@ Types:
 
 Methods:
 
-- <code title="post /ee/connectors/{connector_type}/auth/finalize">client.ee.connectors.auth.<a href="./src/resources/ee/connectors/auth.ts">finalizeManualAuth</a>(connectorType, { ...params }) -> AuthFinalizeManualAuthResponse</code>
+- <code title="post /ee/connectors/{connector_type}/auth/finalize">client.ee.connectors.auth.<a href="./src/resources/ee/connectors/auth.ts">finalizeManualAuth</a>(connectorType, { ...params }) -> unknown</code>
 - <code title="get /ee/connectors/{connector_type}/auth/initiate_url">client.ee.connectors.auth.<a href="./src/resources/ee/connectors/auth.ts">getInitiateAuthURL</a>(connectorType, { ...params }) -> AuthGetInitiateAuthURLResponse</code>
 
 # Retrieve
@@ -304,6 +275,16 @@ Methods:
 - <code title="post /batch/chunks">client.batch.<a href="./src/resources/batch.ts">retrieveChunks</a>({ ...params }) -> BatchRetrieveChunksResponse</code>
 - <code title="post /batch/documents">client.batch.<a href="./src/resources/batch.ts">retrieveDocuments</a>({ ...params }) -> BatchRetrieveDocumentsResponse</code>
 
+# Search
+
+Types:
+
+- <code><a href="./src/resources/search.ts">SearchDocumentsResponse</a></code>
+
+Methods:
+
+- <code title="post /search/documents">client.search.<a href="./src/resources/search.ts">documents</a>({ ...params }) -> SearchDocumentsResponse</code>
+
 # Query
 
 Methods:
@@ -318,7 +299,7 @@ Types:
 
 Methods:
 
-- <code title="post /agent">client.agent.<a href="./src/resources/agent.ts">executeQuery</a>({ ...params }) -> AgentExecuteQueryResponse</code>
+- <code title="post /agent">client.agent.<a href="./src/resources/agent.ts">executeQuery</a>({ ...params }) -> unknown</code>
 
 # Usage
 
@@ -351,7 +332,7 @@ Types:
 
 Methods:
 
-- <code title="delete /cloud/apps">client.cloud.<a href="./src/resources/cloud.ts">deleteApp</a>({ ...params }) -> CloudDeleteAppResponse</code>
+- <code title="delete /cloud/apps">client.cloud.<a href="./src/resources/cloud.ts">deleteApp</a>({ ...params }) -> unknown</code>
 - <code title="post /cloud/generate_uri">client.cloud.<a href="./src/resources/cloud.ts">generateUri</a>({ ...params }) -> CloudGenerateUriResponse</code>
 
 # Documents
@@ -363,16 +344,20 @@ Types:
 - <code><a href="./src/resources/documents/documents.ts">DocumentDownloadFileResponse</a></code>
 - <code><a href="./src/resources/documents/documents.ts">DocumentGetDownloadURLResponse</a></code>
 - <code><a href="./src/resources/documents/documents.ts">DocumentGetStatusResponse</a></code>
+- <code><a href="./src/resources/documents/documents.ts">DocumentListDocsResponse</a></code>
+- <code><a href="./src/resources/documents/documents.ts">DocumentPagesResponse</a></code>
 
 Methods:
 
 - <code title="get /documents/{document_id}">client.documents.<a href="./src/resources/documents/documents.ts">retrieve</a>(documentID) -> Document</code>
-- <code title="post /documents/">client.documents.<a href="./src/resources/documents/documents.ts">list</a>({ ...params }) -> DocumentListResponse</code>
+- <code title="post /documents">client.documents.<a href="./src/resources/documents/documents.ts">list</a>({ ...params }) -> DocumentListResponse</code>
 - <code title="delete /documents/{document_id}">client.documents.<a href="./src/resources/documents/documents.ts">delete</a>(documentID) -> DocumentDeleteResponse</code>
 - <code title="get /documents/{document_id}/file">client.documents.<a href="./src/resources/documents/documents.ts">downloadFile</a>(documentID) -> unknown</code>
 - <code title="get /documents/filename/{filename}">client.documents.<a href="./src/resources/documents/documents.ts">getByFilename</a>(filename, { ...params }) -> Document</code>
 - <code title="get /documents/{document_id}/download_url">client.documents.<a href="./src/resources/documents/documents.ts">getDownloadURL</a>(documentID, { ...params }) -> DocumentGetDownloadURLResponse</code>
-- <code title="get /documents/{document_id}/status">client.documents.<a href="./src/resources/documents/documents.ts">getStatus</a>(documentID) -> DocumentGetStatusResponse</code>
+- <code title="get /documents/{document_id}/status">client.documents.<a href="./src/resources/documents/documents.ts">getStatus</a>(documentID) -> unknown</code>
+- <code title="post /documents/list_docs">client.documents.<a href="./src/resources/documents/documents.ts">listDocs</a>({ ...params }) -> DocumentListDocsResponse</code>
+- <code title="post /documents/pages">client.documents.<a href="./src/resources/documents/documents.ts">pages</a>({ ...params }) -> DocumentPagesResponse</code>
 - <code title="post /documents/{document_id}/update_file">client.documents.<a href="./src/resources/documents/documents.ts">updateFile</a>(documentID, { ...params }) -> Document</code>
 - <code title="post /documents/{document_id}/update_metadata">client.documents.<a href="./src/resources/documents/documents.ts">updateMetadata</a>(documentID, { ...params }) -> Document</code>
 - <code title="post /documents/{document_id}/update_text">client.documents.<a href="./src/resources/documents/documents.ts">updateText</a>(documentID, { ...params }) -> Document</code>

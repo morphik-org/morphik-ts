@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource query', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('generateCompletion: only required params', async () => {
     const responsePromise = client.query.generateCompletion({ query: 'x' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,32 +20,33 @@ describe('resource query', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('generateCompletion: required and optional params', async () => {
     const response = await client.query.generateCompletion({
       query: 'x',
       chat_id: 'chat_id',
       end_user_id: 'end_user_id',
-      filters: { foo: 'bar' },
+      filters: {},
       folder_name: 'string',
       graph_name: 'graph_name',
       hop_depth: 1,
       include_paths: true,
+      inline_citations: true,
       k: 1,
-      llm_config: { foo: 'bar' },
+      llm_config: {},
       max_tokens: 0,
       min_score: 0,
       padding: 0,
       prompt_overrides: {
         entity_extraction: {
-          examples: [{ label: 'label', type: 'type', properties: { foo: 'bar' } }],
+          examples: [{ label: 'label', type: 'type', properties: {} }],
           prompt_template: 'prompt_template',
         },
         entity_resolution: {
           examples: [{ canonical: 'canonical', variants: ['string'] }],
           prompt_template: 'prompt_template',
         },
-        query: { prompt_template: 'prompt_template' },
+        query: { prompt_template: 'prompt_template', system_prompt: 'system_prompt' },
       },
       schema: {},
       stream_response: true,

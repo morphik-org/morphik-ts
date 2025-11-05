@@ -8,10 +8,10 @@ const client = new Morphik({
 });
 
 describe('resource customModels', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.modelConfig.customModels.create({
-      config: { foo: 'bar' },
+      config: {},
       model_name: 'model_name',
       name: 'name',
       provider: 'provider',
@@ -25,17 +25,17 @@ describe('resource customModels', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.modelConfig.customModels.create({
-      config: { foo: 'bar' },
+      config: {},
       model_name: 'model_name',
       name: 'name',
       provider: 'provider',
     });
   });
 
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.modelConfig.customModels.list();
     const rawResponse = await responsePromise.asResponse();

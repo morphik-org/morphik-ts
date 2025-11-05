@@ -1,24 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as FoldersAPI from './folders';
 import * as DocumentsAPI from './documents';
 import { DocumentAddParams, DocumentAddResponse, DocumentRemoveParams, Documents } from './documents';
-import * as WorkflowsAPI from './workflows';
-import {
-  WorkflowAssociateParams,
-  WorkflowAssociateResponse,
-  WorkflowDisassociateParams,
-  WorkflowDisassociateResponse,
-  WorkflowListResponse,
-  Workflows,
-} from './workflows';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Folders extends APIResource {
   documents: DocumentsAPI.Documents = new DocumentsAPI.Documents(this._client);
-  workflows: WorkflowsAPI.Workflows = new WorkflowsAPI.Workflows(this._client);
 
   /**
    * Create a new folder.
@@ -33,14 +24,14 @@ export class Folders extends APIResource {
   }
 
   /**
-   * Get a folder by ID.
+   * Get a folder by ID or name.
    *
-   * Args: folder_id: ID of the folder auth: Authentication context
+   * Args: folder_id_or_name: ID or name of the folder auth: Authentication context
    *
    * Returns: Folder: Folder if found and accessible
    */
-  retrieve(folderID: string, options?: RequestOptions): APIPromise<Folder> {
-    return this._client.get(path`/folders/${folderID}`, options);
+  retrieve(folderIDOrName: string, options?: RequestOptions): APIPromise<Folder> {
+    return this._client.get(path`/folders/${folderIDOrName}`, options);
   }
 
   /**
@@ -57,13 +48,20 @@ export class Folders extends APIResource {
   /**
    * Delete a folder and all associated documents.
    *
-   * Args: folder_name: Name of the folder to delete auth: Authentication context
-   * (must have write access to the folder)
+   * Args: folder_id_or_name: Name or ID of the folder to delete auth: Authentication
+   * context (must have write access to the folder)
    *
    * Returns: Deletion status
    */
-  delete(folderName: string, options?: RequestOptions): APIPromise<FolderDeleteResponse> {
-    return this._client.delete(path`/folders/${folderName}`, options);
+  delete(folderIDOrName: string, options?: RequestOptions): APIPromise<FolderDeleteResponse> {
+    return this._client.delete(path`/folders/${folderIDOrName}`, options);
+  }
+
+  /**
+   * Retrieve folder metadata with optional document statistics and projections.
+   */
+  details(body: FolderDetailsParams, options?: RequestOptions): APIPromise<FolderDetailsResponse> {
+    return this._client.post('/folders/details', { body, ...options });
   }
 
   /**
@@ -71,28 +69,6 @@ export class Folders extends APIResource {
    */
   listSummaries(options?: RequestOptions): APIPromise<FolderListSummariesResponse> {
     return this._client.get('/folders/summary', options);
-  }
-
-  /**
-   * Set extraction rules for a folder.
-   *
-   * Args: folder_id: ID of the folder to set rules for request: SetFolderRuleRequest
-   * containing metadata extraction rules auth: Authentication context
-   * apply_to_existing: Whether to apply rules to existing documents in the folder
-   *
-   * Returns: Success status with processing results
-   */
-  setRule(
-    folderID: string,
-    params: FolderSetRuleParams,
-    options?: RequestOptions,
-  ): APIPromise<FolderSetRuleResponse> {
-    const { apply_to_existing, ...body } = params;
-    return this._client.post(path`/folders/${folderID}/set_rule`, {
-      query: { apply_to_existing },
-      body,
-      ...options,
-    });
   }
 }
 
@@ -112,14 +88,7 @@ export interface Folder {
 
   end_user_id?: string | null;
 
-  rules?: Array<{ [key: string]: unknown }>;
-
-  system_metadata?: { [key: string]: unknown };
-
-  /**
-   * List of workflow IDs to run on document ingestion
-   */
-  workflow_ids?: Array<string>;
+  system_metadata?: unknown;
 }
 
 export type FolderListResponse = Array<Folder>;
@@ -131,6 +100,53 @@ export interface FolderDeleteResponse {
   message: string;
 
   status: string;
+}
+
+/**
+ * Response wrapping folder detail entries.
+ */
+export interface FolderDetailsResponse {
+  folders: Array<FolderDetailsResponse.Folder>;
+}
+
+export namespace FolderDetailsResponse {
+  /**
+   * Folder details with optional document summary.
+   */
+  export interface Folder {
+    /**
+     * Represents a folder that contains documents
+     */
+    folder: FoldersAPI.Folder;
+
+    /**
+     * Document summary for a folder.
+     */
+    document_info?: Folder.DocumentInfo | null;
+  }
+
+  export namespace Folder {
+    /**
+     * Document summary for a folder.
+     */
+    export interface DocumentInfo {
+      document_count?: number | null;
+
+      documents?: Array<unknown>;
+
+      has_more?: boolean;
+
+      limit?: number;
+
+      next_skip?: number | null;
+
+      returned_count?: number;
+
+      skip?: number;
+
+      status_counts?: { [key: string]: number } | null;
+    }
+  }
 }
 
 export type FolderListSummariesResponse = Array<FolderListSummariesResponse.FolderListSummariesResponseItem>;
@@ -149,56 +165,76 @@ export namespace FolderListSummariesResponse {
   }
 }
 
-/**
- * Response for folder rule setting endpoint
- */
-export interface FolderSetRuleResponse {
-  message: string;
-
-  status: string;
-}
-
 export interface FolderCreateParams {
   name: string;
 
   description?: string | null;
 }
 
-export interface FolderSetRuleParams {
+export interface FolderDetailsParams {
   /**
-   * Body param:
+   * Optional list of fields to project for folder documents (dot notation supported)
    */
-  rules: Array<FolderSetRuleParams.Rule>;
+  document_fields?: Array<string> | null;
 
   /**
-   * Query param:
+   * Optional metadata filters applied when computing folder document statistics
    */
-  apply_to_existing?: boolean;
-}
+  document_filters?: unknown | null;
 
-export namespace FolderSetRuleParams {
   /**
-   * Request model for metadata extraction rule
+   * Maximum number of documents to return per folder when include_documents is true
    */
-  export interface Rule {
-    schema?: { [key: string]: unknown };
+  document_limit?: number;
 
-    type?: string;
-  }
+  /**
+   * Number of documents to skip within each folder when include_documents is true
+   */
+  document_skip?: number;
+
+  /**
+   * List of folder IDs or names. If omitted, returns details for all accessible
+   * folders.
+   */
+  identifiers?: Array<string> | null;
+
+  /**
+   * Include total document count when true
+   */
+  include_document_count?: boolean;
+
+  /**
+   * Include a paginated list of documents for each folder when true
+   */
+  include_documents?: boolean;
+
+  /**
+   * Include document counts grouped by status when true
+   */
+  include_status_counts?: boolean;
+
+  /**
+   * Field to sort folder documents by when include_documents is true
+   */
+  sort_by?: 'created_at' | 'updated_at' | 'filename' | 'external_id' | null;
+
+  /**
+   * Sort direction for folder documents when include_documents is true
+   */
+  sort_direction?: 'asc' | 'desc';
 }
 
 Folders.Documents = Documents;
-Folders.Workflows = Workflows;
 
 export declare namespace Folders {
   export {
     type Folder as Folder,
     type FolderListResponse as FolderListResponse,
     type FolderDeleteResponse as FolderDeleteResponse,
+    type FolderDetailsResponse as FolderDetailsResponse,
     type FolderListSummariesResponse as FolderListSummariesResponse,
-    type FolderSetRuleResponse as FolderSetRuleResponse,
     type FolderCreateParams as FolderCreateParams,
-    type FolderSetRuleParams as FolderSetRuleParams,
+    type FolderDetailsParams as FolderDetailsParams,
   };
 
   export {
@@ -206,14 +242,5 @@ export declare namespace Folders {
     type DocumentAddResponse as DocumentAddResponse,
     type DocumentAddParams as DocumentAddParams,
     type DocumentRemoveParams as DocumentRemoveParams,
-  };
-
-  export {
-    Workflows as Workflows,
-    type WorkflowListResponse as WorkflowListResponse,
-    type WorkflowAssociateResponse as WorkflowAssociateResponse,
-    type WorkflowDisassociateResponse as WorkflowDisassociateResponse,
-    type WorkflowAssociateParams as WorkflowAssociateParams,
-    type WorkflowDisassociateParams as WorkflowDisassociateParams,
   };
 }

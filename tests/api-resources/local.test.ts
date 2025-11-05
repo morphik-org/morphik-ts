@@ -8,9 +8,9 @@ const client = new Morphik({
 });
 
 describe('resource local', () => {
-  // skipped: tests are disabled for the time being
-  test.skip('generateUri', async () => {
-    const responsePromise = client.local.generateUri();
+  // Prism tests are disabled
+  test.skip('generateUri: only required params', async () => {
+    const responsePromise = client.local.generateUri({ password_token: 'password_token' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -20,11 +20,13 @@ describe('resource local', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // skipped: tests are disabled for the time being
-  test.skip('generateUri: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.local.generateUri({ expiry_days: 0, name: 'name' }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Morphik.NotFoundError);
+  // Prism tests are disabled
+  test.skip('generateUri: required and optional params', async () => {
+    const response = await client.local.generateUri({
+      password_token: 'password_token',
+      expiry_days: 0,
+      name: 'name',
+      server_mode: true,
+    });
   });
 });
