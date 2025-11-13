@@ -15,17 +15,6 @@ export {
   type BatchRetrieveDocumentsParams,
 } from './batch';
 export {
-  Cache,
-  type CompletionResponse,
-  type CacheCreateResponse,
-  type CacheRetrieveResponse,
-  type CacheUpdateResponse,
-  type CacheAddDocsResponse,
-  type CacheCreateParams,
-  type CacheAddDocsParams,
-  type CacheQueryParams,
-} from './cache';
-export {
   Chat,
   type ChatListResponse,
   type ChatRetrieveHistoryResponse,
@@ -57,7 +46,7 @@ export {
   type DocumentUpdateFileParams,
   type DocumentUpdateMetadataParams,
   type DocumentUpdateTextParams,
-} from './documents/documents';
+} from './documents';
 export { Ee } from './ee/ee';
 export {
   Folders,
@@ -119,7 +108,7 @@ export {
   type ModelCreateParams,
 } from './models';
 export { Ping, type PingCheckResponse, type PingStatusResponse } from './ping';
-export { Query, type QueryGenerateCompletionParams } from './query';
+export { Query, type QueryGenerateCompletionResponse, type QueryGenerateCompletionParams } from './query';
 export {
   Retrieve,
   type RetrieveCreateDocsResponse,

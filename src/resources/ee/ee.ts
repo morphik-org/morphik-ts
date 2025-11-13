@@ -1,8 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as AppsAPI from './apps';
-import { Apps } from './apps';
 import * as ConnectorsAPI from './connectors/connectors';
 import {
   ConnectorDisconnectParams,
@@ -28,16 +26,12 @@ import {
 } from './connectors/connectors';
 
 export class Ee extends APIResource {
-  apps: AppsAPI.Apps = new AppsAPI.Apps(this._client);
   connectors: ConnectorsAPI.Connectors = new ConnectorsAPI.Connectors(this._client);
 }
 
-Ee.Apps = Apps;
 Ee.Connectors = Connectors;
 
 export declare namespace Ee {
-  export { Apps as Apps };
-
   export {
     Connectors as Connectors,
     type ConnectorDisconnectResponse as ConnectorDisconnectResponse,
