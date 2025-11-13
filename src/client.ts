@@ -27,6 +27,17 @@ import {
   BatchRetrieveDocumentsResponse,
 } from './resources/batch';
 import {
+  Cache,
+  CacheAddDocsParams,
+  CacheAddDocsResponse,
+  CacheCreateParams,
+  CacheCreateResponse,
+  CacheQueryParams,
+  CacheRetrieveResponse,
+  CacheUpdateResponse,
+  CompletionResponse,
+} from './resources/cache';
+import {
   Chat,
   ChatListParams,
   ChatListResponse,
@@ -41,24 +52,6 @@ import {
   CloudGenerateUriParams,
   CloudGenerateUriResponse,
 } from './resources/cloud';
-import {
-  DocumentDeleteResponse,
-  DocumentDownloadFileResponse,
-  DocumentGetByFilenameParams,
-  DocumentGetDownloadURLParams,
-  DocumentGetDownloadURLResponse,
-  DocumentGetStatusResponse,
-  DocumentListDocsParams,
-  DocumentListDocsResponse,
-  DocumentListParams,
-  DocumentListResponse,
-  DocumentPagesParams,
-  DocumentPagesResponse,
-  DocumentUpdateFileParams,
-  DocumentUpdateMetadataParams,
-  DocumentUpdateTextParams,
-  Documents,
-} from './resources/documents';
 import {
   Document,
   Ingest,
@@ -84,7 +77,7 @@ import {
   Models,
 } from './resources/models';
 import { Ping, PingCheckResponse, PingStatusResponse } from './resources/ping';
-import { Query, QueryGenerateCompletionParams, QueryGenerateCompletionResponse } from './resources/query';
+import { Query, QueryGenerateCompletionParams } from './resources/query';
 import { Search, SearchDocumentsParams, SearchDocumentsResponse } from './resources/search';
 import {
   Usage,
@@ -92,6 +85,25 @@ import {
   UsageListRecentResponse,
   UsageRetrieveStatsResponse,
 } from './resources/usage';
+import {
+  DocumentChatRequest,
+  DocumentDeleteResponse,
+  DocumentDownloadFileResponse,
+  DocumentGetByFilenameParams,
+  DocumentGetDownloadURLParams,
+  DocumentGetDownloadURLResponse,
+  DocumentGetStatusResponse,
+  DocumentListDocsParams,
+  DocumentListDocsResponse,
+  DocumentListParams,
+  DocumentListResponse,
+  DocumentPagesParams,
+  DocumentPagesResponse,
+  DocumentUpdateFileParams,
+  DocumentUpdateMetadataParams,
+  DocumentUpdateTextParams,
+  Documents,
+} from './resources/documents/documents';
 import { Ee } from './resources/ee/ee';
 import {
   Folder,
@@ -827,6 +839,7 @@ export class Morphik {
   modelConfig: API.ModelConfig = new API.ModelConfig(this);
   apiKeys: API.APIKeys = new API.APIKeys(this);
   logs: API.Logs = new API.Logs(this);
+  cache: API.Cache = new API.Cache(this);
   graph: API.GraphResource = new API.GraphResource(this);
   ee: API.Ee = new API.Ee(this);
   retrieve: API.Retrieve = new API.Retrieve(this);
@@ -848,6 +861,7 @@ Morphik.Folders = Folders;
 Morphik.ModelConfig = ModelConfig;
 Morphik.APIKeys = APIKeys;
 Morphik.Logs = Logs;
+Morphik.Cache = Cache;
 Morphik.GraphResource = GraphResource;
 Morphik.Ee = Ee;
 Morphik.Retrieve = Retrieve;
@@ -924,6 +938,18 @@ export declare namespace Morphik {
   export { Logs as Logs, type LogListResponse as LogListResponse, type LogListParams as LogListParams };
 
   export {
+    Cache as Cache,
+    type CompletionResponse as CompletionResponse,
+    type CacheCreateResponse as CacheCreateResponse,
+    type CacheRetrieveResponse as CacheRetrieveResponse,
+    type CacheUpdateResponse as CacheUpdateResponse,
+    type CacheAddDocsResponse as CacheAddDocsResponse,
+    type CacheCreateParams as CacheCreateParams,
+    type CacheAddDocsParams as CacheAddDocsParams,
+    type CacheQueryParams as CacheQueryParams,
+  };
+
+  export {
     GraphResource as GraphResource,
     type EntityExtractionPromptOverride as EntityExtractionPromptOverride,
     type EntityResolutionPromptOverride as EntityResolutionPromptOverride,
@@ -963,11 +989,7 @@ export declare namespace Morphik {
     type SearchDocumentsParams as SearchDocumentsParams,
   };
 
-  export {
-    Query as Query,
-    type QueryGenerateCompletionResponse as QueryGenerateCompletionResponse,
-    type QueryGenerateCompletionParams as QueryGenerateCompletionParams,
-  };
+  export { Query as Query, type QueryGenerateCompletionParams as QueryGenerateCompletionParams };
 
   export {
     Agent as Agent,
@@ -998,6 +1020,7 @@ export declare namespace Morphik {
 
   export {
     Documents as Documents,
+    type DocumentChatRequest as DocumentChatRequest,
     type DocumentDeleteResponse as DocumentDeleteResponse,
     type DocumentListResponse as DocumentListResponse,
     type DocumentDownloadFileResponse as DocumentDownloadFileResponse,
