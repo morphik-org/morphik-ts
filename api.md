@@ -126,6 +126,24 @@ Methods:
 
 - <code title="get /logs/">client.logs.<a href="./src/resources/logs.ts">list</a>({ ...params }) -> LogListResponse</code>
 
+# Cache
+
+Types:
+
+- <code><a href="./src/resources/cache.ts">CompletionResponse</a></code>
+- <code><a href="./src/resources/cache.ts">CacheCreateResponse</a></code>
+- <code><a href="./src/resources/cache.ts">CacheRetrieveResponse</a></code>
+- <code><a href="./src/resources/cache.ts">CacheUpdateResponse</a></code>
+- <code><a href="./src/resources/cache.ts">CacheAddDocsResponse</a></code>
+
+Methods:
+
+- <code title="post /cache/create">client.cache.<a href="./src/resources/cache.ts">create</a>({ ...params }) -> unknown</code>
+- <code title="get /cache/{name}">client.cache.<a href="./src/resources/cache.ts">retrieve</a>(name) -> unknown</code>
+- <code title="post /cache/{name}/update">client.cache.<a href="./src/resources/cache.ts">update</a>(name) -> CacheUpdateResponse</code>
+- <code title="post /cache/{name}/add_docs">client.cache.<a href="./src/resources/cache.ts">addDocs</a>(name, [ ...body ]) -> CacheAddDocsResponse</code>
+- <code title="post /cache/{name}/query">client.cache.<a href="./src/resources/cache.ts">query</a>(name, { ...params }) -> CompletionResponse</code>
+
 # Graph
 
 Types:
@@ -249,13 +267,9 @@ Methods:
 
 # Query
 
-Types:
-
-- <code><a href="./src/resources/query.ts">QueryGenerateCompletionResponse</a></code>
-
 Methods:
 
-- <code title="post /query">client.query.<a href="./src/resources/query.ts">generateCompletion</a>({ ...params }) -> QueryGenerateCompletionResponse</code>
+- <code title="post /query">client.query.<a href="./src/resources/query.ts">generateCompletion</a>({ ...params }) -> CompletionResponse</code>
 
 # Agent
 
@@ -305,28 +319,41 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/documents.ts">DocumentDeleteResponse</a></code>
-- <code><a href="./src/resources/documents.ts">DocumentListResponse</a></code>
-- <code><a href="./src/resources/documents.ts">DocumentDownloadFileResponse</a></code>
-- <code><a href="./src/resources/documents.ts">DocumentGetDownloadURLResponse</a></code>
-- <code><a href="./src/resources/documents.ts">DocumentGetStatusResponse</a></code>
-- <code><a href="./src/resources/documents.ts">DocumentListDocsResponse</a></code>
-- <code><a href="./src/resources/documents.ts">DocumentPagesResponse</a></code>
+- <code><a href="./src/resources/documents/documents.ts">DocumentChatRequest</a></code>
+- <code><a href="./src/resources/documents/documents.ts">DocumentDeleteResponse</a></code>
+- <code><a href="./src/resources/documents/documents.ts">DocumentListResponse</a></code>
+- <code><a href="./src/resources/documents/documents.ts">DocumentDownloadFileResponse</a></code>
+- <code><a href="./src/resources/documents/documents.ts">DocumentGetDownloadURLResponse</a></code>
+- <code><a href="./src/resources/documents/documents.ts">DocumentGetStatusResponse</a></code>
+- <code><a href="./src/resources/documents/documents.ts">DocumentListDocsResponse</a></code>
+- <code><a href="./src/resources/documents/documents.ts">DocumentPagesResponse</a></code>
 
 Methods:
 
-- <code title="get /documents/{document_id}">client.documents.<a href="./src/resources/documents.ts">retrieve</a>(documentID) -> Document</code>
-- <code title="post /documents">client.documents.<a href="./src/resources/documents.ts">list</a>({ ...params }) -> DocumentListResponse</code>
-- <code title="delete /documents/{document_id}">client.documents.<a href="./src/resources/documents.ts">delete</a>(documentID) -> DocumentDeleteResponse</code>
-- <code title="get /documents/{document_id}/file">client.documents.<a href="./src/resources/documents.ts">downloadFile</a>(documentID) -> unknown</code>
-- <code title="get /documents/filename/{filename}">client.documents.<a href="./src/resources/documents.ts">getByFilename</a>(filename, { ...params }) -> Document</code>
-- <code title="get /documents/{document_id}/download_url">client.documents.<a href="./src/resources/documents.ts">getDownloadURL</a>(documentID, { ...params }) -> DocumentGetDownloadURLResponse</code>
-- <code title="get /documents/{document_id}/status">client.documents.<a href="./src/resources/documents.ts">getStatus</a>(documentID) -> unknown</code>
-- <code title="post /documents/list_docs">client.documents.<a href="./src/resources/documents.ts">listDocs</a>({ ...params }) -> DocumentListDocsResponse</code>
-- <code title="post /documents/pages">client.documents.<a href="./src/resources/documents.ts">pages</a>({ ...params }) -> DocumentPagesResponse</code>
-- <code title="post /documents/{document_id}/update_file">client.documents.<a href="./src/resources/documents.ts">updateFile</a>(documentID, { ...params }) -> Document</code>
-- <code title="post /documents/{document_id}/update_metadata">client.documents.<a href="./src/resources/documents.ts">updateMetadata</a>(documentID, { ...params }) -> Document</code>
-- <code title="post /documents/{document_id}/update_text">client.documents.<a href="./src/resources/documents.ts">updateText</a>(documentID, { ...params }) -> Document</code>
+- <code title="get /documents/{document_id}">client.documents.<a href="./src/resources/documents/documents.ts">retrieve</a>(documentID) -> Document</code>
+- <code title="post /documents">client.documents.<a href="./src/resources/documents/documents.ts">list</a>({ ...params }) -> DocumentListResponse</code>
+- <code title="delete /documents/{document_id}">client.documents.<a href="./src/resources/documents/documents.ts">delete</a>(documentID) -> DocumentDeleteResponse</code>
+- <code title="get /documents/{document_id}/file">client.documents.<a href="./src/resources/documents/documents.ts">downloadFile</a>(documentID) -> unknown</code>
+- <code title="get /documents/filename/{filename}">client.documents.<a href="./src/resources/documents/documents.ts">getByFilename</a>(filename, { ...params }) -> Document</code>
+- <code title="get /documents/{document_id}/download_url">client.documents.<a href="./src/resources/documents/documents.ts">getDownloadURL</a>(documentID, { ...params }) -> DocumentGetDownloadURLResponse</code>
+- <code title="get /documents/{document_id}/status">client.documents.<a href="./src/resources/documents/documents.ts">getStatus</a>(documentID) -> unknown</code>
+- <code title="post /documents/list_docs">client.documents.<a href="./src/resources/documents/documents.ts">listDocs</a>({ ...params }) -> DocumentListDocsResponse</code>
+- <code title="post /documents/pages">client.documents.<a href="./src/resources/documents/documents.ts">pages</a>({ ...params }) -> DocumentPagesResponse</code>
+- <code title="post /documents/{document_id}/update_file">client.documents.<a href="./src/resources/documents/documents.ts">updateFile</a>(documentID, { ...params }) -> Document</code>
+- <code title="post /documents/{document_id}/update_metadata">client.documents.<a href="./src/resources/documents/documents.ts">updateMetadata</a>(documentID, { ...params }) -> Document</code>
+- <code title="post /documents/{document_id}/update_text">client.documents.<a href="./src/resources/documents/documents.ts">updateText</a>(documentID, { ...params }) -> Document</code>
+
+## Chat
+
+Types:
+
+- <code><a href="./src/resources/documents/chat.ts">ChatCompleteResponse</a></code>
+- <code><a href="./src/resources/documents/chat.ts">ChatRetrieveHistoryResponse</a></code>
+
+Methods:
+
+- <code title="post /document/chat/{chat_id}/complete">client.documents.chat.<a href="./src/resources/documents/chat.ts">complete</a>(chatID, { ...params }) -> unknown</code>
+- <code title="get /document/chat/{chat_id}">client.documents.chat.<a href="./src/resources/documents/chat.ts">retrieveHistory</a>(chatID) -> unknown</code>
 
 # Chat
 
