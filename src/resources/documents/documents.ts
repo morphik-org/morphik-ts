@@ -26,27 +26,30 @@ export class Documents extends APIResource {
   }
 
   /**
-   * List accessible documents.
+   * List accessible documents with metadata filtering.
    *
-   * `request.document_filters` may include the following operators in addition to
-   * equality checks (which also match scalars inside JSON arrays): `$and`, `$or`,
-   * `$nor`, `$not`, `$in`, `$nin`, `$exists`, `$regex`, and `$contains`. Filters can
-   * be nested arbitrarily. Regex filters accept the optional `i` flag; `$contains`
-   * performs substring matches with optional `case_sensitive` overrides. Example:
+   * **Supported operators**: `$and`, `$or`, `$nor`, `$not`, `$eq`, `$ne`, `$gt`,
+   * `$gte`, `$lt`, `$lte`, `$in`, `$nin`, `$exists`, `$type`, `$regex`, `$contains`.
+   *
+   * **Implicit equality** (backwards compatible):
+   *
+   * ```json
+   * { "status": "active" }
+   * ```
+   *
+   * Uses JSONB containment, matches scalars inside arrays, JSON-serializable types
+   * only.
+   *
+   * **Explicit operators** (typed comparisons):
    *
    * ```json
    * {
-   *   "$and": [
-   *     { "department": "sales" },
-   *     {
-   *       "$or": [
-   *         { "status": "approved" },
-   *         { "priority": { "$in": ["high", "urgent"] } }
-   *       ]
-   *     }
-   *   ]
+   *   "priority": { "$eq": 42 },
+   *   "created_date": { "$gte": "2024-01-01T00:00:00Z" }
    * }
    * ```
+   *
+   * Supports typed metadata (number, decimal, datetime, date) with safe casting.
    *
    * Args: request: Request body containing filters and pagination auth:
    * Authentication context folder_name: Optional folder to scope the operation to
@@ -134,29 +137,24 @@ export class Documents extends APIResource {
   }
 
   /**
-   * Flexible document listing endpoint with support for aggregates, projections, and
-   * advanced pagination.
+   * Flexible document listing with aggregates, projections, and advanced pagination.
    *
-   * `request.document_filters` supports equality plus `$and`, `$or`, `$nor`, `$not`,
-   * `$in`, `$nin`, `$exists`, `$regex`, and `$contains`, with arbitrary nesting.
-   * Scalar comparisons match array elements automatically. Example:
+   * **Supported operators**: `$and`, `$or`, `$nor`, `$not`, `$eq`, `$ne`, `$gt`,
+   * `$gte`, `$lt`, `$lte`, `$in`, `$nin`, `$exists`, `$type`, `$regex`, `$contains`.
+   *
+   * **Implicit equality** (backwards compatible, JSONB containment):
    *
    * ```json
-   * {
-   *   "$and": [
-   *     { "category": "patent" },
-   *     {
-   *       "$nor": [
-   *         { "status": "archived" },
-   *         { "priority": { "$in": ["low", "medium"] } }
-   *       ]
-   *     }
-   *   ]
-   * }
+   * { "status": "active" }
    * ```
    *
-   * Use the `folder_name` and `end_user_id` query parameters to scope system
-   * metadata instead of embedding those keys in the filter payload.
+   * **Explicit operators** (typed comparisons for number, decimal, datetime, date):
+   *
+   * ```json
+   * { "priority": { "$gte": 40 }, "end_date": { "$lt": "2025-01-01" } }
+   * ```
+   *
+   * Use `folder_name` and `end_user_id` query parameters to scope system metadata.
    */
   listDocs(params: DocumentListDocsParams, options?: RequestOptions): APIPromise<DocumentListDocsResponse> {
     const { end_user_id, folder_name, ...body } = params;
@@ -168,8 +166,8 @@ export class Documents extends APIResource {
   }
 
   /**
-   * Extract specific pages from a document (PDF or PowerPoint) as base64-encoded
-   * images.
+   * Extract specific pages from a document (PDF, PowerPoint, or Word) as
+   * base64-encoded images.
    *
    * Args: request: Request containing document_id, start_page, and end_page auth:
    * Authentication context
@@ -211,11 +209,10 @@ export class Documents extends APIResource {
    */
   updateMetadata(
     documentID: string,
-    params: DocumentUpdateMetadataParams,
+    body: DocumentUpdateMetadataParams,
     options?: RequestOptions,
   ): APIPromise<IngestAPI.Document> {
-    const { body } = params;
-    return this._client.post(path`/documents/${documentID}/update_metadata`, { body: body, ...options });
+    return this._client.post(path`/documents/${documentID}/update_metadata`, { body, ...options });
   }
 
   /**
@@ -326,7 +323,10 @@ export interface DocumentListParams {
   folder_name?: string | Array<string> | null;
 
   /**
-   * Body param: Metadata filters for documents
+   * Body param: Metadata filters with operator support: $and, $or, $nor, $not, $eq,
+   * $ne, $gt, $gte, $lt, $lte, $in, $nin, $exists, $type, $regex, $contains.
+   * Implicit equality uses JSONB containment; explicit operators support typed
+   * comparisons.
    */
   document_filters?: unknown | null;
 
@@ -372,7 +372,10 @@ export interface DocumentListDocsParams {
   completed_only?: boolean;
 
   /**
-   * Body param: Metadata filters for documents
+   * Body param: Metadata filters with operator support: $and, $or, $nor, $not, $eq,
+   * $ne, $gt, $gte, $lt, $lte, $in, $nin, $exists, $type, $regex, $contains.
+   * Implicit equality uses JSONB containment; explicit operators support typed
+   * comparisons.
    */
   document_filters?: unknown | null;
 
@@ -445,13 +448,21 @@ export interface DocumentUpdateFileParams {
 
   metadata?: string;
 
+  metadata_types?: string;
+
   update_strategy?: string;
 
   use_colpali?: boolean | null;
 }
 
 export interface DocumentUpdateMetadataParams {
-  body: unknown;
+  metadata?: unknown;
+
+  /**
+   * Optional per-field type hints: 'string', 'number', 'decimal', 'datetime',
+   * 'date', 'boolean', 'array', 'object'. Enables typed comparisons.
+   */
+  metadata_types?: { [key: string]: string } | null;
 }
 
 export interface DocumentUpdateTextParams {
@@ -484,6 +495,13 @@ export interface DocumentUpdateTextParams {
    * Body param:
    */
   metadata?: unknown;
+
+  /**
+   * Body param: Optional per-field type hints: 'string', 'number', 'decimal',
+   * 'datetime', 'date', 'boolean', 'array', 'object'. Enables typed comparisons with
+   * $eq, $gt, etc. Types are inferred if omitted.
+   */
+  metadata_types?: { [key: string]: string } | null;
 
   /**
    * Body param:

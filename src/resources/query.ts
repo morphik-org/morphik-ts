@@ -91,6 +91,11 @@ export interface QueryGenerateCompletionParams {
   min_score?: number;
 
   /**
+   * How to return image chunks: base64 data URI (default) or a presigned URL
+   */
+  output_format?: 'base64' | 'url' | null;
+
+  /**
    * Number of additional chunks/pages to retrieve before and after matched chunks
    * (ColPali only)
    */

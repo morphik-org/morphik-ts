@@ -58,7 +58,7 @@ export {
   type DocumentUpdateMetadataParams,
   type DocumentUpdateTextParams,
 } from './documents/documents';
-export { Ee, type EeCreateAppResponse, type EeCreateAppParams } from './ee/ee';
+export { Ee } from './ee/ee';
 export {
   Folders,
   type Folder,

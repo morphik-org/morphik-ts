@@ -29,6 +29,7 @@ describe('resource ingest', () => {
       end_user_id: 'end_user_id',
       folder_name: 'folder_name',
       metadata: 'metadata',
+      metadata_types: 'metadata_types',
       use_colpali: true,
     });
   });
@@ -79,6 +80,7 @@ describe('resource ingest', () => {
       end_user_id: 'end_user_id',
       folder_name: 'folder_name',
       metadata: 'metadata',
+      metadata_types: 'metadata_types',
       use_colpali: true,
     });
   });
@@ -103,6 +105,7 @@ describe('resource ingest', () => {
       filename: 'filename',
       folder_name: 'folder_name',
       metadata: {},
+      metadata_types: { foo: 'string' },
       use_colpali: true,
     });
   });
