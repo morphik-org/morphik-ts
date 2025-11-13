@@ -33,17 +33,21 @@ export class Ingest extends APIResource {
   }
 
   /**
-   * Run an on-demand Gemini document query with optional structured output and
-   * ingestion.
+   * Execute a one-off analysis for a document using Morphik On-the-Fly, optionally
+   * enforcing structured output and scheduling a follow-up ingestion.
    *
-   * Args: file: Uploaded source document (PDF or another supported MIME type).
-   * prompt: Natural-language instruction to execute against the document. schema:
-   * Optional JSON schema enforcing structured Gemini output. ingestion_options: JSON
-   * object controlling ingestion follow-up (keys: ingest, use_colpali, folder_name,
-   * end_user_id, metadata).
+   * Args: file: Uploaded document (PDF or any supported MIME type) analysed by
+   * Morphik On-the-Fly inline. prompt: Natural-language instruction Morphik
+   * On-the-Fly should fulfil against the document. schema: Optional JSON schema
+   * forcing structured output; accepts a JSON object encoded in the form data.
+   * ingestion_options: JSON object encoded as a string that controls follow-up
+   * ingestion. Supported keys include `ingest` (bool), `metadata` (dict merged with
+   * any extracted fields), `use_colpali` (bool), `folder_name` (str or list[str]),
+   * and `end_user_id` (str). Additional keys are ignored.
    *
-   * Returns: DocumentQueryResponse containing Gemini outputs, original metadata, and
-   * ingestion status details.
+   * Returns: DocumentQueryResponse containing raw and structured outputs alongside
+   * ingestion status details. When ingestion is requested, the original metadata is
+   * merged with any schema-derived fields before the file is queued.
    */
   documentQuery(
     body: IngestDocumentQueryParams,
@@ -63,10 +67,12 @@ export class Ingest extends APIResource {
    * chunking work.
    *
    * Args: file: Uploaded file from multipart/form-data. metadata: JSON-string
-   * representing user metadata. auth: Caller context – must include _write_
-   * permission. use_colpali: Switch to multi-vector embeddings. folder_name:
-   * Optionally scope doc to a folder. end_user_id: Optionally scope doc to an
-   * end-user. redis: arq redis connection – used to enqueue the job.
+   * representing user metadata. metadata_types: JSON-string with per-field type
+   * hints (string, number, decimal, datetime, date, boolean, array, object) for
+   * typed filtering. auth: Caller context – must include _write_ permission.
+   * use_colpali: Switch to multi-vector embeddings. folder_name: Optionally scope
+   * doc to a folder. end_user_id: Optionally scope doc to an end-user. redis: arq
+   * redis connection – used to enqueue the job.
    *
    * Returns: Document stub with `status='processing'`.
    */
@@ -79,8 +85,10 @@ export class Ingest extends APIResource {
    *
    * Args: request: IngestTextRequest payload containing: • content – raw text to
    * ingest. • filename – optional filename to help detect MIME-type. • metadata –
-   * optional JSON metadata dict. • folder_name – optional folder scope. •
-   * end_user_id – optional end-user scope. auth: Decoded JWT context (injected).
+   * optional JSON metadata dict. • metadata_types – optional type hints (string,
+   * number, decimal, datetime, date, boolean, array, object) for typed filtering. •
+   * folder_name – optional folder scope. • end_user_id – optional end-user scope.
+   * auth: Decoded JWT context (injected).
    *
    * Returns: Document metadata row representing the newly-ingested text.
    */
@@ -117,6 +125,8 @@ export interface Document {
   folder_name?: string | null;
 
   metadata?: unknown;
+
+  metadata_types?: { [key: string]: string };
 
   storage_files?: Array<Document.StorageFile>;
 
@@ -163,6 +173,13 @@ export interface TextRequest {
   folder_name?: string | null;
 
   metadata?: unknown;
+
+  /**
+   * Optional per-field type hints: 'string', 'number', 'decimal', 'datetime',
+   * 'date', 'boolean', 'array', 'object'. Enables typed comparisons with $eq, $gt,
+   * etc. Types are inferred if omitted.
+   */
+  metadata_types?: { [key: string]: string } | null;
 
   use_colpali?: boolean | null;
 
@@ -213,12 +230,12 @@ export interface IngestDocumentQueryResponse {
   input_metadata?: unknown;
 
   /**
-   * Raw structured output returned from Gemini (may be list/dict)
+   * Raw structured output returned from Morphik On-the-Fly (may be list/dict)
    */
   structured_output?: unknown;
 
   /**
-   * Raw text returned from Gemini when no schema is provided
+   * Raw text returned from Morphik On-the-Fly when no schema is provided
    */
   text_output?: string | null;
 }
@@ -264,6 +281,8 @@ export interface IngestBatchIngestFilesParams {
 
   metadata?: string;
 
+  metadata_types?: string;
+
   use_colpali?: boolean | null;
 }
 
@@ -286,6 +305,8 @@ export interface IngestIngestFileParams {
 
   metadata?: string;
 
+  metadata_types?: string;
+
   use_colpali?: boolean | null;
 }
 
@@ -305,6 +326,13 @@ export interface IngestIngestTextParams {
   folder_name?: string | null;
 
   metadata?: unknown;
+
+  /**
+   * Optional per-field type hints: 'string', 'number', 'decimal', 'datetime',
+   * 'date', 'boolean', 'array', 'object'. Enables typed comparisons with $eq, $gt,
+   * etc. Types are inferred if omitted.
+   */
+  metadata_types?: { [key: string]: string } | null;
 
   use_colpali?: boolean | null;
 

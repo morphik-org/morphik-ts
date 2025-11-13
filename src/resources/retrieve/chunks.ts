@@ -9,12 +9,16 @@ export class Chunks extends APIResource {
   /**
    * Retrieve relevant chunks.
    *
-   * The optional `request.filters` payload accepts equality checks (automatically
-   * matching scalars inside JSON arrays) plus the operators `$and`, `$or`, `$nor`,
-   * `$not`, `$in`, `$nin`, `$exists`, `$regex`, and `$contains`. Regex filters allow
-   * the optional `i` flag for case-insensitive matching, while `$contains` performs
-   * substring checks (case-insensitive by default, configurable via
-   * `case_sensitive`). Filters can be nested freely, for example:
+   * The optional `request.filters` payload accepts equality checks (which also match
+   * scalars inside JSON arrays) plus the logical operators `$and`, `$or`, `$nor`,
+   * and `$not`. Field-level predicates include `$eq`, `$ne`, `$in`, `$nin`,
+   * `$exists`, `$type`, `$regex`, `$contains`, and the comparison operators `$gt`,
+   * `$gte`, `$lt`, and `$lte`. Comparison clauses evaluate typed metadata (`number`,
+   * `decimal`, `datetime`, or `date`) and raise detailed validation errors when
+   * operands cannot be coerced. Regex filters allow the optional `i` flag for
+   * case-insensitive matching, while `$contains` performs substring checks
+   * (case-insensitive by default, configurable via `case_sensitive`). Filters can be
+   * nested freely, for example:
    *
    * ```json
    * {
@@ -41,8 +45,9 @@ export class Chunks extends APIResource {
   /**
    * Retrieve relevant chunks with grouped response format.
    *
-   * Uses the same filter operators as `/retrieve/chunks` (equality, nested logic
-   * operators, `$regex`, `$contains`, etc.), with arbitrary nesting supported inside
+   * Uses the same filter operators as `/retrieve/chunks` (equality, `$eq/$ne`,
+   * `$gt/$gte/$lt/$lte`, `$in/$nin`, `$exists`, `$type`, `$regex`, `$contains`, and
+   * the logical `$and/$or/$nor/$not`), with arbitrary nesting supported inside
    * `request.filters`.
    *
    * Returns both flat results (for backward compatibility) and grouped results (for
@@ -124,6 +129,11 @@ export interface RetrieveRequest {
   k?: number;
 
   min_score?: number;
+
+  /**
+   * How to return image chunks: base64 data URI (default) or a presigned URL
+   */
+  output_format?: 'base64' | 'url' | null;
 
   /**
    * Number of additional chunks/pages to retrieve before and after matched chunks
@@ -218,6 +228,11 @@ export interface ChunkCreateParams {
   min_score?: number;
 
   /**
+   * How to return image chunks: base64 data URI (default) or a presigned URL
+   */
+  output_format?: 'base64' | 'url' | null;
+
+  /**
    * Number of additional chunks/pages to retrieve before and after matched chunks
    * (ColPali only)
    */
@@ -262,6 +277,11 @@ export interface ChunkCreateGroupedParams {
   k?: number;
 
   min_score?: number;
+
+  /**
+   * How to return image chunks: base64 data URI (default) or a presigned URL
+   */
+  output_format?: 'base64' | 'url' | null;
 
   /**
    * Number of additional chunks/pages to retrieve before and after matched chunks

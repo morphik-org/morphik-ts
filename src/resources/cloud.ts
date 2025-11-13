@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 
 export class Cloud extends APIResource {
@@ -26,8 +27,19 @@ export class Cloud extends APIResource {
    *
    * Returns: A dictionary with the generated `uri` and associated `app_id`.
    */
-  generateUri(body: CloudGenerateUriParams, options?: RequestOptions): APIPromise<CloudGenerateUriResponse> {
-    return this._client.post('/cloud/generate_uri', { body, ...options });
+  generateUri(
+    params: CloudGenerateUriParams,
+    options?: RequestOptions,
+  ): APIPromise<CloudGenerateUriResponse> {
+    const { 'X-Morphik-Admin-Secret': xMorphikAdminSecret, ...body } = params;
+    return this._client.post('/cloud/generate_uri', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(xMorphikAdminSecret != null ? { 'X-Morphik-Admin-Secret': xMorphikAdminSecret } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -44,24 +56,39 @@ export interface CloudDeleteAppParams {
 
 export interface CloudGenerateUriParams {
   /**
-   * ID of the application
+   * Body param: ID of the application
    */
   app_id: string;
 
   /**
-   * Name of the application
+   * Body param: Name of the application
    */
   name: string;
 
   /**
-   * ID of the user who owns the app
+   * Body param: ID of the user who owns the app
    */
   user_id: string;
 
   /**
-   * Number of days until the token expires
+   * Body param: ID of the admin or service user that initiated the request
+   */
+  created_by_user_id?: string | null;
+
+  /**
+   * Body param: Number of days until the token expires
    */
   expiry_days?: number;
+
+  /**
+   * Body param: Optional organization identifier for multi-tenant control planes
+   */
+  org_id?: string | null;
+
+  /**
+   * Header param:
+   */
+  'X-Morphik-Admin-Secret'?: string;
 }
 
 export declare namespace Cloud {

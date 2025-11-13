@@ -65,10 +65,14 @@ export class Connectors extends APIResource {
    */
   ingestRepository(
     connectorType: string,
-    body: ConnectorIngestRepositoryParams,
+    params: ConnectorIngestRepositoryParams,
     options?: RequestOptions,
   ): APIPromise<unknown> {
-    return this._client.post(path`/ee/connectors/${connectorType}/ingest-repository`, { body, ...options });
+    const { body_connector_type, ...body } = params;
+    return this._client.post(path`/ee/connectors/${connectorType}/ingest-repository`, {
+      body: { connector_type: body_connector_type, ...body },
+      ...options,
+    });
   }
 
   /**
