@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as CacheAPI from './cache';
 import * as GraphAPI from './graph/graph';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
@@ -32,8 +31,39 @@ export class Query extends APIResource {
   generateCompletion(
     body: QueryGenerateCompletionParams,
     options?: RequestOptions,
-  ): APIPromise<CacheAPI.CompletionResponse> {
+  ): APIPromise<QueryGenerateCompletionResponse> {
     return this._client.post('/query', { body, ...options });
+  }
+}
+
+/**
+ * Response from completion generation
+ */
+export interface QueryGenerateCompletionResponse {
+  /**
+   * Structured completion object for schema-based responses
+   */
+  completion: string | { [key: string]: unknown };
+
+  usage: { [key: string]: number };
+
+  finish_reason?: string | null;
+
+  metadata?: unknown | null;
+
+  sources?: Array<QueryGenerateCompletionResponse.Source>;
+}
+
+export namespace QueryGenerateCompletionResponse {
+  /**
+   * Source information for a chunk used in completion
+   */
+  export interface Source {
+    chunk_number: number;
+
+    document_id: string;
+
+    score?: number | null;
   }
 }
 
@@ -300,5 +330,8 @@ export namespace QueryGenerateCompletionParams {
 }
 
 export declare namespace Query {
-  export { type QueryGenerateCompletionParams as QueryGenerateCompletionParams };
+  export {
+    type QueryGenerateCompletionResponse as QueryGenerateCompletionResponse,
+    type QueryGenerateCompletionParams as QueryGenerateCompletionParams,
+  };
 }
