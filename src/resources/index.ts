@@ -42,6 +42,7 @@ export {
 } from './cloud';
 export {
   Documents,
+  type DocumentChatRequest,
   type DocumentDeleteResponse,
   type DocumentListResponse,
   type DocumentDownloadFileResponse,
@@ -58,7 +59,7 @@ export {
   type DocumentUpdateMetadataParams,
   type DocumentUpdateTextParams,
 } from './documents/documents';
-export { Ee, type EeCreateAppResponse, type EeCreateAppParams } from './ee/ee';
+export { Ee } from './ee/ee';
 export {
   Folders,
   type Folder,

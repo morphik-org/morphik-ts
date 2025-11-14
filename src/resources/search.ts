@@ -15,8 +15,11 @@ export class Search extends APIResource {
    * to scope search - end_user_id: Optional end-user ID to scope search auth:
    * Authentication context
    *
-   * `request.filters` accepts the same operator set as `/retrieve/chunks`, including
-   * `$regex` (with optional `i` flag) and `$contains` for substring matches.
+   * `request.filters` accepts the same operator set as `/retrieve/chunks`: `$eq`,
+   * `$ne`, `$gt`, `$gte`, `$lt`, `$lte`, `$in`, `$nin`, `$exists`, `$type`, `$regex`
+   * (with optional `i` flag), `$contains`, and the logical operators `$and`, `$or`,
+   * `$nor`, `$not`. Comparison clauses honor typed metadata (`number`, `decimal`,
+   * `datetime`, `date`).
    *
    * Returns: List[Document]: List of matching documents ordered by relevance
    */

@@ -8,6 +8,7 @@ export {
 } from './chat';
 export {
   Documents,
+  type DocumentChatRequest,
   type DocumentDeleteResponse,
   type DocumentListResponse,
   type DocumentDownloadFileResponse,

@@ -43,7 +43,10 @@ describe('resource cloud', () => {
       app_id: 'app_id',
       name: 'name',
       user_id: 'user_id',
+      created_by_user_id: 'created_by_user_id',
       expiry_days: 0,
+      org_id: 'org_id',
+      'X-Morphik-Admin-Secret': 'X-Morphik-Admin-Secret',
     });
   });
 });

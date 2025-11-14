@@ -179,26 +179,6 @@ Methods:
 
 # Ee
 
-Types:
-
-- <code><a href="./src/resources/ee/ee.ts">EeCreateAppResponse</a></code>
-
-Methods:
-
-- <code title="post /ee/create_app">client.ee.<a href="./src/resources/ee/ee.ts">createApp</a>({ ...params }) -> EeCreateAppResponse</code>
-
-## Apps
-
-Types:
-
-- <code><a href="./src/resources/ee/apps.ts">AppCreateResponse</a></code>
-- <code><a href="./src/resources/ee/apps.ts">AppDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /ee/apps">client.ee.apps.<a href="./src/resources/ee/apps.ts">create</a>({ ...params }) -> AppCreateResponse</code>
-- <code title="delete /ee/apps">client.ee.apps.<a href="./src/resources/ee/apps.ts">delete</a>({ ...params }) -> AppDeleteResponse</code>
-
 ## Connectors
 
 Types:
@@ -339,6 +319,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/documents/documents.ts">DocumentChatRequest</a></code>
 - <code><a href="./src/resources/documents/documents.ts">DocumentDeleteResponse</a></code>
 - <code><a href="./src/resources/documents/documents.ts">DocumentListResponse</a></code>
 - <code><a href="./src/resources/documents/documents.ts">DocumentDownloadFileResponse</a></code>

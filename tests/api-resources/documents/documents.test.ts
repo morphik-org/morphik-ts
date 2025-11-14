@@ -164,14 +164,15 @@ describe('resource documents', () => {
     const response = await client.documents.updateFile('document_id', {
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       metadata: 'metadata',
+      metadata_types: 'metadata_types',
       update_strategy: 'update_strategy',
       use_colpali: true,
     });
   });
 
   // Prism tests are disabled
-  test.skip('updateMetadata: only required params', async () => {
-    const responsePromise = client.documents.updateMetadata('document_id', { body: {} });
+  test.skip('updateMetadata', async () => {
+    const responsePromise = client.documents.updateMetadata('document_id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -179,11 +180,6 @@ describe('resource documents', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('updateMetadata: required and optional params', async () => {
-    const response = await client.documents.updateMetadata('document_id', { body: {} });
   });
 
   // Prism tests are disabled
@@ -207,6 +203,7 @@ describe('resource documents', () => {
       filename: 'filename',
       folder_name: 'folder_name',
       metadata: {},
+      metadata_types: { foo: 'string' },
       use_colpali: true,
     });
   });

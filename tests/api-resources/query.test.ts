@@ -36,6 +36,7 @@ describe('resource query', () => {
       llm_config: {},
       max_tokens: 0,
       min_score: 0,
+      output_format: 'base64',
       padding: 0,
       prompt_overrides: {
         entity_extraction: {

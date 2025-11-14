@@ -21,9 +21,12 @@ export class Retrieve extends APIResource {
    * Retrieve relevant documents.
    *
    * `request.filters` supports equality checks (including scalar-to-array matches)
-   * plus `$and`, `$or`, `$nor`, `$not`, `$in`, `$nin`, `$exists`, `$regex`, and
-   * `$contains`, with arbitrary nesting. Use the same JSON structure as in
-   * `/retrieve/chunks` when expressing complex logic.
+   * and the same operator set as `/retrieve/chunks`: logical composition via `$and`,
+   * `$or`, `$nor`, `$not`, plus field predicates `$eq`, `$ne`, `$gt`, `$gte`, `$lt`,
+   * `$lte`, `$in`, `$nin`, `$exists`, `$type`, `$regex`, and `$contains`. Use the
+   * same JSON structure as `/retrieve/chunks` when expressing complex logic.
+   * Comparison operators require metadata typed as `number`, `decimal`, `datetime`,
+   * or `date`.
    *
    * Args: request: RetrieveRequest containing: - query: Search query text - filters:
    * Optional metadata filters - k: Number of results (default: 4) - min_score:
@@ -114,6 +117,11 @@ export interface RetrieveCreateDocsParams {
   k?: number;
 
   min_score?: number;
+
+  /**
+   * How to return image chunks: base64 data URI (default) or a presigned URL
+   */
+  output_format?: 'base64' | 'url' | null;
 
   /**
    * Number of additional chunks/pages to retrieve before and after matched chunks

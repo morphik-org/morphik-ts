@@ -86,6 +86,7 @@ import {
   UsageRetrieveStatsResponse,
 } from './resources/usage';
 import {
+  DocumentChatRequest,
   DocumentDeleteResponse,
   DocumentDownloadFileResponse,
   DocumentGetByFilenameParams,
@@ -103,7 +104,7 @@ import {
   DocumentUpdateTextParams,
   Documents,
 } from './resources/documents/documents';
-import { Ee, EeCreateAppParams, EeCreateAppResponse } from './resources/ee/ee';
+import { Ee } from './resources/ee/ee';
 import {
   Folder,
   FolderCreateParams,
@@ -966,11 +967,7 @@ export declare namespace Morphik {
     type GraphVisualizationParams as GraphVisualizationParams,
   };
 
-  export {
-    Ee as Ee,
-    type EeCreateAppResponse as EeCreateAppResponse,
-    type EeCreateAppParams as EeCreateAppParams,
-  };
+  export { Ee as Ee };
 
   export {
     Retrieve as Retrieve,
@@ -1023,6 +1020,7 @@ export declare namespace Morphik {
 
   export {
     Documents as Documents,
+    type DocumentChatRequest as DocumentChatRequest,
     type DocumentDeleteResponse as DocumentDeleteResponse,
     type DocumentListResponse as DocumentListResponse,
     type DocumentDownloadFileResponse as DocumentDownloadFileResponse,
