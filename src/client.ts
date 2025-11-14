@@ -51,6 +51,8 @@ import {
   CloudDeleteAppResponse,
   CloudGenerateUriParams,
   CloudGenerateUriResponse,
+  CloudListAppsParams,
+  CloudListAppsResponse,
 } from './resources/cloud';
 import {
   Document,
@@ -1014,8 +1016,10 @@ export declare namespace Morphik {
     Cloud as Cloud,
     type CloudDeleteAppResponse as CloudDeleteAppResponse,
     type CloudGenerateUriResponse as CloudGenerateUriResponse,
+    type CloudListAppsResponse as CloudListAppsResponse,
     type CloudDeleteAppParams as CloudDeleteAppParams,
     type CloudGenerateUriParams as CloudGenerateUriParams,
+    type CloudListAppsParams as CloudListAppsParams,
   };
 
   export {

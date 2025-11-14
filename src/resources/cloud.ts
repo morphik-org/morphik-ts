@@ -31,11 +31,31 @@ export class Cloud extends APIResource {
       ]),
     });
   }
+
+  /**
+   * List provisioned apps for the specified organization/user.
+   */
+  listApps(
+    params: CloudListAppsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<unknown> {
+    const { 'X-Morphik-Admin-Secret': xMorphikAdminSecret, ...query } = params ?? {};
+    return this._client.get('/apps', {
+      query,
+      ...options,
+      headers: buildHeaders([
+        { ...(xMorphikAdminSecret != null ? { 'X-Morphik-Admin-Secret': xMorphikAdminSecret } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
 }
 
 export type CloudDeleteAppResponse = unknown;
 
 export type CloudGenerateUriResponse = { [key: string]: string };
+
+export type CloudListAppsResponse = unknown;
 
 export interface CloudDeleteAppParams {
   /**
@@ -81,11 +101,40 @@ export interface CloudGenerateUriParams {
   'X-Morphik-Admin-Secret'?: string;
 }
 
+export interface CloudListAppsParams {
+  /**
+   * Query param:
+   */
+  limit?: number;
+
+  /**
+   * Query param:
+   */
+  offset?: number;
+
+  /**
+   * Query param: Filter apps by organization ID
+   */
+  org_id?: string | null;
+
+  /**
+   * Query param: Filter apps by creator
+   */
+  user_id?: string | null;
+
+  /**
+   * Header param:
+   */
+  'X-Morphik-Admin-Secret'?: string;
+}
+
 export declare namespace Cloud {
   export {
     type CloudDeleteAppResponse as CloudDeleteAppResponse,
     type CloudGenerateUriResponse as CloudGenerateUriResponse,
+    type CloudListAppsResponse as CloudListAppsResponse,
     type CloudDeleteAppParams as CloudDeleteAppParams,
     type CloudGenerateUriParams as CloudGenerateUriParams,
+    type CloudListAppsParams as CloudListAppsParams,
   };
 }
