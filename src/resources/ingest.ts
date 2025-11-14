@@ -13,14 +13,6 @@ export class Ingest extends APIResource {
    * Each file is treated the same as :func:`ingest_file` but sharing the same
    * request avoids many round-trips. All heavy work is still delegated to the
    * background worker pool.
-   *
-   * Args: files: List of files to upload. metadata: Either a single JSON-string dict
-   * or list of dicts matching the number of files. use_colpali: Enable multi-vector
-   * embeddings. folder_name: Optional folder scoping for **all** files. end_user_id:
-   * Optional end-user scoping for **all** files. auth: Caller context with _write_
-   * permission. redis: arq redis connection to enqueue jobs.
-   *
-   * Returns: BatchIngestResponse summarising created documents & errors.
    */
   batchIngestFiles(
     body: IngestBatchIngestFilesParams,
@@ -36,18 +28,10 @@ export class Ingest extends APIResource {
    * Execute a one-off analysis for a document using Morphik On-the-Fly, optionally
    * enforcing structured output and scheduling a follow-up ingestion.
    *
-   * Args: file: Uploaded document (PDF or any supported MIME type) analysed by
-   * Morphik On-the-Fly inline. prompt: Natural-language instruction Morphik
-   * On-the-Fly should fulfil against the document. schema: Optional JSON schema
-   * forcing structured output; accepts a JSON object encoded in the form data.
-   * ingestion_options: JSON object encoded as a string that controls follow-up
-   * ingestion. Supported keys include `ingest` (bool), `metadata` (dict merged with
-   * any extracted fields), `use_colpali` (bool), `folder_name` (str or list[str]),
-   * and `end_user_id` (str). Additional keys are ignored.
-   *
-   * Returns: DocumentQueryResponse containing raw and structured outputs alongside
-   * ingestion status details. When ingestion is requested, the original metadata is
-   * merged with any schema-derived fields before the file is queued.
+   * `ingestion_options` is a JSON string controlling post-analysis ingestion
+   * behaviour via keys such as `ingest`, `metadata`, `use_colpali`, `folder_name`,
+   * and `end_user_id`. Additional keys are ignored. A :class:`DocumentQueryResponse`
+   * describing the inline analysis and any queued ingestion is returned.
    */
   documentQuery(
     body: IngestDocumentQueryParams,
@@ -65,16 +49,6 @@ export class Ingest extends APIResource {
    * The file is uploaded to object storage, a _Document_ stub is persisted with
    * `status='processing'` and a background worker picks up the heavy parsing /
    * chunking work.
-   *
-   * Args: file: Uploaded file from multipart/form-data. metadata: JSON-string
-   * representing user metadata. metadata_types: JSON-string with per-field type
-   * hints (string, number, decimal, datetime, date, boolean, array, object) for
-   * typed filtering. auth: Caller context – must include _write_ permission.
-   * use_colpali: Switch to multi-vector embeddings. folder_name: Optionally scope
-   * doc to a folder. end_user_id: Optionally scope doc to an end-user. redis: arq
-   * redis connection – used to enqueue the job.
-   *
-   * Returns: Document stub with `status='processing'`.
    */
   ingestFile(body: IngestIngestFileParams, options?: RequestOptions): APIPromise<Document> {
     return this._client.post('/ingest/file', multipartFormRequestOptions({ body, ...options }, this._client));
@@ -82,15 +56,6 @@ export class Ingest extends APIResource {
 
   /**
    * Ingest a **text** document.
-   *
-   * Args: request: IngestTextRequest payload containing: • content – raw text to
-   * ingest. • filename – optional filename to help detect MIME-type. • metadata –
-   * optional JSON metadata dict. • metadata_types – optional type hints (string,
-   * number, decimal, datetime, date, boolean, array, object) for typed filtering. •
-   * folder_name – optional folder scope. • end_user_id – optional end-user scope.
-   * auth: Decoded JWT context (injected).
-   *
-   * Returns: Document metadata row representing the newly-ingested text.
    */
   ingestText(body: IngestIngestTextParams, options?: RequestOptions): APIPromise<Document> {
     return this._client.post('/ingest/text', { body, ...options });
@@ -158,6 +123,9 @@ export namespace Document {
  * Request model for ingesting text content
  */
 export interface TextRequest {
+  /**
+   * Raw text content to store as a document.
+   */
   content: string;
 
   /**
@@ -165,6 +133,9 @@ export interface TextRequest {
    */
   end_user_id?: string | null;
 
+  /**
+   * Optional filename hint used when inferring MIME type or displaying the document.
+   */
   filename?: string | null;
 
   /**
@@ -172,6 +143,9 @@ export interface TextRequest {
    */
   folder_name?: string | null;
 
+  /**
+   * User-defined metadata stored with the document (JSON-serializable).
+   */
   metadata?: unknown;
 
   /**
@@ -181,6 +155,10 @@ export interface TextRequest {
    */
   metadata_types?: { [key: string]: string } | null;
 
+  /**
+   * When provided, uses Morphik's finetuned ColPali style embeddings (recommended to
+   * be True for high quality retrieval).
+   */
   use_colpali?: boolean | null;
 
   [k: string]: unknown;
@@ -311,6 +289,9 @@ export interface IngestIngestFileParams {
 }
 
 export interface IngestIngestTextParams {
+  /**
+   * Raw text content to store as a document.
+   */
   content: string;
 
   /**
@@ -318,6 +299,9 @@ export interface IngestIngestTextParams {
    */
   end_user_id?: string | null;
 
+  /**
+   * Optional filename hint used when inferring MIME type or displaying the document.
+   */
   filename?: string | null;
 
   /**
@@ -325,6 +309,9 @@ export interface IngestIngestTextParams {
    */
   folder_name?: string | null;
 
+  /**
+   * User-defined metadata stored with the document (JSON-serializable).
+   */
   metadata?: unknown;
 
   /**
@@ -334,6 +321,10 @@ export interface IngestIngestTextParams {
    */
   metadata_types?: { [key: string]: string } | null;
 
+  /**
+   * When provided, uses Morphik's finetuned ColPali style embeddings (recommended to
+   * be True for high quality retrieval).
+   */
   use_colpali?: boolean | null;
 
   [k: string]: unknown;
@@ -375,7 +366,8 @@ export namespace IngestRequeueParams {
     external_id: string;
 
     /**
-     * Override ColPali processing flag. When omitted the server attempts to infer it.
+     * When provided, uses Morphik's finetuned ColPali style embeddings (recommended to
+     * be True for high quality retrieval).
      */
     use_colpali?: boolean | null;
   }

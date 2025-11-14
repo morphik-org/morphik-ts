@@ -7,12 +7,6 @@ import { RequestOptions } from '../internal/request-options';
 export class Agent extends APIResource {
   /**
    * Execute an agent-style query using the :class:`MorphikAgent`.
-   *
-   * Args: request: The query payload containing the natural language question and
-   * optional chat_id. auth: Authentication context used to enforce limits and access
-   * control. redis: Redis connection for chat history storage.
-   *
-   * Returns: A dictionary with the agent's full response.
    */
   executeQuery(body: AgentExecuteQueryParams, options?: RequestOptions): APIPromise<unknown> {
     return this._client.post('/agent', { body, ...options });

@@ -13,11 +13,6 @@ export class Folders extends APIResource {
 
   /**
    * Create a new folder.
-   *
-   * Args: folder_create: Folder creation request containing name and optional
-   * description auth: Authentication context
-   *
-   * Returns: Folder: Created folder
    */
   create(body: FolderCreateParams, options?: RequestOptions): APIPromise<Folder> {
     return this._client.post('/folders', { body, ...options });
@@ -25,10 +20,6 @@ export class Folders extends APIResource {
 
   /**
    * Get a folder by ID or name.
-   *
-   * Args: folder_id_or_name: ID or name of the folder auth: Authentication context
-   *
-   * Returns: Folder: Folder if found and accessible
    */
   retrieve(folderIDOrName: string, options?: RequestOptions): APIPromise<Folder> {
     return this._client.get(path`/folders/${folderIDOrName}`, options);
@@ -36,10 +27,6 @@ export class Folders extends APIResource {
 
   /**
    * List all folders the user has access to.
-   *
-   * Args: auth: Authentication context
-   *
-   * Returns: List[Folder]: List of folders
    */
   list(options?: RequestOptions): APIPromise<FolderListResponse> {
     return this._client.get('/folders', options);
@@ -47,11 +34,6 @@ export class Folders extends APIResource {
 
   /**
    * Delete a folder and all associated documents.
-   *
-   * Args: folder_id_or_name: Name or ID of the folder to delete auth: Authentication
-   * context (must have write access to the folder)
-   *
-   * Returns: Deletion status
    */
   delete(folderIDOrName: string, options?: RequestOptions): APIPromise<FolderDeleteResponse> {
     return this._client.delete(path`/folders/${folderIDOrName}`, options);
