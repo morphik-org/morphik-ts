@@ -45,7 +45,13 @@ import {
   ChatUpdateTitleParams,
   ChatUpdateTitleResponse,
 } from './resources/chat';
-import { Cloud, CloudGenerateUriParams, CloudGenerateUriResponse } from './resources/cloud';
+import {
+  Cloud,
+  CloudDeleteAppParams,
+  CloudDeleteAppResponse,
+  CloudGenerateUriParams,
+  CloudGenerateUriResponse,
+} from './resources/cloud';
 import {
   Document,
   Ingest,
@@ -1006,7 +1012,9 @@ export declare namespace Morphik {
 
   export {
     Cloud as Cloud,
+    type CloudDeleteAppResponse as CloudDeleteAppResponse,
     type CloudGenerateUriResponse as CloudGenerateUriResponse,
+    type CloudDeleteAppParams as CloudDeleteAppParams,
     type CloudGenerateUriParams as CloudGenerateUriParams,
   };
 
