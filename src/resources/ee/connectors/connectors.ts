@@ -175,30 +175,60 @@ export interface ConnectorHandleOAuthCallbackParams {
 }
 
 export interface ConnectorIngestFileParams {
+  /**
+   * Identifier of the connector file being ingested.
+   */
   file_id: string;
 
+  /**
+   * Optional Morphik folder name applied to the ingested document.
+   */
   folder_name?: string | null;
 
+  /**
+   * Metadata attached to the document when ingesting from the connector.
+   */
   metadata?: unknown | null;
 
   [k: string]: unknown;
 }
 
 export interface ConnectorIngestRepositoryParams {
+  /**
+   * Repository path in the format "owner/repo".
+   */
   repo_path: string;
 
+  /**
+   * When true, package repository files before uploading to Morphik.
+   */
   compress?: boolean;
 
   body_connector_type?: string;
 
+  /**
+   * Optional Morphik folder for the ingested repository documents.
+   */
   folder_name?: string | null;
 
+  /**
+   * Re-ingest the repository even if it was previously processed.
+   */
   force?: boolean;
 
+  /**
+   * Optional glob patterns for files that should be skipped.
+   */
   ignore_patterns?: Array<string> | null;
 
+  /**
+   * Optional glob patterns restricting which files are ingested.
+   */
   include_patterns?: Array<string> | null;
 
+  /**
+   * Metadata applied to each document created from the repository.
+   */
   metadata?: unknown | null;
 }
 

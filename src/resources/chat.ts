@@ -8,12 +8,6 @@ import { path } from '../internal/utils/path';
 export class Chat extends APIResource {
   /**
    * List chat conversations available to the current user.
-   *
-   * Args: auth: Authentication context containing user and app identifiers. limit:
-   * Maximum number of conversations to return (1-500)
-   *
-   * Returns: A list of dictionaries describing each conversation, ordered by most
-   * recent activity.
    */
   list(
     query: ChatListParams | null | undefined = {},
@@ -24,13 +18,6 @@ export class Chat extends APIResource {
 
   /**
    * Retrieve the message history for a chat conversation.
-   *
-   * Args: chat_id: Identifier of the conversation whose history should be loaded.
-   * auth: Authentication context used to verify access to the conversation. redis:
-   * Redis connection where chat messages are stored.
-   *
-   * Returns: A list of :class:`ChatMessage` objects or an empty list if no history
-   * exists.
    */
   retrieveHistory(chatID: string, options?: RequestOptions): APIPromise<ChatRetrieveHistoryResponse> {
     return this._client.get(path`/chat/${chatID}`, options);
@@ -38,11 +25,6 @@ export class Chat extends APIResource {
 
   /**
    * Update the title of a chat conversation.
-   *
-   * Args: chat_id: ID of the chat conversation to update title: New title for the
-   * chat auth: Authentication context
-   *
-   * Returns: Success status
    */
   updateTitle(
     chatID: string,

@@ -8,14 +8,6 @@ import { path } from '../internal/utils/path';
 export class Cache extends APIResource {
   /**
    * Create a persistent cache for low-latency completions.
-   *
-   * Args: name: Unique identifier for the cache. model: The model name to use when
-   * generating completions. gguf_file: Path to the `gguf` weights file to load.
-   * filters: Optional metadata filters used to select documents. docs: Explicit list
-   * of document IDs to include in the cache. auth: Authentication context used for
-   * permission checks.
-   *
-   * Returns: A dictionary describing the created cache.
    */
   create(params: CacheCreateParams, options?: RequestOptions): APIPromise<unknown> {
     const { gguf_file, model, name, ...body } = params;
@@ -24,12 +16,6 @@ export class Cache extends APIResource {
 
   /**
    * Retrieve information about a specific cache.
-   *
-   * Args: name: Name of the cache to inspect. auth: Authentication context used to
-   * authorize the request.
-   *
-   * Returns: A dictionary with a boolean `exists` field indicating whether the cache
-   * is loaded.
    */
   retrieve(name: string, options?: RequestOptions): APIPromise<unknown> {
     return this._client.get(path`/cache/${name}`, options);
@@ -37,11 +23,6 @@ export class Cache extends APIResource {
 
   /**
    * Refresh an existing cache with newly available documents.
-   *
-   * Args: name: Identifier of the cache to update. auth: Authentication context used
-   * for permission checks.
-   *
-   * Returns: A dictionary indicating whether any documents were added.
    */
   update(name: string, options?: RequestOptions): APIPromise<CacheUpdateResponse> {
     return this._client.post(path`/cache/${name}/update`, options);
@@ -49,11 +30,6 @@ export class Cache extends APIResource {
 
   /**
    * Manually add documents to an existing cache.
-   *
-   * Args: name: Name of the target cache. document_ids: List of document IDs to
-   * insert. auth: Authentication context used for authorization.
-   *
-   * Returns: A dictionary indicating whether the documents were queued for addition.
    */
   addDocs(
     name: string,
@@ -66,13 +42,6 @@ export class Cache extends APIResource {
 
   /**
    * Generate a completion using a pre-populated cache.
-   *
-   * Args: name: Name of the cache to query. query: Prompt text to send to the model.
-   * max_tokens: Optional maximum number of tokens to generate. temperature: Optional
-   * sampling temperature for the model. auth: Authentication context for permission
-   * checks.
-   *
-   * Returns: A :class:`CompletionResponse` object containing the model output.
    */
   query(name: string, params: CacheQueryParams, options?: RequestOptions): APIPromise<CompletionResponse> {
     const { query, max_tokens, temperature } = params;

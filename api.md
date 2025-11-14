@@ -307,12 +307,10 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/cloud.ts">CloudDeleteAppResponse</a></code>
 - <code><a href="./src/resources/cloud.ts">CloudGenerateUriResponse</a></code>
 
 Methods:
 
-- <code title="delete /cloud/apps">client.cloud.<a href="./src/resources/cloud.ts">deleteApp</a>({ ...params }) -> unknown</code>
 - <code title="post /cloud/generate_uri">client.cloud.<a href="./src/resources/cloud.ts">generateUri</a>({ ...params }) -> CloudGenerateUriResponse</code>
 
 # Documents

@@ -16,10 +16,7 @@ export class Documents extends APIResource {
   /**
    * Retrieve a single document by its external identifier.
    *
-   * Args: document_id: External ID of the document to fetch. auth: Authentication
-   * context used to verify access rights.
-   *
-   * Returns: The :class:`Document` metadata if found.
+   * Returns the :class:`Document` metadata if found or raises 404.
    */
   retrieve(documentID: string, options?: RequestOptions): APIPromise<IngestAPI.Document> {
     return this._client.get(path`/documents/${documentID}`, options);
@@ -50,12 +47,6 @@ export class Documents extends APIResource {
    * ```
    *
    * Supports typed metadata (number, decimal, datetime, date) with safe casting.
-   *
-   * Args: request: Request body containing filters and pagination auth:
-   * Authentication context folder_name: Optional folder to scope the operation to
-   * end_user_id: Optional end-user ID to scope the operation to
-   *
-   * Returns: List[Document]: List of accessible documents
    */
   list(params: DocumentListParams, options?: RequestOptions): APIPromise<DocumentListResponse> {
     const { end_user_id, folder_name, ...body } = params;
@@ -70,11 +61,6 @@ export class Documents extends APIResource {
    * - Document metadata
    * - Document content in storage
    * - Document chunks and embeddings in vector store
-   *
-   * Args: document_id: ID of the document to delete auth: Authentication context
-   * (must have write access to the document)
-   *
-   * Returns: Deletion status
    */
   delete(documentID: string, options?: RequestOptions): APIPromise<DocumentDeleteResponse> {
     return this._client.delete(path`/documents/${documentID}`, options);
@@ -83,10 +69,6 @@ export class Documents extends APIResource {
   /**
    * Download the actual file content for a document. This endpoint is used for local
    * storage when file:// URLs cannot be accessed by browsers.
-   *
-   * Args: document_id: External ID of the document auth: Authentication context
-   *
-   * Returns: StreamingResponse with the file content
    */
   downloadFile(documentID: string, options?: RequestOptions): APIPromise<unknown> {
     return this._client.get(path`/documents/${documentID}/file`, options);
@@ -94,12 +76,6 @@ export class Documents extends APIResource {
 
   /**
    * Get document by filename.
-   *
-   * Args: filename: Filename of the document to retrieve auth: Authentication
-   * context folder_name: Optional folder to scope the operation to end_user_id:
-   * Optional end-user ID to scope the operation to
-   *
-   * Returns: Document: Document metadata if found and accessible
    */
   getByFilename(
     filename: string,
@@ -111,11 +87,6 @@ export class Documents extends APIResource {
 
   /**
    * Get a download URL for a specific document.
-   *
-   * Args: document_id: External ID of the document auth: Authentication context
-   * expires_in: URL expiration time in seconds (default: 1 hour)
-   *
-   * Returns: Dictionary containing the download URL and metadata
    */
   getDownloadURL(
     documentID: string,
@@ -127,10 +98,6 @@ export class Documents extends APIResource {
 
   /**
    * Get the processing status of a document.
-   *
-   * Args: document_id: ID of the document to check auth: Authentication context
-   *
-   * Returns: Dict containing status information for the document
    */
   getStatus(documentID: string, options?: RequestOptions): APIPromise<unknown> {
     return this._client.get(path`/documents/${documentID}/status`, options);
@@ -168,11 +135,6 @@ export class Documents extends APIResource {
   /**
    * Extract specific pages from a document (PDF, PowerPoint, or Word) as
    * base64-encoded images.
-   *
-   * Args: request: Request containing document_id, start_page, and end_page auth:
-   * Authentication context
-   *
-   * Returns: DocumentPagesResponse: Base64-encoded images of the requested pages
    */
   pages(body: DocumentPagesParams, options?: RequestOptions): APIPromise<DocumentPagesResponse> {
     return this._client.post('/documents/pages', { body, ...options });
@@ -180,13 +142,6 @@ export class Documents extends APIResource {
 
   /**
    * Update a document with content from a file using the specified strategy.
-   *
-   * Args: document_id: ID of the document to update file: File to add to the
-   * document metadata: JSON string of metadata to merge with existing metadata
-   * update_strategy: Strategy for updating the document (default: 'add')
-   * use_colpali: Whether to use multi-vector embedding auth: Authentication context
-   *
-   * Returns: Document: Updated document metadata
    */
   updateFile(
     documentID: string,
@@ -201,11 +156,6 @@ export class Documents extends APIResource {
 
   /**
    * Update only a document's metadata.
-   *
-   * Args: document_id: ID of the document to update metadata_updates: New metadata
-   * to merge with existing metadata auth: Authentication context
-   *
-   * Returns: Document: Updated document metadata
    */
   updateMetadata(
     documentID: string,
@@ -217,12 +167,6 @@ export class Documents extends APIResource {
 
   /**
    * Update a document with new text content using the specified strategy.
-   *
-   * Args: document_id: ID of the document to update request: Text content and
-   * metadata for the update update_strategy: Strategy for updating the document
-   * (default: 'add') auth: Authentication context
-   *
-   * Returns: Document: Updated document metadata
    */
   updateText(
     documentID: string,
@@ -342,12 +286,12 @@ export interface DocumentListParams {
   document_filters?: unknown | null;
 
   /**
-   * Body param:
+   * Body param: Maximum number of documents to return.
    */
   limit?: number;
 
   /**
-   * Body param:
+   * Body param: Number of documents to skip before returning results.
    */
   skip?: number;
 }
@@ -467,6 +411,9 @@ export interface DocumentUpdateFileParams {
 }
 
 export interface DocumentUpdateMetadataParams {
+  /**
+   * Metadata fields to merge into the document.
+   */
   metadata?: unknown;
 
   /**
@@ -478,7 +425,7 @@ export interface DocumentUpdateMetadataParams {
 
 export interface DocumentUpdateTextParams {
   /**
-   * Body param:
+   * Body param: Raw text content to store as a document.
    */
   content: string;
 
@@ -493,7 +440,8 @@ export interface DocumentUpdateTextParams {
   end_user_id?: string | null;
 
   /**
-   * Body param:
+   * Body param: Optional filename hint used when inferring MIME type or displaying
+   * the document.
    */
   filename?: string | null;
 
@@ -503,7 +451,7 @@ export interface DocumentUpdateTextParams {
   folder_name?: string | null;
 
   /**
-   * Body param:
+   * Body param: User-defined metadata stored with the document (JSON-serializable).
    */
   metadata?: unknown;
 
@@ -515,7 +463,8 @@ export interface DocumentUpdateTextParams {
   metadata_types?: { [key: string]: string } | null;
 
   /**
-   * Body param:
+   * Body param: When provided, uses Morphik's finetuned ColPali style embeddings
+   * (recommended to be True for high quality retrieval).
    */
   use_colpali?: boolean | null;
 

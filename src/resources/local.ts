@@ -8,14 +8,6 @@ import { RequestOptions } from '../internal/request-options';
 export class Local extends APIResource {
   /**
    * Generate a development URI for running Morphik locally.
-   *
-   * Args: name: Developer name to embed in the token payload. expiry_days: Number of
-   * days the generated token should remain valid. password_token: Authentication
-   * token that must match LOCAL_URI_TOKEN from .env. server_mode: If True, return
-   * server IP instead of localhost.
-   *
-   * Returns: A dictionary containing the `uri` that can be used to connect to the
-   * local instance.
    */
   generateUri(body: LocalGenerateUriParams, options?: RequestOptions): APIPromise<LocalGenerateUriResponse> {
     return this._client.post('/local/generate_uri', {

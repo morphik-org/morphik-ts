@@ -12,22 +12,6 @@ export class Query extends APIResource {
    *
    * When graph_name is provided, the query will leverage the knowledge graph to
    * enhance retrieval by finding relevant entities and their connected documents.
-   *
-   * Args: request: CompletionQueryRequest containing: - query: Query text - filters:
-   * Optional metadata filters - k: Number of chunks to use as context (default: 4) -
-   * min_score: Minimum similarity threshold (default: 0.0) - max_tokens: Maximum
-   * tokens in completion - temperature: Model temperature - use_reranking: Whether
-   * to use reranking - use_colpali: Whether to use ColPali-style embedding model -
-   * graph_name: Optional name of the graph to use for knowledge graph-enhanced
-   * retrieval - hop_depth: Number of relationship hops to traverse in the graph
-   * (1-3) - include_paths: Whether to include relationship paths in the response -
-   * prompt_overrides: Optional customizations for entity extraction, resolution, and
-   * query prompts - folder_name: Optional folder to scope the operation to -
-   * end_user_id: Optional end-user ID to scope the operation to - schema: Optional
-   * schema for structured output - chat_id: Optional chat conversation identifier
-   * for maintaining history auth: Authentication context
-   *
-   * Returns: CompletionResponse: Generated text completion or structured output
    */
   generateCompletion(
     body: QueryGenerateCompletionParams,
@@ -38,6 +22,9 @@ export class Query extends APIResource {
 }
 
 export interface QueryGenerateCompletionParams {
+  /**
+   * Natural-language query used to retrieve relevant chunks or documents.
+   */
   query: string;
 
   /**
@@ -50,6 +37,10 @@ export interface QueryGenerateCompletionParams {
    */
   end_user_id?: string | null;
 
+  /**
+   * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
+   * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
+   */
   filters?: unknown | null;
 
   /**
@@ -79,6 +70,9 @@ export interface QueryGenerateCompletionParams {
    */
   inline_citations?: boolean | null;
 
+  /**
+   * Maximum number of chunks or documents to return.
+   */
   k?: number;
 
   /**
@@ -86,8 +80,14 @@ export interface QueryGenerateCompletionParams {
    */
   llm_config?: unknown | null;
 
+  /**
+   * Maximum number of tokens allowed in the generated completion.
+   */
   max_tokens?: number | null;
 
+  /**
+   * Minimum similarity score a result must meet before it is returned.
+   */
   min_score?: number;
 
   /**
@@ -132,10 +132,21 @@ export interface QueryGenerateCompletionParams {
    */
   stream_response?: boolean | null;
 
+  /**
+   * Sampling temperature passed to the completion model (None uses provider
+   * default).
+   */
   temperature?: number | null;
 
+  /**
+   * When provided, uses Morphik's finetuned ColPali style embeddings (recommended to
+   * be True for high quality retrieval).
+   */
   use_colpali?: boolean | null;
 
+  /**
+   * When provided, overrides the workspace reranking configuration for this request.
+   */
   use_reranking?: boolean | null;
 }
 

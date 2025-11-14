@@ -7,25 +7,7 @@ import { RequestOptions } from '../internal/request-options';
 
 export class Cloud extends APIResource {
   /**
-   * Delete all resources associated with a given cloud application.
-   *
-   * Args: app_name: Name of the application whose data should be removed. auth:
-   * Authentication context of the requesting user.
-   *
-   * Returns: A summary describing how many documents and folders were removed.
-   */
-  deleteApp(params: CloudDeleteAppParams, options?: RequestOptions): APIPromise<unknown> {
-    const { app_name } = params;
-    return this._client.delete('/cloud/apps', { query: { app_name }, ...options });
-  }
-
-  /**
    * Generate an authenticated URI for a cloud-hosted Morphik application.
-   *
-   * Args: request: Parameters for URI generation including `app_id` and `name`.
-   * authorization: Bearer token of the user requesting the URI.
-   *
-   * Returns: A dictionary with the generated `uri` and associated `app_id`.
    */
   generateUri(
     params: CloudGenerateUriParams,
@@ -43,16 +25,7 @@ export class Cloud extends APIResource {
   }
 }
 
-export type CloudDeleteAppResponse = unknown;
-
 export type CloudGenerateUriResponse = { [key: string]: string };
-
-export interface CloudDeleteAppParams {
-  /**
-   * Name of the application to delete
-   */
-  app_name: string;
-}
 
 export interface CloudGenerateUriParams {
   /**
@@ -93,9 +66,7 @@ export interface CloudGenerateUriParams {
 
 export declare namespace Cloud {
   export {
-    type CloudDeleteAppResponse as CloudDeleteAppResponse,
     type CloudGenerateUriResponse as CloudGenerateUriResponse,
-    type CloudDeleteAppParams as CloudDeleteAppParams,
     type CloudGenerateUriParams as CloudGenerateUriParams,
   };
 }

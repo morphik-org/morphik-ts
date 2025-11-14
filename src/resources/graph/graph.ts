@@ -17,12 +17,6 @@ export class GraphResource extends APIResource {
    * `status = "processing"` while a background task extracts entities and
    * relationships.
    *
-   * Args: request: Graph creation parameters including name and optional filters.
-   * auth: Authentication context authorizing the operation.
-   *
-   * Returns: The placeholder :class:`Graph` object which clients can poll for
-   * status.
-   *
    * @example
    * ```ts
    * const graph = await client.graph.create({ name: 'name' });
@@ -36,12 +30,6 @@ export class GraphResource extends APIResource {
    * Get a graph by name.
    *
    * This endpoint retrieves a graph by its name if the user has access to it.
-   *
-   * Args: name: Name of the graph to retrieve auth: Authentication context
-   * folder_name: Optional folder to scope the operation to end_user_id: Optional
-   * end-user ID to scope the operation to
-   *
-   * Returns: Graph: The requested graph object
    *
    * @example
    * ```ts
@@ -63,16 +51,6 @@ export class GraphResource extends APIResource {
    * and/or new filters/document IDs, extracts entities and relationships, and
    * updates the graph with new information.
    *
-   * Args: name: Name of the graph to update request: UpdateGraphRequest
-   * containing: - additional_filters: Optional additional metadata filters to
-   * determine which new documents to include - additional_documents: Optional list
-   * of additional document IDs to include - prompt_overrides: Optional
-   * customizations for entity extraction and resolution prompts - folder_name:
-   * Optional folder to scope the operation to - end_user_id: Optional end-user ID to
-   * scope the operation to auth: Authentication context
-   *
-   * Returns: Graph: The updated graph object
-   *
    * @example
    * ```ts
    * const graph = await client.graph.update('name');
@@ -86,11 +64,6 @@ export class GraphResource extends APIResource {
    * List all graphs the user has access to.
    *
    * This endpoint retrieves all graphs the user has access to.
-   *
-   * Args: auth: Authentication context folder_name: Optional folder to scope the
-   * operation to end_user_id: Optional end-user ID to scope the operation to
-   *
-   * Returns: List[Graph]: List of graph objects
    *
    * @example
    * ```ts
@@ -106,11 +79,6 @@ export class GraphResource extends APIResource {
 
   /**
    * Delete a graph by name.
-   *
-   * Args: name: Name of the graph to delete auth: Authentication context (must have
-   * write access to the graph)
-   *
-   * Returns: Deletion status
    *
    * @example
    * ```ts
@@ -128,16 +96,6 @@ export class GraphResource extends APIResource {
    * This endpoint is designed for polling during graph creation/update operations.
    * For MorphikGraphService backends, it synchronizes the local graph status with
    * the remote service status automatically.
-   *
-   * Args: name: Name of the graph to check auth: Authentication context folder_name:
-   * Optional folder to scope the operation to end_user_id: Optional end-user ID to
-   * scope the operation to
-   *
-   * Returns: Dict containing: - status: Current status (processing, completed,
-   * failed) - message: Optional status message - error: Error details if status is
-   * failed - created_at: Creation timestamp - updated_at: Last update timestamp -
-   * node_count: Number of nodes (if available) - edge_count: Number of edges (if
-   * available)
    *
    * @example
    * ```ts
@@ -157,12 +115,6 @@ export class GraphResource extends APIResource {
    *
    * This endpoint retrieves the nodes and links data needed for graph visualization.
    * It works with both local and API-based graph services.
-   *
-   * Args: name: Name of the graph to visualize auth: Authentication context
-   * folder_name: Optional folder to scope the operation to end_user_id: Optional
-   * end-user ID to scope the operation to
-   *
-   * Returns: Dict: Visualization data containing nodes and links arrays
    *
    * @example
    * ```ts
