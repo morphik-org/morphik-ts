@@ -12,12 +12,6 @@ export class Workflow extends APIResource {
    * This endpoint polls the external graph API to check the status of an async
    * operation.
    *
-   * Args: workflow_id: The workflow ID returned from build/update operations run_id:
-   * Optional run ID for the specific workflow run auth: Authentication context
-   *
-   * Returns: Dict containing status ('running', 'completed', or 'failed') and
-   * optional result
-   *
    * @example
    * ```ts
    * const response = await client.graph.workflow.status(

@@ -37,8 +37,10 @@ export {
   Cloud,
   type CloudDeleteAppResponse,
   type CloudGenerateUriResponse,
+  type CloudListAppsResponse,
   type CloudDeleteAppParams,
   type CloudGenerateUriParams,
+  type CloudListAppsParams,
 } from './cloud';
 export {
   Documents,

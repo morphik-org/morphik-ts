@@ -8,12 +8,6 @@ import { path } from '../../internal/utils/path';
 export class Chat extends APIResource {
   /**
    * Stream a chat completion response for a document chat conversation.
-   *
-   * Args: chat_id: Identifier of the document chat conversation. request: The chat
-   * request containing the user message. auth: Authentication context. redis: Redis
-   * connection for chat history storage.
-   *
-   * Returns: StreamingResponse with the assistant's response.
    */
   complete(chatID: string, body: ChatCompleteParams, options?: RequestOptions): APIPromise<unknown> {
     return this._client.post(path`/document/chat/${chatID}/complete`, { body, ...options });
@@ -21,12 +15,6 @@ export class Chat extends APIResource {
 
   /**
    * Retrieve the message history for a document chat conversation.
-   *
-   * Args: chat_id: Identifier of the document chat conversation. auth:
-   * Authentication context used to verify access to the conversation. redis: Redis
-   * connection where chat messages are stored.
-   *
-   * Returns: A list of message dictionaries or an empty list if no history exists.
    */
   retrieveHistory(chatID: string, options?: RequestOptions): APIPromise<unknown> {
     return this._client.get(path`/document/chat/${chatID}`, options);

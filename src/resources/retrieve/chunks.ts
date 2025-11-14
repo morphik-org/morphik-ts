@@ -29,14 +29,7 @@ export class Chunks extends APIResource {
    * }
    * ```
    *
-   * Args: request: RetrieveRequest containing: - query: Search query text - filters:
-   * Optional metadata filters - k: Number of results (default: 4) - min_score:
-   * Minimum similarity threshold (default: 0.0) - use_reranking: Whether to use
-   * reranking - use_colpali: Whether to use ColPali-style embedding model -
-   * folder_name: Optional folder to scope the search to - end_user_id: Optional
-   * end-user ID to scope the search to auth: Authentication context
-   *
-   * Returns: List[ChunkResult]: List of relevant chunks
+   * Returns a list of `ChunkResult` objects ordered by relevance.
    */
   create(body: ChunkCreateParams, options?: RequestOptions): APIPromise<ChunkCreateResponse> {
     return this._client.post('/retrieve/chunks', { body, ...options });
@@ -52,11 +45,6 @@ export class Chunks extends APIResource {
    *
    * Returns both flat results (for backward compatibility) and grouped results (for
    * UI). When padding > 0, groups chunks by main matches and their padding chunks.
-   *
-   * Args: request: RetrieveRequest containing query parameters, metadata filters,
-   * and padding instructions auth: Authentication context
-   *
-   * Returns: GroupedChunkResponse: Contains both flat chunks and grouped chunks
    */
   createGrouped(
     body: ChunkCreateGroupedParams,
@@ -96,6 +84,9 @@ export interface ChunkResult {
  * Base retrieve request model
  */
 export interface RetrieveRequest {
+  /**
+   * Natural-language query used to retrieve relevant chunks or documents.
+   */
   query: string;
 
   /**
@@ -103,6 +94,10 @@ export interface RetrieveRequest {
    */
   end_user_id?: string | null;
 
+  /**
+   * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
+   * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
+   */
   filters?: unknown | null;
 
   /**
@@ -126,8 +121,14 @@ export interface RetrieveRequest {
    */
   include_paths?: boolean | null;
 
+  /**
+   * Maximum number of chunks or documents to return.
+   */
   k?: number;
 
+  /**
+   * Minimum similarity score a result must meet before it is returned.
+   */
   min_score?: number;
 
   /**
@@ -141,8 +142,15 @@ export interface RetrieveRequest {
    */
   padding?: number;
 
+  /**
+   * When provided, uses Morphik's finetuned ColPali style embeddings (recommended to
+   * be True for high quality retrieval).
+   */
   use_colpali?: boolean | null;
 
+  /**
+   * When provided, overrides the workspace reranking configuration for this request.
+   */
   use_reranking?: boolean | null;
 }
 
@@ -193,6 +201,9 @@ export namespace ChunkCreateGroupedResponse {
 }
 
 export interface ChunkCreateParams {
+  /**
+   * Natural-language query used to retrieve relevant chunks or documents.
+   */
   query: string;
 
   /**
@@ -200,6 +211,10 @@ export interface ChunkCreateParams {
    */
   end_user_id?: string | null;
 
+  /**
+   * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
+   * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
+   */
   filters?: unknown | null;
 
   /**
@@ -223,8 +238,14 @@ export interface ChunkCreateParams {
    */
   include_paths?: boolean | null;
 
+  /**
+   * Maximum number of chunks or documents to return.
+   */
   k?: number;
 
+  /**
+   * Minimum similarity score a result must meet before it is returned.
+   */
   min_score?: number;
 
   /**
@@ -238,12 +259,22 @@ export interface ChunkCreateParams {
    */
   padding?: number;
 
+  /**
+   * When provided, uses Morphik's finetuned ColPali style embeddings (recommended to
+   * be True for high quality retrieval).
+   */
   use_colpali?: boolean | null;
 
+  /**
+   * When provided, overrides the workspace reranking configuration for this request.
+   */
   use_reranking?: boolean | null;
 }
 
 export interface ChunkCreateGroupedParams {
+  /**
+   * Natural-language query used to retrieve relevant chunks or documents.
+   */
   query: string;
 
   /**
@@ -251,6 +282,10 @@ export interface ChunkCreateGroupedParams {
    */
   end_user_id?: string | null;
 
+  /**
+   * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
+   * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
+   */
   filters?: unknown | null;
 
   /**
@@ -274,8 +309,14 @@ export interface ChunkCreateGroupedParams {
    */
   include_paths?: boolean | null;
 
+  /**
+   * Maximum number of chunks or documents to return.
+   */
   k?: number;
 
+  /**
+   * Minimum similarity score a result must meet before it is returned.
+   */
   min_score?: number;
 
   /**
@@ -289,8 +330,15 @@ export interface ChunkCreateGroupedParams {
    */
   padding?: number;
 
+  /**
+   * When provided, uses Morphik's finetuned ColPali style embeddings (recommended to
+   * be True for high quality retrieval).
+   */
   use_colpali?: boolean | null;
 
+  /**
+   * When provided, overrides the workspace reranking configuration for this request.
+   */
   use_reranking?: boolean | null;
 }
 

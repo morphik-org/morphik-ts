@@ -9,11 +9,6 @@ import { path } from '../../internal/utils/path';
 export class Documents extends APIResource {
   /**
    * Add a document to a folder.
-   *
-   * Args: folder_id_or_name: ID or name of the folder document_id: ID of the
-   * document auth: Authentication context
-   *
-   * Returns: Success status
    */
   add(
     documentID: string,
@@ -26,11 +21,6 @@ export class Documents extends APIResource {
 
   /**
    * Remove a document from a folder.
-   *
-   * Args: folder_id_or_name: ID or name of the folder document_id: ID of the
-   * document auth: Authentication context
-   *
-   * Returns: Success status
    */
   remove(
     documentID: string,

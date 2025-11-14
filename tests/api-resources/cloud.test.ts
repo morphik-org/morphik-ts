@@ -49,4 +49,33 @@ describe('resource cloud', () => {
       'X-Morphik-Admin-Secret': 'X-Morphik-Admin-Secret',
     });
   });
+
+  // Prism tests are disabled
+  test.skip('listApps', async () => {
+    const responsePromise = client.cloud.listApps();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('listApps: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.cloud.listApps(
+        {
+          limit: 1,
+          offset: 0,
+          org_id: 'org_id',
+          user_id: 'user_id',
+          'X-Morphik-Admin-Secret': 'X-Morphik-Admin-Secret',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Morphik.NotFoundError);
+  });
 });

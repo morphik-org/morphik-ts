@@ -10,13 +10,6 @@ export class Batch extends APIResource {
   /**
    * Retrieve specific chunks by their document ID and chunk number in a single batch
    * operation.
-   *
-   * Args: request: Dictionary containing: - sources: List of ChunkSource objects
-   * (with document_id and chunk_number) - folder_name: Optional folder to scope the
-   * operation to - end_user_id: Optional end-user ID to scope the operation to -
-   * use_colpali: Whether to use ColPali-style embedding auth: Authentication context
-   *
-   * Returns: List[ChunkResult]: List of chunk results
    */
   retrieveChunks(
     params: BatchRetrieveChunksParams,
@@ -28,13 +21,6 @@ export class Batch extends APIResource {
 
   /**
    * Retrieve multiple documents by their IDs in a single batch operation.
-   *
-   * Args: batch_request: Dictionary containing: - document_ids: List of document IDs
-   * to retrieve - folder_name: Optional folder to scope the operation to -
-   * end_user_id: Optional end-user ID to scope the operation to auth: Authentication
-   * context
-   *
-   * Returns: List[Document]: List of documents matching the IDs
    */
   retrieveDocuments(
     params: BatchRetrieveDocumentsParams,
