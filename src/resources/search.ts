@@ -36,7 +36,7 @@ export interface SearchDocumentsParams {
   /**
    * Optional metadata filters for documents
    */
-  filters?: unknown | null;
+  filters?: { [key: string]: unknown } | null;
 
   /**
    * Optional folder scope for the search. Accepts a single folder name or a list of

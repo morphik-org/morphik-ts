@@ -6,7 +6,11 @@ import { RequestOptions } from '../internal/request-options';
 
 export class Logs extends APIResource {
   /**
-   * Return recent logs for the authenticated user (scoped by user_id).
+   * Return recent logs for the authenticated user (scoped by app_id).
+   *
+   * Args: hours: Number of hours of history to retrieve (default 4) - <= 4 hours:
+   * reads from local files - > 4 hours: queries logs.morphik.ai proxy (requires
+   * proxy endpoint)
    */
   list(query: LogListParams | null | undefined = {}, options?: RequestOptions): APIPromise<LogListResponse> {
     return this._client.get('/logs/', { query, ...options });
@@ -17,7 +21,7 @@ export type LogListResponse = Array<LogListResponse.LogListResponseItem>;
 
 export namespace LogListResponse {
   /**
-   * Public serialisable view of a UsageRecord.
+   * Public serialisable view of a telemetry event.
    */
   export interface LogListResponseItem {
     duration_ms: number;
@@ -36,16 +40,16 @@ export namespace LogListResponse {
 
     error?: string | null;
 
-    metadata?: unknown | null;
+    metadata?: { [key: string]: unknown } | null;
   }
 }
 
 export interface LogListParams {
+  hours?: number;
+
   limit?: number;
 
   op_type?: string | null;
-
-  since?: string | null;
 
   status?: string | null;
 }

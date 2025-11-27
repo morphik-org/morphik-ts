@@ -16,7 +16,7 @@ export class Auth extends APIResource {
     connectorType: string,
     body: AuthFinalizeManualAuthParams,
     options?: RequestOptions,
-  ): APIPromise<unknown> {
+  ): APIPromise<AuthFinalizeManualAuthResponse> {
     return this._client.post(path`/ee/connectors/${connectorType}/auth/finalize`, { body, ...options });
   }
 
@@ -39,7 +39,7 @@ export class Auth extends APIResource {
   }
 }
 
-export type AuthFinalizeManualAuthResponse = unknown;
+export type AuthFinalizeManualAuthResponse = { [key: string]: unknown };
 
 export type AuthGetInitiateAuthURLResponse =
   | AuthGetInitiateAuthURLResponse.ManualCredentialsAuthResponse
@@ -84,7 +84,7 @@ export namespace AuthGetInitiateAuthURLResponse {
 }
 
 export interface AuthFinalizeManualAuthParams {
-  credentials: unknown;
+  credentials: { [key: string]: unknown };
 }
 
 export interface AuthGetInitiateAuthURLParams {

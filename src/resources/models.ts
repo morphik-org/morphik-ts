@@ -57,7 +57,7 @@ export class Models extends APIResource {
 export interface ModelResponse {
   id: string;
 
-  config: unknown;
+  config: { [key: string]: unknown };
 
   created_at: string;
 
@@ -72,11 +72,11 @@ export interface ModelResponse {
  * Response for available models endpoint
  */
 export interface ModelListResponse {
-  chat_models: Array<unknown>;
+  chat_models: Array<{ [key: string]: unknown }>;
 
   default_models: { [key: string]: string | null };
 
-  embedding_models: Array<unknown>;
+  embedding_models: Array<{ [key: string]: unknown }>;
 
   providers: Array<string>;
 }
@@ -88,7 +88,7 @@ export type ModelListAvailableResponse = unknown;
 export type ModelListCustomResponse = Array<ModelResponse>;
 
 export interface ModelCreateParams {
-  config: unknown;
+  config: { [key: string]: unknown };
 
   name: string;
 

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as CacheAPI from './cache';
 import * as GraphAPI from './graph/graph';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
@@ -16,8 +15,39 @@ export class Query extends APIResource {
   generateCompletion(
     body: QueryGenerateCompletionParams,
     options?: RequestOptions,
-  ): APIPromise<CacheAPI.CompletionResponse> {
+  ): APIPromise<QueryGenerateCompletionResponse> {
     return this._client.post('/query', { body, ...options });
+  }
+}
+
+/**
+ * Response from completion generation
+ */
+export interface QueryGenerateCompletionResponse {
+  /**
+   * Structured completion object for schema-based responses
+   */
+  completion: string | { [key: string]: unknown };
+
+  usage: { [key: string]: number };
+
+  finish_reason?: string | null;
+
+  metadata?: { [key: string]: unknown } | null;
+
+  sources?: Array<QueryGenerateCompletionResponse.Source>;
+}
+
+export namespace QueryGenerateCompletionResponse {
+  /**
+   * Source information for a chunk used in completion
+   */
+  export interface Source {
+    chunk_number: number;
+
+    document_id: string;
+
+    score?: number | null;
   }
 }
 
@@ -41,7 +71,7 @@ export interface QueryGenerateCompletionParams {
    * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
    * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
    */
-  filters?: unknown | null;
+  filters?: { [key: string]: unknown } | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -78,7 +108,7 @@ export interface QueryGenerateCompletionParams {
   /**
    * LiteLLM-compatible model configuration (e.g., model name, API key, base URL)
    */
-  llm_config?: unknown | null;
+  llm_config?: { [key: string]: unknown } | null;
 
   /**
    * Maximum number of tokens allowed in the generated completion.
@@ -125,7 +155,7 @@ export interface QueryGenerateCompletionParams {
   /**
    * Schema for structured output, can be a Pydantic model or JSON schema dict
    */
-  schema?: unknown | unknown | null;
+  schema?: unknown | { [key: string]: unknown } | null;
 
   /**
    * Whether to stream the response back in chunks
@@ -311,5 +341,8 @@ export namespace QueryGenerateCompletionParams {
 }
 
 export declare namespace Query {
-  export { type QueryGenerateCompletionParams as QueryGenerateCompletionParams };
+  export {
+    type QueryGenerateCompletionResponse as QueryGenerateCompletionResponse,
+    type QueryGenerateCompletionParams as QueryGenerateCompletionParams,
+  };
 }
