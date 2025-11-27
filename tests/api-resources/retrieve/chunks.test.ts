@@ -25,7 +25,7 @@ describe('resource chunks', () => {
     const response = await client.retrieve.chunks.create({
       query: 'x',
       end_user_id: 'end_user_id',
-      filters: {},
+      filters: { foo: 'bar' },
       folder_name: 'string',
       graph_name: 'graph_name',
       hop_depth: 1,
@@ -56,7 +56,7 @@ describe('resource chunks', () => {
     const response = await client.retrieve.chunks.createGrouped({
       query: 'x',
       end_user_id: 'end_user_id',
-      filters: {},
+      filters: { foo: 'bar' },
       folder_name: 'string',
       graph_name: 'graph_name',
       hop_depth: 1,

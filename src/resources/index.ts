@@ -6,7 +6,6 @@ export {
   type APIKeyListResponse,
   type APIKeyCreateParams,
 } from './api-keys';
-export { Agent, type AgentExecuteQueryResponse, type AgentExecuteQueryParams } from './agent';
 export {
   Batch,
   type BatchRetrieveChunksResponse,
@@ -14,17 +13,6 @@ export {
   type BatchRetrieveChunksParams,
   type BatchRetrieveDocumentsParams,
 } from './batch';
-export {
-  Cache,
-  type CompletionResponse,
-  type CacheCreateResponse,
-  type CacheRetrieveResponse,
-  type CacheUpdateResponse,
-  type CacheAddDocsResponse,
-  type CacheCreateParams,
-  type CacheAddDocsParams,
-  type CacheQueryParams,
-} from './cache';
 export {
   Chat,
   type ChatListResponse,
@@ -122,16 +110,10 @@ export {
   type ModelCreateParams,
 } from './models';
 export { Ping, type PingCheckResponse, type PingStatusResponse } from './ping';
-export { Query, type QueryGenerateCompletionParams } from './query';
+export { Query, type QueryGenerateCompletionResponse, type QueryGenerateCompletionParams } from './query';
 export {
   Retrieve,
   type RetrieveCreateDocsResponse,
   type RetrieveCreateDocsParams,
 } from './retrieve/retrieve';
 export { Search, type SearchDocumentsResponse, type SearchDocumentsParams } from './search';
-export {
-  Usage,
-  type UsageListRecentResponse,
-  type UsageRetrieveStatsResponse,
-  type UsageListRecentParams,
-} from './usage';

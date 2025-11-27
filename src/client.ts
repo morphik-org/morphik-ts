@@ -17,7 +17,6 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Agent, AgentExecuteQueryParams, AgentExecuteQueryResponse } from './resources/agent';
 import { APIKeyCreateParams, APIKeyCreateResponse, APIKeyListResponse, APIKeys } from './resources/api-keys';
 import {
   Batch,
@@ -26,17 +25,6 @@ import {
   BatchRetrieveDocumentsParams,
   BatchRetrieveDocumentsResponse,
 } from './resources/batch';
-import {
-  Cache,
-  CacheAddDocsParams,
-  CacheAddDocsResponse,
-  CacheCreateParams,
-  CacheCreateResponse,
-  CacheQueryParams,
-  CacheRetrieveResponse,
-  CacheUpdateResponse,
-  CompletionResponse,
-} from './resources/cache';
 import {
   Chat,
   ChatListParams,
@@ -79,14 +67,8 @@ import {
   Models,
 } from './resources/models';
 import { Ping, PingCheckResponse, PingStatusResponse } from './resources/ping';
-import { Query, QueryGenerateCompletionParams } from './resources/query';
+import { Query, QueryGenerateCompletionParams, QueryGenerateCompletionResponse } from './resources/query';
 import { Search, SearchDocumentsParams, SearchDocumentsResponse } from './resources/search';
-import {
-  Usage,
-  UsageListRecentParams,
-  UsageListRecentResponse,
-  UsageRetrieveStatsResponse,
-} from './resources/usage';
 import {
   DocumentChatRequest,
   DocumentDeleteResponse,
@@ -841,15 +823,12 @@ export class Morphik {
   modelConfig: API.ModelConfig = new API.ModelConfig(this);
   apiKeys: API.APIKeys = new API.APIKeys(this);
   logs: API.Logs = new API.Logs(this);
-  cache: API.Cache = new API.Cache(this);
   graph: API.GraphResource = new API.GraphResource(this);
   ee: API.Ee = new API.Ee(this);
   retrieve: API.Retrieve = new API.Retrieve(this);
   batch: API.Batch = new API.Batch(this);
   search: API.Search = new API.Search(this);
   query: API.Query = new API.Query(this);
-  agent: API.Agent = new API.Agent(this);
-  usage: API.Usage = new API.Usage(this);
   local: API.Local = new API.Local(this);
   cloud: API.Cloud = new API.Cloud(this);
   documents: API.Documents = new API.Documents(this);
@@ -863,15 +842,12 @@ Morphik.Folders = Folders;
 Morphik.ModelConfig = ModelConfig;
 Morphik.APIKeys = APIKeys;
 Morphik.Logs = Logs;
-Morphik.Cache = Cache;
 Morphik.GraphResource = GraphResource;
 Morphik.Ee = Ee;
 Morphik.Retrieve = Retrieve;
 Morphik.Batch = Batch;
 Morphik.Search = Search;
 Morphik.Query = Query;
-Morphik.Agent = Agent;
-Morphik.Usage = Usage;
 Morphik.Local = Local;
 Morphik.Cloud = Cloud;
 Morphik.Documents = Documents;
@@ -940,18 +916,6 @@ export declare namespace Morphik {
   export { Logs as Logs, type LogListResponse as LogListResponse, type LogListParams as LogListParams };
 
   export {
-    Cache as Cache,
-    type CompletionResponse as CompletionResponse,
-    type CacheCreateResponse as CacheCreateResponse,
-    type CacheRetrieveResponse as CacheRetrieveResponse,
-    type CacheUpdateResponse as CacheUpdateResponse,
-    type CacheAddDocsResponse as CacheAddDocsResponse,
-    type CacheCreateParams as CacheCreateParams,
-    type CacheAddDocsParams as CacheAddDocsParams,
-    type CacheQueryParams as CacheQueryParams,
-  };
-
-  export {
     GraphResource as GraphResource,
     type EntityExtractionPromptOverride as EntityExtractionPromptOverride,
     type EntityResolutionPromptOverride as EntityResolutionPromptOverride,
@@ -991,19 +955,10 @@ export declare namespace Morphik {
     type SearchDocumentsParams as SearchDocumentsParams,
   };
 
-  export { Query as Query, type QueryGenerateCompletionParams as QueryGenerateCompletionParams };
-
   export {
-    Agent as Agent,
-    type AgentExecuteQueryResponse as AgentExecuteQueryResponse,
-    type AgentExecuteQueryParams as AgentExecuteQueryParams,
-  };
-
-  export {
-    Usage as Usage,
-    type UsageListRecentResponse as UsageListRecentResponse,
-    type UsageRetrieveStatsResponse as UsageRetrieveStatsResponse,
-    type UsageListRecentParams as UsageListRecentParams,
+    Query as Query,
+    type QueryGenerateCompletionResponse as QueryGenerateCompletionResponse,
+    type QueryGenerateCompletionParams as QueryGenerateCompletionParams,
   };
 
   export {

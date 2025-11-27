@@ -25,7 +25,7 @@ describe('resource logs', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.logs.list(
-        { limit: 1, op_type: 'op_type', since: '2019-12-27T18:11:19.117Z', status: 'status' },
+        { hours: 0.1, limit: 1, op_type: 'op_type', status: 'status' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Morphik.NotFoundError);

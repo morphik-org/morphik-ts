@@ -66,7 +66,7 @@ export interface ChunkResult {
 
   document_id: string;
 
-  metadata: unknown;
+  metadata: { [key: string]: unknown };
 
   score: number;
 
@@ -98,7 +98,7 @@ export interface RetrieveRequest {
    * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
    * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
    */
-  filters?: unknown | null;
+  filters?: { [key: string]: unknown } | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -215,7 +215,7 @@ export interface ChunkCreateParams {
    * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
    * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
    */
-  filters?: unknown | null;
+  filters?: { [key: string]: unknown } | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -286,7 +286,7 @@ export interface ChunkCreateGroupedParams {
    * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
    * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
    */
-  filters?: unknown | null;
+  filters?: { [key: string]: unknown } | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
