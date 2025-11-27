@@ -43,7 +43,7 @@ export namespace RetrieveCreateDocsResponse {
    * Query result at document level
    */
   export interface RetrieveCreateDocsResponseItem {
-    additional_metadata: { [key: string]: unknown };
+    additional_metadata: unknown;
 
     /**
      * Represents either a URL or content string
@@ -52,7 +52,7 @@ export namespace RetrieveCreateDocsResponse {
 
     document_id: string;
 
-    metadata: { [key: string]: unknown };
+    metadata: unknown;
 
     score: number;
   }
@@ -89,7 +89,7 @@ export interface RetrieveCreateDocsParams {
    * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
    * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
    */
-  filters?: { [key: string]: unknown } | null;
+  filters?: unknown | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list

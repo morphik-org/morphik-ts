@@ -28,7 +28,7 @@ describe('resource connectors', () => {
   // Prism tests are disabled
   test.skip('finalizeAuth: only required params', async () => {
     const responsePromise = client.ee.connectors.finalizeAuth({
-      auth_response_data: { foo: 'bar' },
+      auth_response_data: {},
       connector_type: 'connector_type',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -43,7 +43,7 @@ describe('resource connectors', () => {
   // Prism tests are disabled
   test.skip('finalizeAuth: required and optional params', async () => {
     const response = await client.ee.connectors.finalizeAuth({
-      auth_response_data: { foo: 'bar' },
+      auth_response_data: {},
       connector_type: 'connector_type',
     });
   });
@@ -101,7 +101,7 @@ describe('resource connectors', () => {
     const response = await client.ee.connectors.ingestFile('connector_type', {
       file_id: 'file_id',
       folder_name: 'folder_name',
-      metadata: { foo: 'bar' },
+      metadata: {},
     });
   });
 
@@ -129,7 +129,7 @@ describe('resource connectors', () => {
       force: true,
       ignore_patterns: ['string'],
       include_patterns: ['string'],
-      metadata: { foo: 'bar' },
+      metadata: {},
     });
   });
 
