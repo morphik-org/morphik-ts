@@ -159,7 +159,7 @@ export interface ConnectorDisconnectParams {
 }
 
 export interface ConnectorFinalizeAuthParams {
-  auth_response_data: { [key: string]: unknown };
+  auth_response_data: unknown;
 
   connector_type: string;
 }
@@ -188,7 +188,7 @@ export interface ConnectorIngestFileParams {
   /**
    * Metadata attached to the document when ingesting from the connector.
    */
-  metadata?: { [key: string]: unknown } | null;
+  metadata?: unknown | null;
 
   [k: string]: unknown;
 }
@@ -229,7 +229,7 @@ export interface ConnectorIngestRepositoryParams {
   /**
    * Metadata applied to each document created from the repository.
    */
-  metadata?: { [key: string]: unknown } | null;
+  metadata?: unknown | null;
 }
 
 export interface ConnectorInitiateAuthParams {
