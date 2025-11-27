@@ -10,38 +10,22 @@ export class Batch extends APIResource {
   /**
    * Retrieve specific chunks by their document ID and chunk number in a single batch
    * operation.
-   *
-   * Args: request: Dictionary containing: - sources: List of ChunkSource objects
-   * (with document_id and chunk_number) - folder_name: Optional folder to scope the
-   * operation to - end_user_id: Optional end-user ID to scope the operation to -
-   * use_colpali: Whether to use ColPali-style embedding auth: Authentication context
-   *
-   * Returns: List[ChunkResult]: List of chunk results
    */
   retrieveChunks(
-    params: BatchRetrieveChunksParams,
+    body: BatchRetrieveChunksParams,
     options?: RequestOptions,
   ): APIPromise<BatchRetrieveChunksResponse> {
-    const { body } = params;
-    return this._client.post('/batch/chunks', { body: body, ...options });
+    return this._client.post('/batch/chunks', { body, ...options });
   }
 
   /**
    * Retrieve multiple documents by their IDs in a single batch operation.
-   *
-   * Args: batch_request: Dictionary containing: - document_ids: List of document IDs
-   * to retrieve - folder_name: Optional folder to scope the operation to -
-   * end_user_id: Optional end-user ID to scope the operation to auth: Authentication
-   * context
-   *
-   * Returns: List[Document]: List of documents matching the IDs
    */
   retrieveDocuments(
-    params: BatchRetrieveDocumentsParams,
+    body: BatchRetrieveDocumentsParams,
     options?: RequestOptions,
   ): APIPromise<BatchRetrieveDocumentsResponse> {
-    const { body } = params;
-    return this._client.post('/batch/documents', { body: body, ...options });
+    return this._client.post('/batch/documents', { body, ...options });
   }
 }
 
@@ -50,11 +34,62 @@ export type BatchRetrieveChunksResponse = Array<ChunksAPI.ChunkResult>;
 export type BatchRetrieveDocumentsResponse = Array<IngestAPI.Document>;
 
 export interface BatchRetrieveChunksParams {
-  body: unknown;
+  /**
+   * Optional end-user scope for the operation
+   */
+  end_user_id?: string | null;
+
+  /**
+   * Optional folder scope for the operation. Accepts a single folder name or a list
+   * of folder names.
+   */
+  folder_name?: string | Array<string> | null;
+
+  /**
+   * How to return image chunks: base64 data URI (default) or a presigned URL
+   */
+  output_format?: 'base64' | 'url' | null;
+
+  /**
+   * List of chunk sources to retrieve
+   */
+  sources?: Array<BatchRetrieveChunksParams.Source>;
+
+  /**
+   * Whether to use ColPali embeddings for retrieval
+   */
+  use_colpali?: boolean | null;
+}
+
+export namespace BatchRetrieveChunksParams {
+  /**
+   * Source information for a chunk used in completion
+   */
+  export interface Source {
+    chunk_number: number;
+
+    document_id: string;
+
+    score?: number | null;
+  }
 }
 
 export interface BatchRetrieveDocumentsParams {
-  body: unknown;
+  /**
+   * List of document IDs to retrieve
+   */
+  document_ids?: Array<string>;
+
+  /**
+   * Optional end-user scope for the operation
+   */
+  end_user_id?: string | null;
+
+  /**
+   * Optional folder scope for the operation. Accepts a single folder name or a list
+   * of folder names.
+   */
+  folder_name?: string | Array<string> | null;
 }
 
 export declare namespace Batch {

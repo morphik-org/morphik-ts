@@ -9,19 +9,11 @@ export class Search extends APIResource {
   /**
    * Search documents by filename using full-text search.
    *
-   * Args: request: SearchDocumentsRequest containing: - query: Search query for
-   * document names/filenames - limit: Number of documents to return (1-100) -
-   * filters: Optional metadata filters for documents - folder_name: Optional folder
-   * to scope search - end_user_id: Optional end-user ID to scope search auth:
-   * Authentication context
-   *
    * `request.filters` accepts the same operator set as `/retrieve/chunks`: `$eq`,
    * `$ne`, `$gt`, `$gte`, `$lt`, `$lte`, `$in`, `$nin`, `$exists`, `$type`, `$regex`
    * (with optional `i` flag), `$contains`, and the logical operators `$and`, `$or`,
    * `$nor`, `$not`. Comparison clauses honor typed metadata (`number`, `decimal`,
    * `datetime`, `date`).
-   *
-   * Returns: List[Document]: List of matching documents ordered by relevance
    */
   documents(body: SearchDocumentsParams, options?: RequestOptions): APIPromise<SearchDocumentsResponse> {
     return this._client.post('/search/documents', { body, ...options });

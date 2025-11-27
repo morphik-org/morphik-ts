@@ -22,8 +22,6 @@ export class Ping extends APIResource {
    * - PGVector store
    * - Storage service (Local/S3)
    * - ColPali vector store (if enabled)
-   *
-   * Returns: DetailedHealthCheckResponse with status of each service
    */
   status(options?: RequestOptions): APIPromise<PingStatusResponse> {
     return this._client.get('/health', options);

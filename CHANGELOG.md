@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.2.0 (2025-11-27)
+
+Full Changelog: [v1.1.0...v1.2.0](https://github.com/morphik-org/morphik-ts/compare/v1.1.0...v1.2.0)
+
+### Features
+
+* **api:** manual updates ([62daa2d](https://github.com/morphik-org/morphik-ts/commit/62daa2ddf6fa67c58664a00d82a4156151029db4))
+* **api:** manual updates ([36d0662](https://github.com/morphik-org/morphik-ts/commit/36d066232619440eeeb5a89061de6a799cf12038))
+* **api:** manual updates ([6228c67](https://github.com/morphik-org/morphik-ts/commit/6228c67b9af8644408f2e20053a20ba945bf34d7))
+* **api:** manual updates ([e56494f](https://github.com/morphik-org/morphik-ts/commit/e56494f561b044b049aa11d2c9e4c1b54e64e6d0))
+* **api:** manual updates ([adc1986](https://github.com/morphik-org/morphik-ts/commit/adc1986b92ad9e51a98bacb83fcd4c00b38f1d57))
+
+
+### Bug Fixes
+
+* Add license configuration to gitleaks workflow ([#9](https://github.com/morphik-org/morphik-ts/issues/9)) ([f37d078](https://github.com/morphik-org/morphik-ts/commit/f37d07862bcb05711d83ecde038a452189c60b88))
+
 ## 1.1.0 (2025-11-13)
 
 Full Changelog: [v1.0.1...v1.1.0](https://github.com/morphik-org/morphik-ts/compare/v1.0.1...v1.1.0)

@@ -126,24 +126,6 @@ Methods:
 
 - <code title="get /logs/">client.logs.<a href="./src/resources/logs.ts">list</a>({ ...params }) -> LogListResponse</code>
 
-# Cache
-
-Types:
-
-- <code><a href="./src/resources/cache.ts">CompletionResponse</a></code>
-- <code><a href="./src/resources/cache.ts">CacheCreateResponse</a></code>
-- <code><a href="./src/resources/cache.ts">CacheRetrieveResponse</a></code>
-- <code><a href="./src/resources/cache.ts">CacheUpdateResponse</a></code>
-- <code><a href="./src/resources/cache.ts">CacheAddDocsResponse</a></code>
-
-Methods:
-
-- <code title="post /cache/create">client.cache.<a href="./src/resources/cache.ts">create</a>({ ...params }) -> unknown</code>
-- <code title="get /cache/{name}">client.cache.<a href="./src/resources/cache.ts">retrieve</a>(name) -> unknown</code>
-- <code title="post /cache/{name}/update">client.cache.<a href="./src/resources/cache.ts">update</a>(name) -> CacheUpdateResponse</code>
-- <code title="post /cache/{name}/add_docs">client.cache.<a href="./src/resources/cache.ts">addDocs</a>(name, [ ...body ]) -> CacheAddDocsResponse</code>
-- <code title="post /cache/{name}/query">client.cache.<a href="./src/resources/cache.ts">query</a>(name, { ...params }) -> CompletionResponse</code>
-
 # Graph
 
 Types:
@@ -267,31 +249,13 @@ Methods:
 
 # Query
 
-Methods:
-
-- <code title="post /query">client.query.<a href="./src/resources/query.ts">generateCompletion</a>({ ...params }) -> CompletionResponse</code>
-
-# Agent
-
 Types:
 
-- <code><a href="./src/resources/agent.ts">AgentExecuteQueryResponse</a></code>
+- <code><a href="./src/resources/query.ts">QueryGenerateCompletionResponse</a></code>
 
 Methods:
 
-- <code title="post /agent">client.agent.<a href="./src/resources/agent.ts">executeQuery</a>({ ...params }) -> unknown</code>
-
-# Usage
-
-Types:
-
-- <code><a href="./src/resources/usage.ts">UsageListRecentResponse</a></code>
-- <code><a href="./src/resources/usage.ts">UsageRetrieveStatsResponse</a></code>
-
-Methods:
-
-- <code title="get /usage/recent">client.usage.<a href="./src/resources/usage.ts">listRecent</a>({ ...params }) -> UsageListRecentResponse</code>
-- <code title="get /usage/stats">client.usage.<a href="./src/resources/usage.ts">retrieveStats</a>() -> UsageRetrieveStatsResponse</code>
+- <code title="post /query">client.query.<a href="./src/resources/query.ts">generateCompletion</a>({ ...params }) -> QueryGenerateCompletionResponse</code>
 
 # Local
 
@@ -309,11 +273,13 @@ Types:
 
 - <code><a href="./src/resources/cloud.ts">CloudDeleteAppResponse</a></code>
 - <code><a href="./src/resources/cloud.ts">CloudGenerateUriResponse</a></code>
+- <code><a href="./src/resources/cloud.ts">CloudListAppsResponse</a></code>
 
 Methods:
 
-- <code title="delete /cloud/apps">client.cloud.<a href="./src/resources/cloud.ts">deleteApp</a>({ ...params }) -> unknown</code>
+- <code title="delete /apps">client.cloud.<a href="./src/resources/cloud.ts">deleteApp</a>({ ...params }) -> unknown</code>
 - <code title="post /cloud/generate_uri">client.cloud.<a href="./src/resources/cloud.ts">generateUri</a>({ ...params }) -> CloudGenerateUriResponse</code>
+- <code title="get /apps">client.cloud.<a href="./src/resources/cloud.ts">listApps</a>({ ...params }) -> unknown</code>
 
 # Documents
 
