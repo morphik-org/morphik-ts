@@ -99,7 +99,7 @@ export class Documents extends APIResource {
   /**
    * Get the processing status of a document.
    */
-  getStatus(documentID: string, options?: RequestOptions): APIPromise<DocumentGetStatusResponse> {
+  getStatus(documentID: string, options?: RequestOptions): APIPromise<unknown> {
     return this._client.get(path`/documents/${documentID}/status`, options);
   }
 
@@ -215,7 +215,7 @@ export interface DocumentGetDownloadURLResponse {
   expires_in: number;
 }
 
-export type DocumentGetStatusResponse = { [key: string]: unknown };
+export type DocumentGetStatusResponse = unknown;
 
 /**
  * Flexible response for listing documents with aggregates.
@@ -283,7 +283,7 @@ export interface DocumentListParams {
    * Implicit equality uses JSONB containment; explicit operators support typed
    * comparisons.
    */
-  document_filters?: { [key: string]: unknown } | null;
+  document_filters?: unknown | null;
 
   /**
    * Body param: Maximum number of documents to return.
@@ -332,7 +332,7 @@ export interface DocumentListDocsParams {
    * Implicit equality uses JSONB containment; explicit operators support typed
    * comparisons.
    */
-  document_filters?: { [key: string]: unknown } | null;
+  document_filters?: unknown | null;
 
   /**
    * Body param: Optional list of fields to project for each document (dot notation
@@ -414,7 +414,7 @@ export interface DocumentUpdateMetadataParams {
   /**
    * Metadata fields to merge into the document.
    */
-  metadata?: { [key: string]: unknown };
+  metadata?: unknown;
 
   /**
    * Optional per-field type hints: 'string', 'number', 'decimal', 'datetime',
@@ -453,7 +453,7 @@ export interface DocumentUpdateTextParams {
   /**
    * Body param: User-defined metadata stored with the document (JSON-serializable).
    */
-  metadata?: { [key: string]: unknown };
+  metadata?: unknown;
 
   /**
    * Body param: Optional per-field type hints: 'string', 'number', 'decimal',

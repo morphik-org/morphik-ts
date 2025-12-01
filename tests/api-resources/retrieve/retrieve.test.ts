@@ -9,8 +9,8 @@ const client = new Morphik({
 
 describe('resource retrieve', () => {
   // Prism tests are disabled
-  test.skip('createDocs: only required params', async () => {
-    const responsePromise = client.retrieve.createDocs({ query: 'x' });
+  test.skip('createDocs', async () => {
+    const responsePromise = client.retrieve.createDocs({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,24 +18,5 @@ describe('resource retrieve', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('createDocs: required and optional params', async () => {
-    const response = await client.retrieve.createDocs({
-      query: 'x',
-      end_user_id: 'end_user_id',
-      filters: { foo: 'bar' },
-      folder_name: 'string',
-      graph_name: 'graph_name',
-      hop_depth: 1,
-      include_paths: true,
-      k: 1,
-      min_score: 0,
-      output_format: 'base64',
-      padding: 0,
-      use_colpali: true,
-      use_reranking: true,
-    });
   });
 });

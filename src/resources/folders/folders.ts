@@ -70,7 +70,7 @@ export interface Folder {
 
   end_user_id?: string | null;
 
-  system_metadata?: { [key: string]: unknown };
+  system_metadata?: unknown;
 }
 
 export type FolderListResponse = Array<Folder>;
@@ -162,7 +162,7 @@ export interface FolderDetailsParams {
   /**
    * Optional metadata filters applied when computing folder document statistics
    */
-  document_filters?: { [key: string]: unknown } | null;
+  document_filters?: unknown | null;
 
   /**
    * Maximum number of documents to return per folder when include_documents is true

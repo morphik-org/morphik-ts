@@ -66,7 +66,7 @@ export interface ChunkResult {
 
   document_id: string;
 
-  metadata: { [key: string]: unknown };
+  metadata: unknown;
 
   score: number;
 
@@ -85,11 +85,6 @@ export interface ChunkResult {
  */
 export interface RetrieveRequest {
   /**
-   * Natural-language query used to retrieve relevant chunks or documents.
-   */
-  query: string;
-
-  /**
    * Optional end-user scope for the operation
    */
   end_user_id?: string | null;
@@ -98,7 +93,7 @@ export interface RetrieveRequest {
    * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
    * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
    */
-  filters?: { [key: string]: unknown } | null;
+  filters?: unknown | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -141,6 +136,17 @@ export interface RetrieveRequest {
    * (ColPali only)
    */
   padding?: number;
+
+  /**
+   * Natural-language query used to retrieve relevant chunks or documents.
+   */
+  query?: string | null;
+
+  /**
+   * Base64-encoded image to use as query for Morphik multimodal retrieval. Requires
+   * use_colpali=True. Mutually exclusive with 'query'.
+   */
+  query_image?: string | null;
 
   /**
    * When provided, uses Morphik's finetuned ColPali style embeddings (recommended to
@@ -202,11 +208,6 @@ export namespace ChunkCreateGroupedResponse {
 
 export interface ChunkCreateParams {
   /**
-   * Natural-language query used to retrieve relevant chunks or documents.
-   */
-  query: string;
-
-  /**
    * Optional end-user scope for the operation
    */
   end_user_id?: string | null;
@@ -215,7 +216,7 @@ export interface ChunkCreateParams {
    * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
    * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
    */
-  filters?: { [key: string]: unknown } | null;
+  filters?: unknown | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -258,6 +259,17 @@ export interface ChunkCreateParams {
    * (ColPali only)
    */
   padding?: number;
+
+  /**
+   * Natural-language query used to retrieve relevant chunks or documents.
+   */
+  query?: string | null;
+
+  /**
+   * Base64-encoded image to use as query for Morphik multimodal retrieval. Requires
+   * use_colpali=True. Mutually exclusive with 'query'.
+   */
+  query_image?: string | null;
 
   /**
    * When provided, uses Morphik's finetuned ColPali style embeddings (recommended to
@@ -273,11 +285,6 @@ export interface ChunkCreateParams {
 
 export interface ChunkCreateGroupedParams {
   /**
-   * Natural-language query used to retrieve relevant chunks or documents.
-   */
-  query: string;
-
-  /**
    * Optional end-user scope for the operation
    */
   end_user_id?: string | null;
@@ -286,7 +293,7 @@ export interface ChunkCreateGroupedParams {
    * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
    * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
    */
-  filters?: { [key: string]: unknown } | null;
+  filters?: unknown | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -329,6 +336,17 @@ export interface ChunkCreateGroupedParams {
    * (ColPali only)
    */
   padding?: number;
+
+  /**
+   * Natural-language query used to retrieve relevant chunks or documents.
+   */
+  query?: string | null;
+
+  /**
+   * Base64-encoded image to use as query for Morphik multimodal retrieval. Requires
+   * use_colpali=True. Mutually exclusive with 'query'.
+   */
+  query_image?: string | null;
 
   /**
    * When provided, uses Morphik's finetuned ColPali style embeddings (recommended to

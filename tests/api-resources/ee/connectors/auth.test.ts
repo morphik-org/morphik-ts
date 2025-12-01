@@ -11,7 +11,7 @@ describe('resource auth', () => {
   // Prism tests are disabled
   test.skip('finalizeManualAuth: only required params', async () => {
     const responsePromise = client.ee.connectors.auth.finalizeManualAuth('connector_type', {
-      credentials: { foo: 'bar' },
+      credentials: {},
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -25,7 +25,7 @@ describe('resource auth', () => {
   // Prism tests are disabled
   test.skip('finalizeManualAuth: required and optional params', async () => {
     const response = await client.ee.connectors.auth.finalizeManualAuth('connector_type', {
-      credentials: { foo: 'bar' },
+      credentials: {},
     });
   });
 
