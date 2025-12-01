@@ -25,7 +25,7 @@ describe('resource retrieve', () => {
     const response = await client.retrieve.createDocs({
       query: 'x',
       end_user_id: 'end_user_id',
-      filters: {},
+      filters: { foo: 'bar' },
       folder_name: 'string',
       graph_name: 'graph_name',
       hop_depth: 1,

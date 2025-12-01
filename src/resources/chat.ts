@@ -36,7 +36,7 @@ export class Chat extends APIResource {
   }
 }
 
-export type ChatListResponse = Array<unknown>;
+export type ChatListResponse = Array<{ [key: string]: unknown }>;
 
 export type ChatRetrieveHistoryResponse = Array<ChatRetrieveHistoryResponse.ChatRetrieveHistoryResponseItem>;
 
