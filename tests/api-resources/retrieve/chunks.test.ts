@@ -9,8 +9,8 @@ const client = new Morphik({
 
 describe('resource chunks', () => {
   // Prism tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.retrieve.chunks.create({ query: 'x' });
+  test.skip('create', async () => {
+    const responsePromise = client.retrieve.chunks.create({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,27 +21,8 @@ describe('resource chunks', () => {
   });
 
   // Prism tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.retrieve.chunks.create({
-      query: 'x',
-      end_user_id: 'end_user_id',
-      filters: { foo: 'bar' },
-      folder_name: 'string',
-      graph_name: 'graph_name',
-      hop_depth: 1,
-      include_paths: true,
-      k: 1,
-      min_score: 0,
-      output_format: 'base64',
-      padding: 0,
-      use_colpali: true,
-      use_reranking: true,
-    });
-  });
-
-  // Prism tests are disabled
-  test.skip('createGrouped: only required params', async () => {
-    const responsePromise = client.retrieve.chunks.createGrouped({ query: 'x' });
+  test.skip('createGrouped', async () => {
+    const responsePromise = client.retrieve.chunks.createGrouped({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -49,24 +30,5 @@ describe('resource chunks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('createGrouped: required and optional params', async () => {
-    const response = await client.retrieve.chunks.createGrouped({
-      query: 'x',
-      end_user_id: 'end_user_id',
-      filters: { foo: 'bar' },
-      folder_name: 'string',
-      graph_name: 'graph_name',
-      hop_depth: 1,
-      include_paths: true,
-      k: 1,
-      min_score: 0,
-      output_format: 'base64',
-      padding: 0,
-      use_colpali: true,
-      use_reranking: true,
-    });
   });
 });

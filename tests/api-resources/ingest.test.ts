@@ -104,7 +104,7 @@ describe('resource ingest', () => {
       end_user_id: 'end_user_id',
       filename: 'filename',
       folder_name: 'folder_name',
-      metadata: { foo: 'bar' },
+      metadata: {},
       metadata_types: { foo: 'string' },
       use_colpali: true,
     });

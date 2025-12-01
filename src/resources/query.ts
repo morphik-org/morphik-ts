@@ -33,7 +33,7 @@ export interface QueryGenerateCompletionResponse {
 
   finish_reason?: string | null;
 
-  metadata?: { [key: string]: unknown } | null;
+  metadata?: unknown | null;
 
   sources?: Array<QueryGenerateCompletionResponse.Source>;
 }
@@ -53,11 +53,6 @@ export namespace QueryGenerateCompletionResponse {
 
 export interface QueryGenerateCompletionParams {
   /**
-   * Natural-language query used to retrieve relevant chunks or documents.
-   */
-  query: string;
-
-  /**
    * Optional chat session ID for persisting conversation history
    */
   chat_id?: string | null;
@@ -71,7 +66,7 @@ export interface QueryGenerateCompletionParams {
    * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
    * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
    */
-  filters?: { [key: string]: unknown } | null;
+  filters?: unknown | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -108,7 +103,7 @@ export interface QueryGenerateCompletionParams {
   /**
    * LiteLLM-compatible model configuration (e.g., model name, API key, base URL)
    */
-  llm_config?: { [key: string]: unknown } | null;
+  llm_config?: unknown | null;
 
   /**
    * Maximum number of tokens allowed in the generated completion.
@@ -153,9 +148,20 @@ export interface QueryGenerateCompletionParams {
   prompt_overrides?: QueryGenerateCompletionParams.PromptOverrides | null;
 
   /**
+   * Natural-language query used to retrieve relevant chunks or documents.
+   */
+  query?: string | null;
+
+  /**
+   * Base64-encoded image to use as query for Morphik multimodal retrieval. Requires
+   * use_colpali=True. Mutually exclusive with 'query'.
+   */
+  query_image?: string | null;
+
+  /**
    * Schema for structured output, can be a Pydantic model or JSON schema dict
    */
-  schema?: unknown | { [key: string]: unknown } | null;
+  schema?: unknown | unknown | null;
 
   /**
    * Whether to stream the response back in chunks
