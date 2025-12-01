@@ -40,7 +40,7 @@ export namespace LogListResponse {
 
     error?: string | null;
 
-    metadata?: { [key: string]: unknown } | null;
+    metadata?: unknown | null;
   }
 }
 

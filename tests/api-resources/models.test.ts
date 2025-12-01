@@ -10,11 +10,7 @@ const client = new Morphik({
 describe('resource models', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.models.create({
-      config: { foo: 'bar' },
-      name: 'name',
-      provider: 'provider',
-    });
+    const responsePromise = client.models.create({ config: {}, name: 'name', provider: 'provider' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,11 +22,7 @@ describe('resource models', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.models.create({
-      config: { foo: 'bar' },
-      name: 'name',
-      provider: 'provider',
-    });
+    const response = await client.models.create({ config: {}, name: 'name', provider: 'provider' });
   });
 
   // Prism tests are disabled
