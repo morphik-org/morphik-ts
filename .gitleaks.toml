@@ -1,0 +1,7 @@
+title = "Morphik Gitleaks Config"
+
+[allowlist]
+  description = "Ignore Stainless openapi_spec_hash"
+  regexes = [
+    '''openapi_spec_hash:\s*["']?[A-Za-z0-9+/=:_-]+["']?'''
+  ]
