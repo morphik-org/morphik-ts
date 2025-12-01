@@ -85,7 +85,7 @@ export class GraphResource extends APIResource {
    * const graph = await client.graph.delete('name');
    * ```
    */
-  delete(name: string, options?: RequestOptions): APIPromise<unknown> {
+  delete(name: string, options?: RequestOptions): APIPromise<GraphDeleteResponse> {
     return this._client.delete(path`/graph/${name}`, options);
   }
 
@@ -106,7 +106,7 @@ export class GraphResource extends APIResource {
     name: string,
     query: GraphStatusParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<unknown> {
+  ): APIPromise<GraphStatusResponse> {
     return this._client.get(path`/graph/${name}/status`, { query, ...options });
   }
 
@@ -125,7 +125,7 @@ export class GraphResource extends APIResource {
     name: string,
     query: GraphVisualizationParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<unknown> {
+  ): APIPromise<GraphVisualizationResponse> {
     return this._client.get(path`/graph/${name}/visualization`, { query, ...options });
   }
 }
@@ -195,7 +195,7 @@ export namespace EntityExtractionPromptOverride {
     /**
      * Optional properties of the entity (e.g., {'role': 'CEO', 'age': 42})
      */
-    properties?: unknown | null;
+    properties?: { [key: string]: unknown } | null;
   }
 }
 
@@ -287,15 +287,15 @@ export interface Graph {
 
   entities?: Array<Graph.Entity>;
 
-  filters?: unknown | null;
+  filters?: { [key: string]: unknown } | null;
 
   folder_name?: string | null;
 
-  metadata?: unknown;
+  metadata?: { [key: string]: unknown };
 
   relationships?: Array<Graph.Relationship>;
 
-  system_metadata?: unknown;
+  system_metadata?: { [key: string]: unknown };
 
   updated_at?: string;
 }
@@ -315,7 +315,7 @@ export namespace Graph {
 
     document_ids?: Array<string>;
 
-    properties?: unknown;
+    properties?: { [key: string]: unknown };
   }
 
   /**
@@ -413,11 +413,11 @@ export interface GraphPromptOverrides {
 
 export type GraphListResponse = Array<Graph>;
 
-export type GraphDeleteResponse = unknown;
+export type GraphDeleteResponse = { [key: string]: unknown };
 
-export type GraphStatusResponse = unknown;
+export type GraphStatusResponse = { [key: string]: unknown };
 
-export type GraphVisualizationResponse = unknown;
+export type GraphVisualizationResponse = { [key: string]: unknown };
 
 export interface GraphCreateParams {
   /**
@@ -438,7 +438,7 @@ export interface GraphCreateParams {
   /**
    * Optional metadata filters to determine which documents to include
    */
-  filters?: unknown | null;
+  filters?: { [key: string]: unknown } | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -473,7 +473,7 @@ export interface GraphUpdateParams {
   /**
    * Optional additional metadata filters to determine which new documents to include
    */
-  additional_filters?: unknown | null;
+  additional_filters?: { [key: string]: unknown } | null;
 
   /**
    * Optional end-user scope for the operation

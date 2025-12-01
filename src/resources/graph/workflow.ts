@@ -23,12 +23,12 @@ export class Workflow extends APIResource {
     workflowID: string,
     query: WorkflowStatusParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<unknown> {
+  ): APIPromise<WorkflowStatusResponse> {
     return this._client.get(path`/graph/workflow/${workflowID}/status`, { query, ...options });
   }
 }
 
-export type WorkflowStatusResponse = unknown;
+export type WorkflowStatusResponse = { [key: string]: unknown };
 
 export interface WorkflowStatusParams {
   run_id?: string | null;

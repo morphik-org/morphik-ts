@@ -10,7 +10,7 @@ const client = new Morphik({
 describe('resource modelConfig', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.modelConfig.create({ config_data: {}, provider: 'provider' });
+    const responsePromise = client.modelConfig.create({ config_data: { foo: 'bar' }, provider: 'provider' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource modelConfig', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.modelConfig.create({ config_data: {}, provider: 'provider' });
+    const response = await client.modelConfig.create({ config_data: { foo: 'bar' }, provider: 'provider' });
   });
 
   // Prism tests are disabled
@@ -39,7 +39,7 @@ describe('resource modelConfig', () => {
 
   // Prism tests are disabled
   test.skip('update: only required params', async () => {
-    const responsePromise = client.modelConfig.update('config_id', { config_data: {} });
+    const responsePromise = client.modelConfig.update('config_id', { config_data: { foo: 'bar' } });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -51,7 +51,7 @@ describe('resource modelConfig', () => {
 
   // Prism tests are disabled
   test.skip('update: required and optional params', async () => {
-    const response = await client.modelConfig.update('config_id', { config_data: {} });
+    const response = await client.modelConfig.update('config_id', { config_data: { foo: 'bar' } });
   });
 
   // Prism tests are disabled

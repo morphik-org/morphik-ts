@@ -25,7 +25,7 @@ describe('resource search', () => {
     const response = await client.search.documents({
       query: 'x',
       end_user_id: 'end_user_id',
-      filters: {},
+      filters: { foo: 'bar' },
       folder_name: 'string',
       limit: 1,
     });
