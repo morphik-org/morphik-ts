@@ -66,7 +66,7 @@ export interface ChunkResult {
 
   document_id: string;
 
-  metadata: unknown;
+  metadata: { [key: string]: unknown };
 
   score: number;
 
@@ -93,7 +93,13 @@ export interface RetrieveRequest {
    * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
    * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
    */
-  filters?: unknown | null;
+  filters?: { [key: string]: unknown } | null;
+
+  /**
+   * Folder scope depth. 0 or None = exact folder only, -1 = include all descendants,
+   * n > 0 = include descendants up to n levels deeper.
+   */
+  folder_depth?: number | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -127,9 +133,9 @@ export interface RetrieveRequest {
   min_score?: number;
 
   /**
-   * How to return image chunks: base64 data URI (default) or a presigned URL
+   * Output format for image chunks in retrieval results.
    */
-  output_format?: 'base64' | 'url' | null;
+  output_format?: 'base64' | 'url' | 'text' | null;
 
   /**
    * Number of additional chunks/pages to retrieve before and after matched chunks
@@ -216,7 +222,13 @@ export interface ChunkCreateParams {
    * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
    * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
    */
-  filters?: unknown | null;
+  filters?: { [key: string]: unknown } | null;
+
+  /**
+   * Folder scope depth. 0 or None = exact folder only, -1 = include all descendants,
+   * n > 0 = include descendants up to n levels deeper.
+   */
+  folder_depth?: number | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -250,9 +262,9 @@ export interface ChunkCreateParams {
   min_score?: number;
 
   /**
-   * How to return image chunks: base64 data URI (default) or a presigned URL
+   * Output format for image chunks in retrieval results.
    */
-  output_format?: 'base64' | 'url' | null;
+  output_format?: 'base64' | 'url' | 'text' | null;
 
   /**
    * Number of additional chunks/pages to retrieve before and after matched chunks
@@ -293,7 +305,13 @@ export interface ChunkCreateGroupedParams {
    * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
    * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
    */
-  filters?: unknown | null;
+  filters?: { [key: string]: unknown } | null;
+
+  /**
+   * Folder scope depth. 0 or None = exact folder only, -1 = include all descendants,
+   * n > 0 = include descendants up to n levels deeper.
+   */
+  folder_depth?: number | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -327,9 +345,9 @@ export interface ChunkCreateGroupedParams {
   min_score?: number;
 
   /**
-   * How to return image chunks: base64 data URI (default) or a presigned URL
+   * Output format for image chunks in retrieval results.
    */
-  output_format?: 'base64' | 'url' | null;
+  output_format?: 'base64' | 'url' | 'text' | null;
 
   /**
    * Number of additional chunks/pages to retrieve before and after matched chunks

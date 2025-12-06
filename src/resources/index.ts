@@ -58,6 +58,7 @@ export {
   type FolderDetailsResponse,
   type FolderListSummariesResponse,
   type FolderCreateParams,
+  type FolderDeleteParams,
   type FolderDetailsParams,
 } from './folders/folders';
 export {

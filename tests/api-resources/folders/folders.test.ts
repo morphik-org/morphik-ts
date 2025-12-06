@@ -22,7 +22,12 @@ describe('resource folders', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.folders.create({ name: 'name', description: 'description' });
+    const response = await client.folders.create({
+      name: 'name',
+      description: 'description',
+      full_path: 'full_path',
+      parent_id: 'parent_id',
+    });
   });
 
   // Prism tests are disabled
@@ -59,6 +64,14 @@ describe('resource folders', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('delete: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.folders.delete('folder_id_or_name', { recursive: true }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Morphik.NotFoundError);
   });
 
   // Prism tests are disabled

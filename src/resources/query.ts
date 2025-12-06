@@ -33,7 +33,7 @@ export interface QueryGenerateCompletionResponse {
 
   finish_reason?: string | null;
 
-  metadata?: unknown | null;
+  metadata?: { [key: string]: unknown } | null;
 
   sources?: Array<QueryGenerateCompletionResponse.Source>;
 }
@@ -66,7 +66,13 @@ export interface QueryGenerateCompletionParams {
    * Metadata filters supporting logical operators ($and/$or/$not/$nor) and field
    * predicates ($eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$type/$regex/$contains).
    */
-  filters?: unknown | null;
+  filters?: { [key: string]: unknown } | null;
+
+  /**
+   * Folder scope depth. 0 or None = exact folder only, -1 = include all descendants,
+   * n > 0 = include descendants up to n levels deeper.
+   */
+  folder_depth?: number | null;
 
   /**
    * Optional folder scope for the operation. Accepts a single folder name or a list
@@ -103,7 +109,7 @@ export interface QueryGenerateCompletionParams {
   /**
    * LiteLLM-compatible model configuration (e.g., model name, API key, base URL)
    */
-  llm_config?: unknown | null;
+  llm_config?: { [key: string]: unknown } | null;
 
   /**
    * Maximum number of tokens allowed in the generated completion.
@@ -116,9 +122,9 @@ export interface QueryGenerateCompletionParams {
   min_score?: number;
 
   /**
-   * How to return image chunks: base64 data URI (default) or a presigned URL
+   * Output format for image chunks in retrieval results.
    */
-  output_format?: 'base64' | 'url' | null;
+  output_format?: 'base64' | 'url' | 'text' | null;
 
   /**
    * Number of additional chunks/pages to retrieve before and after matched chunks
@@ -161,7 +167,7 @@ export interface QueryGenerateCompletionParams {
   /**
    * Schema for structured output, can be a Pydantic model or JSON schema dict
    */
-  schema?: unknown | unknown | null;
+  schema?: unknown | { [key: string]: unknown } | null;
 
   /**
    * Whether to stream the response back in chunks
