@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.4.0 (2025-12-06)
+
+Full Changelog: [v1.3.0...v1.4.0](https://github.com/morphik-org/morphik-ts/compare/v1.3.0...v1.4.0)
+
+### Features
+
+* **api:** manual updates ([e5a1c10](https://github.com/morphik-org/morphik-ts/commit/e5a1c10c0071e43ba15873ac5e7f82502cfae6f5))
+
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([e89e314](https://github.com/morphik-org/morphik-ts/commit/e89e314e2e6151f3e62206f5a57eaa11320c8033))
+* **mcp:** return correct lines on typescript errors ([cacb409](https://github.com/morphik-org/morphik-ts/commit/cacb409f8ee6452f4bedddff8c70d7d6d924dabf))
+
+
+### Chores
+
+* **client:** fix logger property type ([64a321b](https://github.com/morphik-org/morphik-ts/commit/64a321bed36d9409f484c872849e7c7ec85200ca))
+* **internal:** codegen related update ([28298f8](https://github.com/morphik-org/morphik-ts/commit/28298f8c454691477acc4a465f897ab8dfb06f1d))
+* **internal:** codegen related update ([03fffcd](https://github.com/morphik-org/morphik-ts/commit/03fffcdf20c9468117cda566da2f3b9e73749b8c))
+* **internal:** upgrade eslint ([a47b838](https://github.com/morphik-org/morphik-ts/commit/a47b83845baf0e1d83594ea897afc9a3363c5b32))
+
 ## 1.3.0 (2025-12-01)
 
 Full Changelog: [v1.2.0...v1.3.0](https://github.com/morphik-org/morphik-ts/compare/v1.2.0...v1.3.0)

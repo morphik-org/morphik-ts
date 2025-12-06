@@ -92,6 +92,7 @@ import { Ee } from './resources/ee/ee';
 import {
   Folder,
   FolderCreateParams,
+  FolderDeleteParams,
   FolderDeleteResponse,
   FolderDetailsParams,
   FolderDetailsResponse,
@@ -226,7 +227,7 @@ export class Morphik {
   baseURL: string;
   maxRetries: number;
   timeout: number;
-  logger: Logger | undefined;
+  logger: Logger;
   logLevel: LogLevel | undefined;
   fetchOptions: MergedRequestInit | undefined;
 
@@ -894,6 +895,7 @@ export declare namespace Morphik {
     type FolderDetailsResponse as FolderDetailsResponse,
     type FolderListSummariesResponse as FolderListSummariesResponse,
     type FolderCreateParams as FolderCreateParams,
+    type FolderDeleteParams as FolderDeleteParams,
     type FolderDetailsParams as FolderDetailsParams,
   };
 
