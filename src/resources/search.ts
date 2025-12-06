@@ -36,7 +36,13 @@ export interface SearchDocumentsParams {
   /**
    * Optional metadata filters for documents
    */
-  filters?: unknown | null;
+  filters?: { [key: string]: unknown } | null;
+
+  /**
+   * Folder scope depth: 0/None exact, -1 all descendants, n>0 include descendants up
+   * to n levels.
+   */
+  folder_depth?: number | null;
 
   /**
    * Optional folder scope for the search. Accepts a single folder name or a list of

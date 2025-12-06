@@ -11,7 +11,7 @@ describe('resource customModels', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.modelConfig.customModels.create({
-      config: {},
+      config: { foo: 'bar' },
       model_name: 'model_name',
       name: 'name',
       provider: 'provider',
@@ -28,7 +28,7 @@ describe('resource customModels', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.modelConfig.customModels.create({
-      config: {},
+      config: { foo: 'bar' },
       model_name: 'model_name',
       name: 'name',
       provider: 'provider',

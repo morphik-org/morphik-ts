@@ -46,9 +46,9 @@ export interface BatchRetrieveChunksParams {
   folder_name?: string | Array<string> | null;
 
   /**
-   * How to return image chunks: base64 data URI (default) or a presigned URL
+   * Output format for image chunks in retrieval results.
    */
-  output_format?: 'base64' | 'url' | null;
+  output_format?: 'base64' | 'url' | 'text' | null;
 
   /**
    * List of chunk sources to retrieve

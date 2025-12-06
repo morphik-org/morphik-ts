@@ -75,7 +75,7 @@ export class Ingest extends APIResource {
 export interface Document {
   content_type: string;
 
-  additional_metadata?: unknown;
+  additional_metadata?: { [key: string]: unknown };
 
   app_id?: string | null;
 
@@ -89,15 +89,17 @@ export interface Document {
 
   folder_name?: string | null;
 
-  metadata?: unknown;
+  folder_path?: string | null;
+
+  metadata?: { [key: string]: unknown };
 
   metadata_types?: { [key: string]: string };
 
   storage_files?: Array<Document.StorageFile>;
 
-  storage_info?: unknown;
+  storage_info?: { [key: string]: unknown };
 
-  system_metadata?: unknown;
+  system_metadata?: { [key: string]: unknown };
 }
 
 export namespace Document {
@@ -146,7 +148,7 @@ export interface TextRequest {
   /**
    * User-defined metadata stored with the document (JSON-serializable).
    */
-  metadata?: unknown;
+  metadata?: { [key: string]: unknown };
 
   /**
    * Optional per-field type hints: 'string', 'number', 'decimal', 'datetime',
@@ -180,12 +182,12 @@ export interface IngestDocumentQueryResponse {
   /**
    * Metadata that would be used if ingestion is performed
    */
-  combined_metadata?: unknown;
+  combined_metadata?: { [key: string]: unknown };
 
   /**
    * Structured output coerced to metadata when possible
    */
-  extracted_metadata?: unknown | null;
+  extracted_metadata?: { [key: string]: unknown } | null;
 
   /**
    * Represents a document stored in the database documents collection
@@ -200,12 +202,12 @@ export interface IngestDocumentQueryResponse {
   /**
    * Normalized ingestion options applied to this request
    */
-  ingestion_options?: unknown;
+  ingestion_options?: { [key: string]: unknown };
 
   /**
    * Original metadata supplied alongside the request
    */
-  input_metadata?: unknown;
+  input_metadata?: { [key: string]: unknown };
 
   /**
    * Raw structured output returned from Morphik On-the-Fly (may be list/dict)
@@ -271,7 +273,7 @@ export interface IngestDocumentQueryParams {
 
   ingestion_options?: string;
 
-  schema?: string | null;
+  response_schema?: string | null;
 }
 
 export interface IngestIngestFileParams {
@@ -312,7 +314,7 @@ export interface IngestIngestTextParams {
   /**
    * User-defined metadata stored with the document (JSON-serializable).
    */
-  metadata?: unknown;
+  metadata?: { [key: string]: unknown };
 
   /**
    * Optional per-field type hints: 'string', 'number', 'decimal', 'datetime',

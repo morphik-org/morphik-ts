@@ -55,7 +55,7 @@ describe('resource ingest', () => {
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       prompt: 'prompt',
       ingestion_options: 'ingestion_options',
-      schema: 'schema',
+      response_schema: 'response_schema',
     });
   });
 
@@ -104,7 +104,7 @@ describe('resource ingest', () => {
       end_user_id: 'end_user_id',
       filename: 'filename',
       folder_name: 'folder_name',
-      metadata: {},
+      metadata: { foo: 'bar' },
       metadata_types: { foo: 'string' },
       use_colpali: true,
     });

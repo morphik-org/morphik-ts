@@ -35,8 +35,13 @@ export class Folders extends APIResource {
   /**
    * Delete a folder and all associated documents.
    */
-  delete(folderIDOrName: string, options?: RequestOptions): APIPromise<FolderDeleteResponse> {
-    return this._client.delete(path`/folders/${folderIDOrName}`, options);
+  delete(
+    folderIDOrName: string,
+    params: FolderDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<FolderDeleteResponse> {
+    const { recursive } = params ?? {};
+    return this._client.delete(path`/folders/${folderIDOrName}`, { query: { recursive }, ...options });
   }
 
   /**
@@ -64,13 +69,21 @@ export interface Folder {
 
   app_id?: string | null;
 
+  child_count?: number | null;
+
+  depth?: number | null;
+
   description?: string | null;
 
   document_ids?: Array<string> | null;
 
   end_user_id?: string | null;
 
-  system_metadata?: unknown;
+  full_path?: string | null;
+
+  parent_id?: string | null;
+
+  system_metadata?: { [key: string]: unknown };
 }
 
 export type FolderListResponse = Array<Folder>;
@@ -139,9 +152,13 @@ export namespace FolderListSummariesResponse {
 
     name: string;
 
+    depth?: number | null;
+
     description?: string | null;
 
     doc_count?: number;
+
+    full_path?: string | null;
 
     updated_at?: string | null;
   }
@@ -151,6 +168,14 @@ export interface FolderCreateParams {
   name: string;
 
   description?: string | null;
+
+  full_path?: string | null;
+
+  parent_id?: string | null;
+}
+
+export interface FolderDeleteParams {
+  recursive?: boolean;
 }
 
 export interface FolderDetailsParams {
@@ -162,7 +187,7 @@ export interface FolderDetailsParams {
   /**
    * Optional metadata filters applied when computing folder document statistics
    */
-  document_filters?: unknown | null;
+  document_filters?: { [key: string]: unknown } | null;
 
   /**
    * Maximum number of documents to return per folder when include_documents is true
@@ -216,6 +241,7 @@ export declare namespace Folders {
     type FolderDetailsResponse as FolderDetailsResponse,
     type FolderListSummariesResponse as FolderListSummariesResponse,
     type FolderCreateParams as FolderCreateParams,
+    type FolderDeleteParams as FolderDeleteParams,
     type FolderDetailsParams as FolderDetailsParams,
   };
 

@@ -49,8 +49,12 @@ export class Documents extends APIResource {
    * Supports typed metadata (number, decimal, datetime, date) with safe casting.
    */
   list(params: DocumentListParams, options?: RequestOptions): APIPromise<DocumentListResponse> {
-    const { end_user_id, folder_name, ...body } = params;
-    return this._client.post('/documents', { query: { end_user_id, folder_name }, body, ...options });
+    const { end_user_id, folder_depth, folder_name, ...body } = params;
+    return this._client.post('/documents', {
+      query: { end_user_id, folder_depth, folder_name },
+      body,
+      ...options,
+    });
   }
 
   /**
@@ -99,7 +103,7 @@ export class Documents extends APIResource {
   /**
    * Get the processing status of a document.
    */
-  getStatus(documentID: string, options?: RequestOptions): APIPromise<unknown> {
+  getStatus(documentID: string, options?: RequestOptions): APIPromise<DocumentGetStatusResponse> {
     return this._client.get(path`/documents/${documentID}/status`, options);
   }
 
@@ -124,9 +128,9 @@ export class Documents extends APIResource {
    * Use `folder_name` and `end_user_id` query parameters to scope system metadata.
    */
   listDocs(params: DocumentListDocsParams, options?: RequestOptions): APIPromise<DocumentListDocsResponse> {
-    const { end_user_id, folder_name, ...body } = params;
+    const { end_user_id, folder_depth, folder_name, ...body } = params;
     return this._client.post('/documents/list_docs', {
-      query: { end_user_id, folder_name },
+      query: { end_user_id, folder_depth, folder_name },
       body,
       ...options,
     });
@@ -215,7 +219,7 @@ export interface DocumentGetDownloadURLResponse {
   expires_in: number;
 }
 
-export type DocumentGetStatusResponse = unknown;
+export type DocumentGetStatusResponse = { [key: string]: unknown };
 
 /**
  * Flexible response for listing documents with aggregates.
@@ -273,6 +277,12 @@ export interface DocumentListParams {
   end_user_id?: string | null;
 
   /**
+   * Query param: Folder scope depth: 0/None = exact, -1 = all descendants, n > 0 =
+   * include descendants up to n levels.
+   */
+  folder_depth?: number | null;
+
+  /**
    * Query param:
    */
   folder_name?: string | Array<string> | null;
@@ -283,7 +293,7 @@ export interface DocumentListParams {
    * Implicit equality uses JSONB containment; explicit operators support typed
    * comparisons.
    */
-  document_filters?: unknown | null;
+  document_filters?: { [key: string]: unknown } | null;
 
   /**
    * Body param: Maximum number of documents to return.
@@ -298,6 +308,12 @@ export interface DocumentListParams {
 
 export interface DocumentGetByFilenameParams {
   end_user_id?: string | null;
+
+  /**
+   * Folder scope depth: 0/None = exact, -1 = all descendants, n > 0 = include
+   * descendants up to n levels.
+   */
+  folder_depth?: number | null;
 
   folder_name?: string | Array<string> | null;
 }
@@ -316,6 +332,12 @@ export interface DocumentListDocsParams {
   end_user_id?: string | null;
 
   /**
+   * Query param: Folder scope depth: 0/None = exact, -1 = all descendants, n > 0 =
+   * include descendants up to n levels.
+   */
+  folder_depth?: number | null;
+
+  /**
    * Query param:
    */
   folder_name?: string | Array<string> | null;
@@ -332,7 +354,7 @@ export interface DocumentListDocsParams {
    * Implicit equality uses JSONB containment; explicit operators support typed
    * comparisons.
    */
-  document_filters?: unknown | null;
+  document_filters?: { [key: string]: unknown } | null;
 
   /**
    * Body param: Optional list of fields to project for each document (dot notation
@@ -414,7 +436,7 @@ export interface DocumentUpdateMetadataParams {
   /**
    * Metadata fields to merge into the document.
    */
-  metadata?: unknown;
+  metadata?: { [key: string]: unknown };
 
   /**
    * Optional per-field type hints: 'string', 'number', 'decimal', 'datetime',
@@ -453,7 +475,7 @@ export interface DocumentUpdateTextParams {
   /**
    * Body param: User-defined metadata stored with the document (JSON-serializable).
    */
-  metadata?: unknown;
+  metadata?: { [key: string]: unknown };
 
   /**
    * Body param: Optional per-field type hints: 'string', 'number', 'decimal',
