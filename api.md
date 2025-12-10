@@ -51,6 +51,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/folders/folders.ts">Folder</a></code>
+- <code><a href="./src/resources/folders/folders.ts">FolderTreeNode</a></code>
 - <code><a href="./src/resources/folders/folders.ts">FolderListResponse</a></code>
 - <code><a href="./src/resources/folders/folders.ts">FolderDeleteResponse</a></code>
 - <code><a href="./src/resources/folders/folders.ts">FolderDetailsResponse</a></code>
@@ -64,6 +65,7 @@ Methods:
 - <code title="delete /folders/{folder_id_or_name}">client.folders.<a href="./src/resources/folders/folders.ts">delete</a>(folderIDOrName, { ...params }) -> FolderDeleteResponse</code>
 - <code title="post /folders/details">client.folders.<a href="./src/resources/folders/folders.ts">details</a>({ ...params }) -> FolderDetailsResponse</code>
 - <code title="get /folders/summary">client.folders.<a href="./src/resources/folders/folders.ts">listSummaries</a>() -> FolderListSummariesResponse</code>
+- <code title="post /folders/tree">client.folders.<a href="./src/resources/folders/folders.ts">tree</a>({ ...params }) -> FolderTreeNode</code>
 
 ## Documents
 
