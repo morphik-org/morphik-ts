@@ -98,6 +98,8 @@ import {
   FolderDetailsResponse,
   FolderListResponse,
   FolderListSummariesResponse,
+  FolderTreeNode,
+  FolderTreeParams,
   Folders,
 } from './resources/folders/folders';
 import {
@@ -890,6 +892,7 @@ export declare namespace Morphik {
   export {
     Folders as Folders,
     type Folder as Folder,
+    type FolderTreeNode as FolderTreeNode,
     type FolderListResponse as FolderListResponse,
     type FolderDeleteResponse as FolderDeleteResponse,
     type FolderDetailsResponse as FolderDetailsResponse,
@@ -897,6 +900,7 @@ export declare namespace Morphik {
     type FolderCreateParams as FolderCreateParams,
     type FolderDeleteParams as FolderDeleteParams,
     type FolderDetailsParams as FolderDetailsParams,
+    type FolderTreeParams as FolderTreeParams,
   };
 
   export {
