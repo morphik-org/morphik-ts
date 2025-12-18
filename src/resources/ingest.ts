@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as DocumentsAPI from './documents';
 import { APIPromise } from '../core/api-promise';
 import { type Uploadable } from '../core/uploads';
 import { RequestOptions } from '../internal/request-options';
@@ -50,14 +51,14 @@ export class Ingest extends APIResource {
    * `status='processing'` and a background worker picks up the heavy parsing /
    * chunking work.
    */
-  ingestFile(body: IngestIngestFileParams, options?: RequestOptions): APIPromise<Document> {
+  ingestFile(body: IngestIngestFileParams, options?: RequestOptions): APIPromise<DocumentsAPI.Document> {
     return this._client.post('/ingest/file', multipartFormRequestOptions({ body, ...options }, this._client));
   }
 
   /**
    * Ingest a **text** document.
    */
-  ingestText(body: IngestIngestTextParams, options?: RequestOptions): APIPromise<Document> {
+  ingestText(body: IngestIngestTextParams, options?: RequestOptions): APIPromise<DocumentsAPI.Document> {
     return this._client.post('/ingest/text', { body, ...options });
   }
 
@@ -159,7 +160,7 @@ export interface TextRequest {
  * Response model for batch ingestion
  */
 export interface IngestBatchIngestFilesResponse {
-  documents: Array<Document>;
+  documents: Array<DocumentsAPI.Document>;
 
   errors: Array<{ [key: string]: string }>;
 }
@@ -181,7 +182,7 @@ export interface IngestDocumentQueryResponse {
   /**
    * Represents a document stored in the database documents collection
    */
-  ingestion_document?: Document | null;
+  ingestion_document?: DocumentsAPI.Document | null;
 
   /**
    * True when the document was queued for ingestion after extraction

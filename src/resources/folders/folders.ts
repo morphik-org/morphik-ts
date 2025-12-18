@@ -1,15 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as FoldersAPI from './folders';
-import * as DocumentsAPI from './documents';
+import * as DocumentsAPI from '../documents';
+import * as FoldersDocumentsAPI from './documents';
 import { DocumentAddParams, DocumentAddResponse, DocumentRemoveParams, Documents } from './documents';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Folders extends APIResource {
-  documents: DocumentsAPI.Documents = new DocumentsAPI.Documents(this._client);
+  documents: FoldersDocumentsAPI.Documents = new FoldersDocumentsAPI.Documents(this._client);
 
   /**
    * Create a new folder.
@@ -52,10 +52,28 @@ export class Folders extends APIResource {
   }
 
   /**
+   * Retrieve the latest summary for a folder.
+   */
+  getSummary(folderIDOrName: string, options?: RequestOptions): APIPromise<DocumentsAPI.SummaryResponse> {
+    return this._client.get(path`/folders/${folderIDOrName}/summary`, options);
+  }
+
+  /**
    * Return compact folder list (id, name, doc_count, updated_at).
    */
   listSummaries(options?: RequestOptions): APIPromise<FolderListSummariesResponse> {
     return this._client.get('/folders/summary', options);
+  }
+
+  /**
+   * Create or update a folder summary with optional versioning.
+   */
+  upsertSummary(
+    folderIDOrName: string,
+    body: FolderUpsertSummaryParams,
+    options?: RequestOptions,
+  ): APIPromise<DocumentsAPI.SummaryResponse> {
+    return this._client.put(path`/folders/${folderIDOrName}/summary`, { body, ...options });
   }
 }
 
@@ -94,6 +112,67 @@ export interface Folder {
   system_metadata?: { [key: string]: unknown };
 }
 
+/**
+ * Folder details with optional document summary.
+ */
+export interface FolderDetails {
+  /**
+   * Represents a folder that contains documents
+   */
+  folder: Folder;
+
+  /**
+   * Document summary for a folder.
+   */
+  document_info?: FolderDetails.DocumentInfo | null;
+}
+
+export namespace FolderDetails {
+  /**
+   * Document summary for a folder.
+   */
+  export interface DocumentInfo {
+    document_count?: number | null;
+
+    documents?: Array<unknown>;
+
+    has_more?: boolean;
+
+    limit?: number;
+
+    next_skip?: number | null;
+
+    returned_count?: number;
+
+    skip?: number;
+
+    status_counts?: { [key: string]: number } | null;
+  }
+}
+
+/**
+ * Response wrapping folder detail entries.
+ */
+export interface FolderDetailsResponse {
+  folders: Array<FolderDetails>;
+}
+
+export interface FolderSummary {
+  id: string;
+
+  name: string;
+
+  depth?: number | null;
+
+  description?: string | null;
+
+  doc_count?: number;
+
+  full_path?: string | null;
+
+  updated_at?: string | null;
+}
+
 export type FolderListResponse = Array<Folder>;
 
 /**
@@ -105,72 +184,7 @@ export interface FolderDeleteResponse {
   status: string;
 }
 
-/**
- * Response wrapping folder detail entries.
- */
-export interface FolderDetailsResponse {
-  folders: Array<FolderDetailsResponse.Folder>;
-}
-
-export namespace FolderDetailsResponse {
-  /**
-   * Folder details with optional document summary.
-   */
-  export interface Folder {
-    /**
-     * Represents a folder that contains documents
-     */
-    folder: FoldersAPI.Folder;
-
-    /**
-     * Document summary for a folder.
-     */
-    document_info?: Folder.DocumentInfo | null;
-  }
-
-  export namespace Folder {
-    /**
-     * Document summary for a folder.
-     */
-    export interface DocumentInfo {
-      document_count?: number | null;
-
-      documents?: Array<unknown>;
-
-      has_more?: boolean;
-
-      limit?: number;
-
-      next_skip?: number | null;
-
-      returned_count?: number;
-
-      skip?: number;
-
-      status_counts?: { [key: string]: number } | null;
-    }
-  }
-}
-
-export type FolderListSummariesResponse = Array<FolderListSummariesResponse.FolderListSummariesResponseItem>;
-
-export namespace FolderListSummariesResponse {
-  export interface FolderListSummariesResponseItem {
-    id: string;
-
-    name: string;
-
-    depth?: number | null;
-
-    description?: string | null;
-
-    doc_count?: number;
-
-    full_path?: string | null;
-
-    updated_at?: string | null;
-  }
-}
+export type FolderListSummariesResponse = Array<FolderSummary>;
 
 export interface FolderCreateParams {
   name: string;
@@ -239,18 +253,39 @@ export interface FolderDetailsParams {
   sort_direction?: 'asc' | 'desc';
 }
 
+export interface FolderUpsertSummaryParams {
+  /**
+   * Summary content to persist (markdown/text)
+   */
+  content: string;
+
+  /**
+   * Allow overwriting the latest summary when versioning is disabled
+   */
+  overwrite_latest?: boolean;
+
+  /**
+   * When true, automatically increments the summary version instead of overwriting
+   * the latest version
+   */
+  versioning?: boolean;
+}
+
 Folders.Documents = Documents;
 
 export declare namespace Folders {
   export {
     type Folder as Folder,
+    type FolderDetails as FolderDetails,
+    type FolderDetailsResponse as FolderDetailsResponse,
+    type FolderSummary as FolderSummary,
     type FolderListResponse as FolderListResponse,
     type FolderDeleteResponse as FolderDeleteResponse,
-    type FolderDetailsResponse as FolderDetailsResponse,
     type FolderListSummariesResponse as FolderListSummariesResponse,
     type FolderCreateParams as FolderCreateParams,
     type FolderDeleteParams as FolderDeleteParams,
     type FolderDetailsParams as FolderDetailsParams,
+    type FolderUpsertSummaryParams as FolderUpsertSummaryParams,
   };
 
   export {
