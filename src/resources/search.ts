@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as IngestAPI from './ingest';
+import * as DocumentsAPI from './documents';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
@@ -20,7 +20,7 @@ export class Search extends APIResource {
   }
 }
 
-export type SearchDocumentsResponse = Array<IngestAPI.Document>;
+export type SearchDocumentsResponse = Array<DocumentsAPI.Document>;
 
 export interface SearchDocumentsParams {
   /**

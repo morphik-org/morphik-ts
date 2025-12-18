@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as IngestAPI from './ingest';
+import * as DocumentsAPI from './documents';
 import * as ChunksAPI from './retrieve/chunks';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
@@ -31,7 +31,7 @@ export class Batch extends APIResource {
 
 export type BatchRetrieveChunksResponse = Array<ChunksAPI.ChunkResult>;
 
-export type BatchRetrieveDocumentsResponse = Array<IngestAPI.Document>;
+export type BatchRetrieveDocumentsResponse = Array<DocumentsAPI.Document>;
 
 export interface BatchRetrieveChunksParams {
   /**
