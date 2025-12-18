@@ -71,47 +71,6 @@ export class Ingest extends APIResource {
 }
 
 /**
- * Represents a document stored in the database documents collection
- */
-export interface Document {
-  content_type: string;
-
-  additional_metadata?: { [key: string]: unknown };
-
-  app_id?: string | null;
-
-  chunk_ids?: Array<string>;
-
-  end_user_id?: string | null;
-
-  external_id?: string;
-
-  filename?: string | null;
-
-  folder_id?: string | null;
-
-  folder_name?: string | null;
-
-  folder_path?: string | null;
-
-  metadata?: { [key: string]: unknown };
-
-  metadata_types?: { [key: string]: string };
-
-  storage_info?: { [key: string]: unknown };
-
-  summary_bucket?: string | null;
-
-  summary_storage_key?: string | null;
-
-  summary_updated_at?: string | null;
-
-  summary_version?: number | null;
-
-  system_metadata?: { [key: string]: unknown };
-}
-
-/**
  * Request model for ingesting text content
  */
 export interface TextRequest {
@@ -401,7 +360,6 @@ export namespace IngestRequeueParams {
 
 export declare namespace Ingest {
   export {
-    type Document as Document,
     type TextRequest as TextRequest,
     type IngestBatchIngestFilesResponse as IngestBatchIngestFilesResponse,
     type IngestDocumentQueryResponse as IngestDocumentQueryResponse,

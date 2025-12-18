@@ -32,7 +32,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/ingest.ts">Document</a></code>
 - <code><a href="./src/resources/ingest.ts">TextRequest</a></code>
 - <code><a href="./src/resources/ingest.ts">IngestBatchIngestFilesResponse</a></code>
 - <code><a href="./src/resources/ingest.ts">IngestDocumentQueryResponse</a></code>
