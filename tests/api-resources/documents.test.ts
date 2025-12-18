@@ -113,6 +113,18 @@ describe('resource documents', () => {
   });
 
   // Prism tests are disabled
+  test.skip('getSummary', async () => {
+    const responsePromise = client.documents.getSummary('document_id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('listDocs', async () => {
     const responsePromise = client.documents.listDocs({});
     const rawResponse = await responsePromise.asResponse();
@@ -165,7 +177,6 @@ describe('resource documents', () => {
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       metadata: 'metadata',
       metadata_types: 'metadata_types',
-      update_strategy: 'update_strategy',
       use_colpali: true,
     });
   });
@@ -198,13 +209,33 @@ describe('resource documents', () => {
   test.skip('updateText: required and optional params', async () => {
     const response = await client.documents.updateText('document_id', {
       content: 'content',
-      update_strategy: 'update_strategy',
       end_user_id: 'end_user_id',
       filename: 'filename',
       folder_name: 'folder_name',
       metadata: { foo: 'bar' },
       metadata_types: { foo: 'string' },
       use_colpali: true,
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('upsertSummary: only required params', async () => {
+    const responsePromise = client.documents.upsertSummary('document_id', { content: 'content' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('upsertSummary: required and optional params', async () => {
+    const response = await client.documents.upsertSummary('document_id', {
+      content: 'content',
+      overwrite_latest: true,
+      versioning: true,
     });
   });
 });

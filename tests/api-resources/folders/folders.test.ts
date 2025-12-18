@@ -87,6 +87,18 @@ describe('resource folders', () => {
   });
 
   // Prism tests are disabled
+  test.skip('getSummary', async () => {
+    const responsePromise = client.folders.getSummary('folder_id_or_name');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('listSummaries', async () => {
     const responsePromise = client.folders.listSummaries();
     const rawResponse = await responsePromise.asResponse();
@@ -99,8 +111,8 @@ describe('resource folders', () => {
   });
 
   // Prism tests are disabled
-  test.skip('tree', async () => {
-    const responsePromise = client.folders.tree({});
+  test.skip('upsertSummary: only required params', async () => {
+    const responsePromise = client.folders.upsertSummary('folder_id_or_name', { content: 'content' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -108,5 +120,14 @@ describe('resource folders', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('upsertSummary: required and optional params', async () => {
+    const response = await client.folders.upsertSummary('folder_id_or_name', {
+      content: 'content',
+      overwrite_latest: true,
+      versioning: true,
+    });
   });
 });

@@ -9,13 +9,14 @@ export {
 export {
   Folders,
   type Folder,
-  type FolderTreeNode,
+  type FolderDetails,
+  type FolderDetailsResponse,
+  type FolderSummary,
   type FolderListResponse,
   type FolderDeleteResponse,
-  type FolderDetailsResponse,
   type FolderListSummariesResponse,
   type FolderCreateParams,
   type FolderDeleteParams,
   type FolderDetailsParams,
-  type FolderTreeParams,
+  type FolderUpsertSummaryParams,
 } from './folders';

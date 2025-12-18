@@ -1,15 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as FoldersAPI from './folders';
-import * as DocumentsAPI from './documents';
+import * as DocumentsAPI from '../documents';
+import * as FoldersDocumentsAPI from './documents';
 import { DocumentAddParams, DocumentAddResponse, DocumentRemoveParams, Documents } from './documents';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
 export class Folders extends APIResource {
-  documents: DocumentsAPI.Documents = new DocumentsAPI.Documents(this._client);
+  documents: FoldersDocumentsAPI.Documents = new FoldersDocumentsAPI.Documents(this._client);
 
   /**
    * Create a new folder.
@@ -52,6 +52,13 @@ export class Folders extends APIResource {
   }
 
   /**
+   * Retrieve the latest summary for a folder.
+   */
+  getSummary(folderIDOrName: string, options?: RequestOptions): APIPromise<DocumentsAPI.SummaryResponse> {
+    return this._client.get(path`/folders/${folderIDOrName}/summary`, options);
+  }
+
+  /**
    * Return compact folder list (id, name, doc_count, updated_at).
    */
   listSummaries(options?: RequestOptions): APIPromise<FolderListSummariesResponse> {
@@ -59,12 +66,14 @@ export class Folders extends APIResource {
   }
 
   /**
-   * Return a hierarchical folder tree (with documents) rooted at `folder_path`.
-   *
-   * When `folder_path` is null or `/`, the entire accessible hierarchy is returned.
+   * Create or update a folder summary with optional versioning.
    */
-  tree(body: FolderTreeParams, options?: RequestOptions): APIPromise<FolderTreeNode> {
-    return this._client.post('/folders/tree', { body, ...options });
+  upsertSummary(
+    folderIDOrName: string,
+    body: FolderUpsertSummaryParams,
+    options?: RequestOptions,
+  ): APIPromise<DocumentsAPI.SummaryResponse> {
+    return this._client.put(path`/folders/${folderIDOrName}/summary`, { body, ...options });
   }
 }
 
@@ -92,26 +101,76 @@ export interface Folder {
 
   parent_id?: string | null;
 
+  summary_bucket?: string | null;
+
+  summary_storage_key?: string | null;
+
+  summary_updated_at?: string | null;
+
+  summary_version?: number | null;
+
   system_metadata?: { [key: string]: unknown };
 }
 
 /**
- * Nested folder tree entry including contained documents.
+ * Folder details with optional document summary.
  */
-export interface FolderTreeNode {
-  id?: string | null;
+export interface FolderDetails {
+  /**
+   * Represents a folder that contains documents
+   */
+  folder: Folder;
 
-  children?: Array<FolderTreeNode>;
+  /**
+   * Document summary for a folder.
+   */
+  document_info?: FolderDetails.DocumentInfo | null;
+}
+
+export namespace FolderDetails {
+  /**
+   * Document summary for a folder.
+   */
+  export interface DocumentInfo {
+    document_count?: number | null;
+
+    documents?: Array<unknown>;
+
+    has_more?: boolean;
+
+    limit?: number;
+
+    next_skip?: number | null;
+
+    returned_count?: number;
+
+    skip?: number;
+
+    status_counts?: { [key: string]: number } | null;
+  }
+}
+
+/**
+ * Response wrapping folder detail entries.
+ */
+export interface FolderDetailsResponse {
+  folders: Array<FolderDetails>;
+}
+
+export interface FolderSummary {
+  id: string;
+
+  name: string;
 
   depth?: number | null;
 
   description?: string | null;
 
-  documents?: Array<{ [key: string]: unknown }>;
+  doc_count?: number;
 
   full_path?: string | null;
 
-  name?: string | null;
+  updated_at?: string | null;
 }
 
 export type FolderListResponse = Array<Folder>;
@@ -125,72 +184,7 @@ export interface FolderDeleteResponse {
   status: string;
 }
 
-/**
- * Response wrapping folder detail entries.
- */
-export interface FolderDetailsResponse {
-  folders: Array<FolderDetailsResponse.Folder>;
-}
-
-export namespace FolderDetailsResponse {
-  /**
-   * Folder details with optional document summary.
-   */
-  export interface Folder {
-    /**
-     * Represents a folder that contains documents
-     */
-    folder: FoldersAPI.Folder;
-
-    /**
-     * Document summary for a folder.
-     */
-    document_info?: Folder.DocumentInfo | null;
-  }
-
-  export namespace Folder {
-    /**
-     * Document summary for a folder.
-     */
-    export interface DocumentInfo {
-      document_count?: number | null;
-
-      documents?: Array<unknown>;
-
-      has_more?: boolean;
-
-      limit?: number;
-
-      next_skip?: number | null;
-
-      returned_count?: number;
-
-      skip?: number;
-
-      status_counts?: { [key: string]: number } | null;
-    }
-  }
-}
-
-export type FolderListSummariesResponse = Array<FolderListSummariesResponse.FolderListSummariesResponseItem>;
-
-export namespace FolderListSummariesResponse {
-  export interface FolderListSummariesResponseItem {
-    id: string;
-
-    name: string;
-
-    depth?: number | null;
-
-    description?: string | null;
-
-    doc_count?: number;
-
-    full_path?: string | null;
-
-    updated_at?: string | null;
-  }
-}
+export type FolderListSummariesResponse = Array<FolderSummary>;
 
 export interface FolderCreateParams {
   name: string;
@@ -259,17 +253,22 @@ export interface FolderDetailsParams {
   sort_direction?: 'asc' | 'desc';
 }
 
-export interface FolderTreeParams {
+export interface FolderUpsertSummaryParams {
   /**
-   * Optional list of fields to include for documents in each folder node (dot
-   * notation supported).
+   * Summary content to persist (markdown/text)
    */
-  document_fields?: Array<string> | null;
+  content: string;
 
   /**
-   * Base folder path to return. Use '/' or null for the full hierarchy.
+   * Allow overwriting the latest summary when versioning is disabled
    */
-  folder_path?: string | null;
+  overwrite_latest?: boolean;
+
+  /**
+   * When true, automatically increments the summary version instead of overwriting
+   * the latest version
+   */
+  versioning?: boolean;
 }
 
 Folders.Documents = Documents;
@@ -277,15 +276,16 @@ Folders.Documents = Documents;
 export declare namespace Folders {
   export {
     type Folder as Folder,
-    type FolderTreeNode as FolderTreeNode,
+    type FolderDetails as FolderDetails,
+    type FolderDetailsResponse as FolderDetailsResponse,
+    type FolderSummary as FolderSummary,
     type FolderListResponse as FolderListResponse,
     type FolderDeleteResponse as FolderDeleteResponse,
-    type FolderDetailsResponse as FolderDetailsResponse,
     type FolderListSummariesResponse as FolderListSummariesResponse,
     type FolderCreateParams as FolderCreateParams,
     type FolderDeleteParams as FolderDeleteParams,
     type FolderDetailsParams as FolderDetailsParams,
-    type FolderTreeParams as FolderTreeParams,
+    type FolderUpsertSummaryParams as FolderUpsertSummaryParams,
   };
 
   export {

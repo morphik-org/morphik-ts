@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as DocumentsAPI from './documents';
 import { APIPromise } from '../core/api-promise';
 import { type Uploadable } from '../core/uploads';
 import { RequestOptions } from '../internal/request-options';
@@ -50,14 +51,14 @@ export class Ingest extends APIResource {
    * `status='processing'` and a background worker picks up the heavy parsing /
    * chunking work.
    */
-  ingestFile(body: IngestIngestFileParams, options?: RequestOptions): APIPromise<Document> {
+  ingestFile(body: IngestIngestFileParams, options?: RequestOptions): APIPromise<DocumentsAPI.Document> {
     return this._client.post('/ingest/file', multipartFormRequestOptions({ body, ...options }, this._client));
   }
 
   /**
    * Ingest a **text** document.
    */
-  ingestText(body: IngestIngestTextParams, options?: RequestOptions): APIPromise<Document> {
+  ingestText(body: IngestIngestTextParams, options?: RequestOptions): APIPromise<DocumentsAPI.Document> {
     return this._client.post('/ingest/text', { body, ...options });
   }
 
@@ -66,58 +67,6 @@ export class Ingest extends APIResource {
    */
   requeue(body: IngestRequeueParams, options?: RequestOptions): APIPromise<IngestRequeueResponse> {
     return this._client.post('/ingest/requeue', { body, ...options });
-  }
-}
-
-/**
- * Represents a document stored in the database documents collection
- */
-export interface Document {
-  content_type: string;
-
-  additional_metadata?: { [key: string]: unknown };
-
-  app_id?: string | null;
-
-  chunk_ids?: Array<string>;
-
-  end_user_id?: string | null;
-
-  external_id?: string;
-
-  filename?: string | null;
-
-  folder_name?: string | null;
-
-  folder_path?: string | null;
-
-  metadata?: { [key: string]: unknown };
-
-  metadata_types?: { [key: string]: string };
-
-  storage_files?: Array<Document.StorageFile>;
-
-  storage_info?: { [key: string]: unknown };
-
-  system_metadata?: { [key: string]: unknown };
-}
-
-export namespace Document {
-  /**
-   * Information about a file stored in storage
-   */
-  export interface StorageFile {
-    bucket: string;
-
-    key: string;
-
-    content_type?: string | null;
-
-    filename?: string | null;
-
-    timestamp?: string;
-
-    version?: number;
   }
 }
 
@@ -170,7 +119,7 @@ export interface TextRequest {
  * Response model for batch ingestion
  */
 export interface IngestBatchIngestFilesResponse {
-  documents: Array<Document>;
+  documents: Array<DocumentsAPI.Document>;
 
   errors: Array<{ [key: string]: string }>;
 }
@@ -192,7 +141,7 @@ export interface IngestDocumentQueryResponse {
   /**
    * Represents a document stored in the database documents collection
    */
-  ingestion_document?: Document | null;
+  ingestion_document?: DocumentsAPI.Document | null;
 
   /**
    * True when the document was queued for ingestion after extraction
@@ -202,7 +151,7 @@ export interface IngestDocumentQueryResponse {
   /**
    * Normalized ingestion options applied to this request
    */
-  ingestion_options?: { [key: string]: unknown };
+  ingestion_options?: IngestDocumentQueryResponse.IngestionOptions;
 
   /**
    * Original metadata supplied alongside the request
@@ -218,6 +167,40 @@ export interface IngestDocumentQueryResponse {
    * Raw text returned from Morphik On-the-Fly when no schema is provided
    */
   text_output?: string | null;
+}
+
+export namespace IngestDocumentQueryResponse {
+  /**
+   * Normalized ingestion options applied to this request
+   */
+  export interface IngestionOptions {
+    /**
+     * Optional end-user scope for the operation.
+     */
+    end_user_id?: string | null;
+
+    /**
+     * Optional target folder path for the ingested document. Only a single folder is
+     * supported.
+     */
+    folder_name?: string | null;
+
+    /**
+     * Whether to enqueue ingestion after metadata extraction.
+     */
+    ingest?: boolean;
+
+    /**
+     * Metadata to merge into the ingested document when ingestion is triggered.
+     */
+    metadata?: { [key: string]: unknown };
+
+    /**
+     * Whether to use Morphik's ColPali-style embeddings during ingestion (recommended
+     * for quality).
+     */
+    use_colpali?: boolean;
+  }
 }
 
 /**
@@ -377,7 +360,6 @@ export namespace IngestRequeueParams {
 
 export declare namespace Ingest {
   export {
-    type Document as Document,
     type TextRequest as TextRequest,
     type IngestBatchIngestFilesResponse as IngestBatchIngestFilesResponse,
     type IngestDocumentQueryResponse as IngestDocumentQueryResponse,

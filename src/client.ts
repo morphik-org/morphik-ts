@@ -44,6 +44,26 @@ import {
 } from './resources/cloud';
 import {
   Document,
+  DocumentDeleteResponse,
+  DocumentDownloadFileResponse,
+  DocumentDownloadURLResponse,
+  DocumentGetByFilenameParams,
+  DocumentGetDownloadURLParams,
+  DocumentGetStatusResponse,
+  DocumentListDocsParams,
+  DocumentListDocsResponse,
+  DocumentListParams,
+  DocumentListResponse,
+  DocumentPagesParams,
+  DocumentPagesResponse,
+  DocumentUpdateFileParams,
+  DocumentUpdateMetadataParams,
+  DocumentUpdateTextParams,
+  DocumentUpsertSummaryParams,
+  Documents,
+  SummaryResponse,
+} from './resources/documents';
+import {
   Ingest,
   IngestBatchIngestFilesParams,
   IngestBatchIngestFilesResponse,
@@ -69,37 +89,19 @@ import {
 import { Ping, PingCheckResponse, PingStatusResponse } from './resources/ping';
 import { Query, QueryGenerateCompletionParams, QueryGenerateCompletionResponse } from './resources/query';
 import { Search, SearchDocumentsParams, SearchDocumentsResponse } from './resources/search';
-import {
-  DocumentChatRequest,
-  DocumentDeleteResponse,
-  DocumentDownloadFileResponse,
-  DocumentGetByFilenameParams,
-  DocumentGetDownloadURLParams,
-  DocumentGetDownloadURLResponse,
-  DocumentGetStatusResponse,
-  DocumentListDocsParams,
-  DocumentListDocsResponse,
-  DocumentListParams,
-  DocumentListResponse,
-  DocumentPagesParams,
-  DocumentPagesResponse,
-  DocumentUpdateFileParams,
-  DocumentUpdateMetadataParams,
-  DocumentUpdateTextParams,
-  Documents,
-} from './resources/documents/documents';
 import { Ee } from './resources/ee/ee';
 import {
   Folder,
   FolderCreateParams,
   FolderDeleteParams,
   FolderDeleteResponse,
+  FolderDetails,
   FolderDetailsParams,
   FolderDetailsResponse,
   FolderListResponse,
   FolderListSummariesResponse,
-  FolderTreeNode,
-  FolderTreeParams,
+  FolderSummary,
+  FolderUpsertSummaryParams,
   Folders,
 } from './resources/folders/folders';
 import {
@@ -877,7 +879,6 @@ export declare namespace Morphik {
 
   export {
     Ingest as Ingest,
-    type Document as Document,
     type TextRequest as TextRequest,
     type IngestBatchIngestFilesResponse as IngestBatchIngestFilesResponse,
     type IngestDocumentQueryResponse as IngestDocumentQueryResponse,
@@ -892,15 +893,16 @@ export declare namespace Morphik {
   export {
     Folders as Folders,
     type Folder as Folder,
-    type FolderTreeNode as FolderTreeNode,
+    type FolderDetails as FolderDetails,
+    type FolderDetailsResponse as FolderDetailsResponse,
+    type FolderSummary as FolderSummary,
     type FolderListResponse as FolderListResponse,
     type FolderDeleteResponse as FolderDeleteResponse,
-    type FolderDetailsResponse as FolderDetailsResponse,
     type FolderListSummariesResponse as FolderListSummariesResponse,
     type FolderCreateParams as FolderCreateParams,
     type FolderDeleteParams as FolderDeleteParams,
     type FolderDetailsParams as FolderDetailsParams,
-    type FolderTreeParams as FolderTreeParams,
+    type FolderUpsertSummaryParams as FolderUpsertSummaryParams,
   };
 
   export {
@@ -985,11 +987,12 @@ export declare namespace Morphik {
 
   export {
     Documents as Documents,
-    type DocumentChatRequest as DocumentChatRequest,
+    type Document as Document,
     type DocumentDeleteResponse as DocumentDeleteResponse,
+    type DocumentDownloadURLResponse as DocumentDownloadURLResponse,
+    type SummaryResponse as SummaryResponse,
     type DocumentListResponse as DocumentListResponse,
     type DocumentDownloadFileResponse as DocumentDownloadFileResponse,
-    type DocumentGetDownloadURLResponse as DocumentGetDownloadURLResponse,
     type DocumentGetStatusResponse as DocumentGetStatusResponse,
     type DocumentListDocsResponse as DocumentListDocsResponse,
     type DocumentPagesResponse as DocumentPagesResponse,
@@ -1001,6 +1004,7 @@ export declare namespace Morphik {
     type DocumentUpdateFileParams as DocumentUpdateFileParams,
     type DocumentUpdateMetadataParams as DocumentUpdateMetadataParams,
     type DocumentUpdateTextParams as DocumentUpdateTextParams,
+    type DocumentUpsertSummaryParams as DocumentUpsertSummaryParams,
   };
 
   export {

@@ -93,8 +93,8 @@ export interface RetrieveCreateDocsParams {
   folder_depth?: number | null;
 
   /**
-   * Optional folder scope for the operation. Accepts a single folder name or a list
-   * of folder names.
+   * Optional folder scope. Accepts a folder PATH (e.g., '/Company/Reports') or list
+   * of paths.
    */
   folder_name?: string | Array<string> | null;
 

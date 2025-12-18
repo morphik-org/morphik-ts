@@ -32,11 +32,12 @@ export {
 } from './cloud';
 export {
   Documents,
-  type DocumentChatRequest,
+  type Document,
   type DocumentDeleteResponse,
+  type DocumentDownloadURLResponse,
+  type SummaryResponse,
   type DocumentListResponse,
   type DocumentDownloadFileResponse,
-  type DocumentGetDownloadURLResponse,
   type DocumentGetStatusResponse,
   type DocumentListDocsResponse,
   type DocumentPagesResponse,
@@ -48,20 +49,22 @@ export {
   type DocumentUpdateFileParams,
   type DocumentUpdateMetadataParams,
   type DocumentUpdateTextParams,
-} from './documents/documents';
+  type DocumentUpsertSummaryParams,
+} from './documents';
 export { Ee } from './ee/ee';
 export {
   Folders,
   type Folder,
-  type FolderTreeNode,
+  type FolderDetails,
+  type FolderDetailsResponse,
+  type FolderSummary,
   type FolderListResponse,
   type FolderDeleteResponse,
-  type FolderDetailsResponse,
   type FolderListSummariesResponse,
   type FolderCreateParams,
   type FolderDeleteParams,
   type FolderDetailsParams,
-  type FolderTreeParams,
+  type FolderUpsertSummaryParams,
 } from './folders/folders';
 export {
   GraphResource,
@@ -82,7 +85,6 @@ export {
 } from './graph/graph';
 export {
   Ingest,
-  type Document,
   type TextRequest,
   type IngestBatchIngestFilesResponse,
   type IngestDocumentQueryResponse,

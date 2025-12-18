@@ -32,7 +32,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/ingest.ts">Document</a></code>
 - <code><a href="./src/resources/ingest.ts">TextRequest</a></code>
 - <code><a href="./src/resources/ingest.ts">IngestBatchIngestFilesResponse</a></code>
 - <code><a href="./src/resources/ingest.ts">IngestDocumentQueryResponse</a></code>
@@ -51,10 +50,11 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/folders/folders.ts">Folder</a></code>
-- <code><a href="./src/resources/folders/folders.ts">FolderTreeNode</a></code>
+- <code><a href="./src/resources/folders/folders.ts">FolderDetails</a></code>
+- <code><a href="./src/resources/folders/folders.ts">FolderDetailsResponse</a></code>
+- <code><a href="./src/resources/folders/folders.ts">FolderSummary</a></code>
 - <code><a href="./src/resources/folders/folders.ts">FolderListResponse</a></code>
 - <code><a href="./src/resources/folders/folders.ts">FolderDeleteResponse</a></code>
-- <code><a href="./src/resources/folders/folders.ts">FolderDetailsResponse</a></code>
 - <code><a href="./src/resources/folders/folders.ts">FolderListSummariesResponse</a></code>
 
 Methods:
@@ -64,8 +64,9 @@ Methods:
 - <code title="get /folders">client.folders.<a href="./src/resources/folders/folders.ts">list</a>() -> FolderListResponse</code>
 - <code title="delete /folders/{folder_id_or_name}">client.folders.<a href="./src/resources/folders/folders.ts">delete</a>(folderIDOrName, { ...params }) -> FolderDeleteResponse</code>
 - <code title="post /folders/details">client.folders.<a href="./src/resources/folders/folders.ts">details</a>({ ...params }) -> FolderDetailsResponse</code>
+- <code title="get /folders/{folder_id_or_name}/summary">client.folders.<a href="./src/resources/folders/folders.ts">getSummary</a>(folderIDOrName) -> SummaryResponse</code>
 - <code title="get /folders/summary">client.folders.<a href="./src/resources/folders/folders.ts">listSummaries</a>() -> FolderListSummariesResponse</code>
-- <code title="post /folders/tree">client.folders.<a href="./src/resources/folders/folders.ts">tree</a>({ ...params }) -> FolderTreeNode</code>
+- <code title="put /folders/{folder_id_or_name}/summary">client.folders.<a href="./src/resources/folders/folders.ts">upsertSummary</a>(folderIDOrName, { ...params }) -> SummaryResponse</code>
 
 ## Documents
 
@@ -287,41 +288,32 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/documents/documents.ts">DocumentChatRequest</a></code>
-- <code><a href="./src/resources/documents/documents.ts">DocumentDeleteResponse</a></code>
-- <code><a href="./src/resources/documents/documents.ts">DocumentListResponse</a></code>
-- <code><a href="./src/resources/documents/documents.ts">DocumentDownloadFileResponse</a></code>
-- <code><a href="./src/resources/documents/documents.ts">DocumentGetDownloadURLResponse</a></code>
-- <code><a href="./src/resources/documents/documents.ts">DocumentGetStatusResponse</a></code>
-- <code><a href="./src/resources/documents/documents.ts">DocumentListDocsResponse</a></code>
-- <code><a href="./src/resources/documents/documents.ts">DocumentPagesResponse</a></code>
+- <code><a href="./src/resources/documents.ts">Document</a></code>
+- <code><a href="./src/resources/documents.ts">DocumentDeleteResponse</a></code>
+- <code><a href="./src/resources/documents.ts">DocumentDownloadURLResponse</a></code>
+- <code><a href="./src/resources/documents.ts">SummaryResponse</a></code>
+- <code><a href="./src/resources/documents.ts">DocumentListResponse</a></code>
+- <code><a href="./src/resources/documents.ts">DocumentDownloadFileResponse</a></code>
+- <code><a href="./src/resources/documents.ts">DocumentGetStatusResponse</a></code>
+- <code><a href="./src/resources/documents.ts">DocumentListDocsResponse</a></code>
+- <code><a href="./src/resources/documents.ts">DocumentPagesResponse</a></code>
 
 Methods:
 
-- <code title="get /documents/{document_id}">client.documents.<a href="./src/resources/documents/documents.ts">retrieve</a>(documentID) -> Document</code>
-- <code title="post /documents">client.documents.<a href="./src/resources/documents/documents.ts">list</a>({ ...params }) -> DocumentListResponse</code>
-- <code title="delete /documents/{document_id}">client.documents.<a href="./src/resources/documents/documents.ts">delete</a>(documentID) -> DocumentDeleteResponse</code>
-- <code title="get /documents/{document_id}/file">client.documents.<a href="./src/resources/documents/documents.ts">downloadFile</a>(documentID) -> unknown</code>
-- <code title="get /documents/filename/{filename}">client.documents.<a href="./src/resources/documents/documents.ts">getByFilename</a>(filename, { ...params }) -> Document</code>
-- <code title="get /documents/{document_id}/download_url">client.documents.<a href="./src/resources/documents/documents.ts">getDownloadURL</a>(documentID, { ...params }) -> DocumentGetDownloadURLResponse</code>
-- <code title="get /documents/{document_id}/status">client.documents.<a href="./src/resources/documents/documents.ts">getStatus</a>(documentID) -> DocumentGetStatusResponse</code>
-- <code title="post /documents/list_docs">client.documents.<a href="./src/resources/documents/documents.ts">listDocs</a>({ ...params }) -> DocumentListDocsResponse</code>
-- <code title="post /documents/pages">client.documents.<a href="./src/resources/documents/documents.ts">pages</a>({ ...params }) -> DocumentPagesResponse</code>
-- <code title="post /documents/{document_id}/update_file">client.documents.<a href="./src/resources/documents/documents.ts">updateFile</a>(documentID, { ...params }) -> Document</code>
-- <code title="post /documents/{document_id}/update_metadata">client.documents.<a href="./src/resources/documents/documents.ts">updateMetadata</a>(documentID, { ...params }) -> Document</code>
-- <code title="post /documents/{document_id}/update_text">client.documents.<a href="./src/resources/documents/documents.ts">updateText</a>(documentID, { ...params }) -> Document</code>
-
-## Chat
-
-Types:
-
-- <code><a href="./src/resources/documents/chat.ts">ChatCompleteResponse</a></code>
-- <code><a href="./src/resources/documents/chat.ts">ChatRetrieveHistoryResponse</a></code>
-
-Methods:
-
-- <code title="post /document/chat/{chat_id}/complete">client.documents.chat.<a href="./src/resources/documents/chat.ts">complete</a>(chatID, { ...params }) -> unknown</code>
-- <code title="get /document/chat/{chat_id}">client.documents.chat.<a href="./src/resources/documents/chat.ts">retrieveHistory</a>(chatID) -> unknown</code>
+- <code title="get /documents/{document_id}">client.documents.<a href="./src/resources/documents.ts">retrieve</a>(documentID) -> Document</code>
+- <code title="post /documents">client.documents.<a href="./src/resources/documents.ts">list</a>({ ...params }) -> DocumentListResponse</code>
+- <code title="delete /documents/{document_id}">client.documents.<a href="./src/resources/documents.ts">delete</a>(documentID) -> DocumentDeleteResponse</code>
+- <code title="get /documents/{document_id}/file">client.documents.<a href="./src/resources/documents.ts">downloadFile</a>(documentID) -> unknown</code>
+- <code title="get /documents/filename/{filename}">client.documents.<a href="./src/resources/documents.ts">getByFilename</a>(filename, { ...params }) -> Document</code>
+- <code title="get /documents/{document_id}/download_url">client.documents.<a href="./src/resources/documents.ts">getDownloadURL</a>(documentID, { ...params }) -> DocumentDownloadURLResponse</code>
+- <code title="get /documents/{document_id}/status">client.documents.<a href="./src/resources/documents.ts">getStatus</a>(documentID) -> DocumentGetStatusResponse</code>
+- <code title="get /documents/{document_id}/summary">client.documents.<a href="./src/resources/documents.ts">getSummary</a>(documentID) -> SummaryResponse</code>
+- <code title="post /documents/list_docs">client.documents.<a href="./src/resources/documents.ts">listDocs</a>({ ...params }) -> DocumentListDocsResponse</code>
+- <code title="post /documents/pages">client.documents.<a href="./src/resources/documents.ts">pages</a>({ ...params }) -> DocumentPagesResponse</code>
+- <code title="post /documents/{document_id}/update_file">client.documents.<a href="./src/resources/documents.ts">updateFile</a>(documentID, { ...params }) -> Document</code>
+- <code title="post /documents/{document_id}/update_metadata">client.documents.<a href="./src/resources/documents.ts">updateMetadata</a>(documentID, { ...params }) -> Document</code>
+- <code title="post /documents/{document_id}/update_text">client.documents.<a href="./src/resources/documents.ts">updateText</a>(documentID, { ...params }) -> Document</code>
+- <code title="put /documents/{document_id}/summary">client.documents.<a href="./src/resources/documents.ts">upsertSummary</a>(documentID, { ...params }) -> SummaryResponse</code>
 
 # Chat
 
