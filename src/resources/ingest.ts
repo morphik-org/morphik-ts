@@ -87,6 +87,8 @@ export interface Document {
 
   filename?: string | null;
 
+  folder_id?: string | null;
+
   folder_name?: string | null;
 
   folder_path?: string | null;
@@ -95,30 +97,17 @@ export interface Document {
 
   metadata_types?: { [key: string]: string };
 
-  storage_files?: Array<Document.StorageFile>;
-
   storage_info?: { [key: string]: unknown };
 
+  summary_bucket?: string | null;
+
+  summary_storage_key?: string | null;
+
+  summary_updated_at?: string | null;
+
+  summary_version?: number | null;
+
   system_metadata?: { [key: string]: unknown };
-}
-
-export namespace Document {
-  /**
-   * Information about a file stored in storage
-   */
-  export interface StorageFile {
-    bucket: string;
-
-    key: string;
-
-    content_type?: string | null;
-
-    filename?: string | null;
-
-    timestamp?: string;
-
-    version?: number;
-  }
 }
 
 /**
@@ -202,7 +191,7 @@ export interface IngestDocumentQueryResponse {
   /**
    * Normalized ingestion options applied to this request
    */
-  ingestion_options?: { [key: string]: unknown };
+  ingestion_options?: IngestDocumentQueryResponse.IngestionOptions;
 
   /**
    * Original metadata supplied alongside the request
@@ -218,6 +207,40 @@ export interface IngestDocumentQueryResponse {
    * Raw text returned from Morphik On-the-Fly when no schema is provided
    */
   text_output?: string | null;
+}
+
+export namespace IngestDocumentQueryResponse {
+  /**
+   * Normalized ingestion options applied to this request
+   */
+  export interface IngestionOptions {
+    /**
+     * Optional end-user scope for the operation.
+     */
+    end_user_id?: string | null;
+
+    /**
+     * Optional target folder path for the ingested document. Only a single folder is
+     * supported.
+     */
+    folder_name?: string | null;
+
+    /**
+     * Whether to enqueue ingestion after metadata extraction.
+     */
+    ingest?: boolean;
+
+    /**
+     * Metadata to merge into the ingested document when ingestion is triggered.
+     */
+    metadata?: { [key: string]: unknown };
+
+    /**
+     * Whether to use Morphik's ColPali-style embeddings during ingestion (recommended
+     * for quality).
+     */
+    use_colpali?: boolean;
+  }
 }
 
 /**

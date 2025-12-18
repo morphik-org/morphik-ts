@@ -32,7 +32,6 @@ export {
 } from './cloud';
 export {
   Documents,
-  type DocumentChatRequest,
   type DocumentDeleteResponse,
   type DocumentListResponse,
   type DocumentDownloadFileResponse,
@@ -53,7 +52,6 @@ export { Ee } from './ee/ee';
 export {
   Folders,
   type Folder,
-  type FolderTreeNode,
   type FolderListResponse,
   type FolderDeleteResponse,
   type FolderDetailsResponse,
@@ -61,7 +59,6 @@ export {
   type FolderCreateParams,
   type FolderDeleteParams,
   type FolderDetailsParams,
-  type FolderTreeParams,
 } from './folders/folders';
 export {
   GraphResource,

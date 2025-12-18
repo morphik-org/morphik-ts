@@ -3,7 +3,7 @@
 import { APIResource } from '../../core/resource';
 import * as IngestAPI from '../ingest';
 import * as ChatAPI from './chat';
-import { Chat, ChatCompleteParams, ChatCompleteResponse, ChatRetrieveHistoryResponse } from './chat';
+import { Chat } from './chat';
 import { APIPromise } from '../../core/api-promise';
 import { type Uploadable } from '../../core/uploads';
 import { RequestOptions } from '../../internal/request-options';
@@ -145,7 +145,7 @@ export class Documents extends APIResource {
   }
 
   /**
-   * Update a document with content from a file using the specified strategy.
+   * Update a document by replacing its content with a new file.
    */
   updateFile(
     documentID: string,
@@ -170,31 +170,15 @@ export class Documents extends APIResource {
   }
 
   /**
-   * Update a document with new text content using the specified strategy.
+   * Update a document by replacing its text content.
    */
   updateText(
     documentID: string,
-    params: DocumentUpdateTextParams,
+    body: DocumentUpdateTextParams,
     options?: RequestOptions,
   ): APIPromise<IngestAPI.Document> {
-    const { update_strategy, ...body } = params;
-    return this._client.post(path`/documents/${documentID}/update_text`, {
-      query: { update_strategy },
-      body,
-      ...options,
-    });
+    return this._client.post(path`/documents/${documentID}/update_text`, { body, ...options });
   }
-}
-
-/**
- * Request model for document chat completion.
- */
-export interface DocumentChatRequest {
-  message: string;
-
-  document_id?: string | null;
-
-  session_id?: string | null;
 }
 
 /**
@@ -427,8 +411,6 @@ export interface DocumentUpdateFileParams {
 
   metadata_types?: string;
 
-  update_strategy?: string;
-
   use_colpali?: boolean | null;
 }
 
@@ -447,46 +429,40 @@ export interface DocumentUpdateMetadataParams {
 
 export interface DocumentUpdateTextParams {
   /**
-   * Body param: Raw text content to store as a document.
+   * Raw text content to store as a document.
    */
   content: string;
 
   /**
-   * Query param:
-   */
-  update_strategy?: string;
-
-  /**
-   * Body param: Optional end-user scope for the operation
+   * Optional end-user scope for the operation
    */
   end_user_id?: string | null;
 
   /**
-   * Body param: Optional filename hint used when inferring MIME type or displaying
-   * the document.
+   * Optional filename hint used when inferring MIME type or displaying the document.
    */
   filename?: string | null;
 
   /**
-   * Body param: Optional folder scope for the operation
+   * Optional folder scope for the operation
    */
   folder_name?: string | null;
 
   /**
-   * Body param: User-defined metadata stored with the document (JSON-serializable).
+   * User-defined metadata stored with the document (JSON-serializable).
    */
   metadata?: { [key: string]: unknown };
 
   /**
-   * Body param: Optional per-field type hints: 'string', 'number', 'decimal',
-   * 'datetime', 'date', 'boolean', 'array', 'object'. Enables typed comparisons with
-   * $eq, $gt, etc. Types are inferred if omitted.
+   * Optional per-field type hints: 'string', 'number', 'decimal', 'datetime',
+   * 'date', 'boolean', 'array', 'object'. Enables typed comparisons with $eq, $gt,
+   * etc. Types are inferred if omitted.
    */
   metadata_types?: { [key: string]: string } | null;
 
   /**
-   * Body param: When provided, uses Morphik's finetuned ColPali style embeddings
-   * (recommended to be True for high quality retrieval).
+   * When provided, uses Morphik's finetuned ColPali style embeddings (recommended to
+   * be True for high quality retrieval).
    */
   use_colpali?: boolean | null;
 
@@ -497,7 +473,6 @@ Documents.Chat = Chat;
 
 export declare namespace Documents {
   export {
-    type DocumentChatRequest as DocumentChatRequest,
     type DocumentDeleteResponse as DocumentDeleteResponse,
     type DocumentListResponse as DocumentListResponse,
     type DocumentDownloadFileResponse as DocumentDownloadFileResponse,
@@ -515,10 +490,5 @@ export declare namespace Documents {
     type DocumentUpdateTextParams as DocumentUpdateTextParams,
   };
 
-  export {
-    Chat as Chat,
-    type ChatCompleteResponse as ChatCompleteResponse,
-    type ChatRetrieveHistoryResponse as ChatRetrieveHistoryResponse,
-    type ChatCompleteParams as ChatCompleteParams,
-  };
+  export { Chat as Chat };
 }

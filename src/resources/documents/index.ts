@@ -1,14 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export {
-  Chat,
-  type ChatCompleteResponse,
-  type ChatRetrieveHistoryResponse,
-  type ChatCompleteParams,
-} from './chat';
+export { Chat } from './chat';
 export {
   Documents,
-  type DocumentChatRequest,
   type DocumentDeleteResponse,
   type DocumentListResponse,
   type DocumentDownloadFileResponse,

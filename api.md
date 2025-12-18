@@ -51,7 +51,6 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/folders/folders.ts">Folder</a></code>
-- <code><a href="./src/resources/folders/folders.ts">FolderTreeNode</a></code>
 - <code><a href="./src/resources/folders/folders.ts">FolderListResponse</a></code>
 - <code><a href="./src/resources/folders/folders.ts">FolderDeleteResponse</a></code>
 - <code><a href="./src/resources/folders/folders.ts">FolderDetailsResponse</a></code>
@@ -65,7 +64,6 @@ Methods:
 - <code title="delete /folders/{folder_id_or_name}">client.folders.<a href="./src/resources/folders/folders.ts">delete</a>(folderIDOrName, { ...params }) -> FolderDeleteResponse</code>
 - <code title="post /folders/details">client.folders.<a href="./src/resources/folders/folders.ts">details</a>({ ...params }) -> FolderDetailsResponse</code>
 - <code title="get /folders/summary">client.folders.<a href="./src/resources/folders/folders.ts">listSummaries</a>() -> FolderListSummariesResponse</code>
-- <code title="post /folders/tree">client.folders.<a href="./src/resources/folders/folders.ts">tree</a>({ ...params }) -> FolderTreeNode</code>
 
 ## Documents
 
@@ -287,7 +285,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/documents/documents.ts">DocumentChatRequest</a></code>
 - <code><a href="./src/resources/documents/documents.ts">DocumentDeleteResponse</a></code>
 - <code><a href="./src/resources/documents/documents.ts">DocumentListResponse</a></code>
 - <code><a href="./src/resources/documents/documents.ts">DocumentDownloadFileResponse</a></code>
@@ -312,16 +309,6 @@ Methods:
 - <code title="post /documents/{document_id}/update_text">client.documents.<a href="./src/resources/documents/documents.ts">updateText</a>(documentID, { ...params }) -> Document</code>
 
 ## Chat
-
-Types:
-
-- <code><a href="./src/resources/documents/chat.ts">ChatCompleteResponse</a></code>
-- <code><a href="./src/resources/documents/chat.ts">ChatRetrieveHistoryResponse</a></code>
-
-Methods:
-
-- <code title="post /document/chat/{chat_id}/complete">client.documents.chat.<a href="./src/resources/documents/chat.ts">complete</a>(chatID, { ...params }) -> unknown</code>
-- <code title="get /document/chat/{chat_id}">client.documents.chat.<a href="./src/resources/documents/chat.ts">retrieveHistory</a>(chatID) -> unknown</code>
 
 # Chat
 

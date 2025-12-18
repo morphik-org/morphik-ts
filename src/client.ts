@@ -70,7 +70,6 @@ import { Ping, PingCheckResponse, PingStatusResponse } from './resources/ping';
 import { Query, QueryGenerateCompletionParams, QueryGenerateCompletionResponse } from './resources/query';
 import { Search, SearchDocumentsParams, SearchDocumentsResponse } from './resources/search';
 import {
-  DocumentChatRequest,
   DocumentDeleteResponse,
   DocumentDownloadFileResponse,
   DocumentGetByFilenameParams,
@@ -98,8 +97,6 @@ import {
   FolderDetailsResponse,
   FolderListResponse,
   FolderListSummariesResponse,
-  FolderTreeNode,
-  FolderTreeParams,
   Folders,
 } from './resources/folders/folders';
 import {
@@ -892,7 +889,6 @@ export declare namespace Morphik {
   export {
     Folders as Folders,
     type Folder as Folder,
-    type FolderTreeNode as FolderTreeNode,
     type FolderListResponse as FolderListResponse,
     type FolderDeleteResponse as FolderDeleteResponse,
     type FolderDetailsResponse as FolderDetailsResponse,
@@ -900,7 +896,6 @@ export declare namespace Morphik {
     type FolderCreateParams as FolderCreateParams,
     type FolderDeleteParams as FolderDeleteParams,
     type FolderDetailsParams as FolderDetailsParams,
-    type FolderTreeParams as FolderTreeParams,
   };
 
   export {
@@ -985,7 +980,6 @@ export declare namespace Morphik {
 
   export {
     Documents as Documents,
-    type DocumentChatRequest as DocumentChatRequest,
     type DocumentDeleteResponse as DocumentDeleteResponse,
     type DocumentListResponse as DocumentListResponse,
     type DocumentDownloadFileResponse as DocumentDownloadFileResponse,

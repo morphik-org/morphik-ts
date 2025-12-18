@@ -57,15 +57,6 @@ export class Folders extends APIResource {
   listSummaries(options?: RequestOptions): APIPromise<FolderListSummariesResponse> {
     return this._client.get('/folders/summary', options);
   }
-
-  /**
-   * Return a hierarchical folder tree (with documents) rooted at `folder_path`.
-   *
-   * When `folder_path` is null or `/`, the entire accessible hierarchy is returned.
-   */
-  tree(body: FolderTreeParams, options?: RequestOptions): APIPromise<FolderTreeNode> {
-    return this._client.post('/folders/tree', { body, ...options });
-  }
 }
 
 /**
@@ -92,26 +83,15 @@ export interface Folder {
 
   parent_id?: string | null;
 
+  summary_bucket?: string | null;
+
+  summary_storage_key?: string | null;
+
+  summary_updated_at?: string | null;
+
+  summary_version?: number | null;
+
   system_metadata?: { [key: string]: unknown };
-}
-
-/**
- * Nested folder tree entry including contained documents.
- */
-export interface FolderTreeNode {
-  id?: string | null;
-
-  children?: Array<FolderTreeNode>;
-
-  depth?: number | null;
-
-  description?: string | null;
-
-  documents?: Array<{ [key: string]: unknown }>;
-
-  full_path?: string | null;
-
-  name?: string | null;
 }
 
 export type FolderListResponse = Array<Folder>;
@@ -259,25 +239,11 @@ export interface FolderDetailsParams {
   sort_direction?: 'asc' | 'desc';
 }
 
-export interface FolderTreeParams {
-  /**
-   * Optional list of fields to include for documents in each folder node (dot
-   * notation supported).
-   */
-  document_fields?: Array<string> | null;
-
-  /**
-   * Base folder path to return. Use '/' or null for the full hierarchy.
-   */
-  folder_path?: string | null;
-}
-
 Folders.Documents = Documents;
 
 export declare namespace Folders {
   export {
     type Folder as Folder,
-    type FolderTreeNode as FolderTreeNode,
     type FolderListResponse as FolderListResponse,
     type FolderDeleteResponse as FolderDeleteResponse,
     type FolderDetailsResponse as FolderDetailsResponse,
@@ -285,7 +251,6 @@ export declare namespace Folders {
     type FolderCreateParams as FolderCreateParams,
     type FolderDeleteParams as FolderDeleteParams,
     type FolderDetailsParams as FolderDetailsParams,
-    type FolderTreeParams as FolderTreeParams,
   };
 
   export {
