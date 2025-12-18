@@ -165,7 +165,6 @@ describe('resource documents', () => {
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       metadata: 'metadata',
       metadata_types: 'metadata_types',
-      update_strategy: 'update_strategy',
       use_colpali: true,
     });
   });
@@ -198,7 +197,6 @@ describe('resource documents', () => {
   test.skip('updateText: required and optional params', async () => {
     const response = await client.documents.updateText('document_id', {
       content: 'content',
-      update_strategy: 'update_strategy',
       end_user_id: 'end_user_id',
       filename: 'filename',
       folder_name: 'folder_name',

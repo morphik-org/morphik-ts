@@ -9,7 +9,6 @@ export {
 export {
   Folders,
   type Folder,
-  type FolderTreeNode,
   type FolderListResponse,
   type FolderDeleteResponse,
   type FolderDetailsResponse,
@@ -17,5 +16,4 @@ export {
   type FolderCreateParams,
   type FolderDeleteParams,
   type FolderDetailsParams,
-  type FolderTreeParams,
 } from './folders';
