@@ -85,7 +85,6 @@ export {
 } from './graph/graph';
 export {
   Ingest,
-  type Document,
   type TextRequest,
   type IngestBatchIngestFilesResponse,
   type IngestDocumentQueryResponse,

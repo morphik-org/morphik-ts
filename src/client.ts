@@ -64,7 +64,6 @@ import {
   SummaryResponse,
 } from './resources/documents';
 import {
-  Document as IngestAPIDocument,
   Ingest,
   IngestBatchIngestFilesParams,
   IngestBatchIngestFilesResponse,
@@ -880,7 +879,6 @@ export declare namespace Morphik {
 
   export {
     Ingest as Ingest,
-    type IngestAPIDocument as Document,
     type TextRequest as TextRequest,
     type IngestBatchIngestFilesResponse as IngestBatchIngestFilesResponse,
     type IngestDocumentQueryResponse as IngestDocumentQueryResponse,
