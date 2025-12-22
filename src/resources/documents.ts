@@ -140,7 +140,8 @@ export class Documents extends APIResource {
 
   /**
    * Extract specific pages from a document (PDF, PowerPoint, or Word) as
-   * base64-encoded images.
+   * base64-encoded images or URLs. When output_format="url", pages that fail URL
+   * generation fall back to base64 data URIs (mixed output possible).
    */
   pages(body: DocumentPagesParams, options?: RequestOptions): APIPromise<DocumentPagesResponse> {
     return this._client.post('/documents/pages', { body, ...options });
@@ -471,6 +472,11 @@ export interface DocumentPagesParams {
    * Starting page number (1-indexed)
    */
   start_page: number;
+
+  /**
+   * How to return page images: base64 (default) or url
+   */
+  output_format?: 'base64' | 'url' | null;
 }
 
 export interface DocumentUpdateFileParams {
