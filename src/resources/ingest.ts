@@ -56,7 +56,7 @@ export class Ingest extends APIResource {
   }
 
   /**
-   * Ingest a **text** document.
+   * Ingest a **text** document asynchronously (queued like /ingest/file).
    */
   ingestText(body: IngestIngestTextParams, options?: RequestOptions): APIPromise<DocumentsAPI.Document> {
     return this._client.post('/ingest/text', { body, ...options });
