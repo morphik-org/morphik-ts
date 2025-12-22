@@ -154,7 +154,12 @@ describe('resource documents', () => {
 
   // Prism tests are disabled
   test.skip('pages: required and optional params', async () => {
-    const response = await client.documents.pages({ document_id: 'document_id', end_page: 1, start_page: 1 });
+    const response = await client.documents.pages({
+      document_id: 'document_id',
+      end_page: 1,
+      start_page: 1,
+      output_format: 'base64',
+    });
   });
 
   // Prism tests are disabled
