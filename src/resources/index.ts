@@ -95,16 +95,9 @@ export {
   type IngestIngestTextParams,
   type IngestRequeueParams,
 } from './ingest';
-export { Local, type LocalGenerateUriResponse, type LocalGenerateUriParams } from './local';
+export { Local } from './local';
 export { Logs, type LogListResponse, type LogListParams } from './logs';
-export {
-  ModelConfig,
-  type ModelConfigResponse,
-  type ModelConfigListResponse,
-  type ModelConfigDeleteResponse,
-  type ModelConfigCreateParams,
-  type ModelConfigUpdateParams,
-} from './model-config/model-config';
+export { ModelConfig } from './model-config/model-config';
 export {
   Models,
   type ModelResponse,
