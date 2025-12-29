@@ -79,34 +79,6 @@ Methods:
 - <code title="post /folders/{folder_id_or_name}/documents/{document_id}">client.folders.documents.<a href="./src/resources/folders/documents.ts">add</a>(documentID, { ...params }) -> DocumentAddResponse</code>
 - <code title="delete /folders/{folder_id_or_name}/documents/{document_id}">client.folders.documents.<a href="./src/resources/folders/documents.ts">remove</a>(documentID, { ...params }) -> DocumentDeleteResponse</code>
 
-# ModelConfig
-
-Types:
-
-- <code><a href="./src/resources/model-config/model-config.ts">ModelConfigResponse</a></code>
-- <code><a href="./src/resources/model-config/model-config.ts">ModelConfigListResponse</a></code>
-- <code><a href="./src/resources/model-config/model-config.ts">ModelConfigDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /model-config/">client.modelConfig.<a href="./src/resources/model-config/model-config.ts">create</a>({ ...params }) -> ModelConfigResponse</code>
-- <code title="get /model-config/{config_id}">client.modelConfig.<a href="./src/resources/model-config/model-config.ts">retrieve</a>(configID) -> ModelConfigResponse</code>
-- <code title="put /model-config/{config_id}">client.modelConfig.<a href="./src/resources/model-config/model-config.ts">update</a>(configID, { ...params }) -> ModelConfigResponse</code>
-- <code title="get /model-config/">client.modelConfig.<a href="./src/resources/model-config/model-config.ts">list</a>() -> ModelConfigListResponse</code>
-- <code title="delete /model-config/{config_id}">client.modelConfig.<a href="./src/resources/model-config/model-config.ts">delete</a>(configID) -> ModelConfigDeleteResponse</code>
-
-## CustomModels
-
-Types:
-
-- <code><a href="./src/resources/model-config/custom-models.ts">CustomModel</a></code>
-- <code><a href="./src/resources/model-config/custom-models.ts">CustomModelListResponse</a></code>
-
-Methods:
-
-- <code title="post /model-config/custom-models">client.modelConfig.customModels.<a href="./src/resources/model-config/custom-models.ts">create</a>({ ...params }) -> CustomModel</code>
-- <code title="get /model-config/custom-models/list">client.modelConfig.customModels.<a href="./src/resources/model-config/custom-models.ts">list</a>() -> CustomModelListResponse</code>
-
 # APIKeys
 
 Types:
@@ -259,16 +231,6 @@ Types:
 Methods:
 
 - <code title="post /query">client.query.<a href="./src/resources/query.ts">generateCompletion</a>({ ...params }) -> QueryGenerateCompletionResponse</code>
-
-# Local
-
-Types:
-
-- <code><a href="./src/resources/local.ts">LocalGenerateUriResponse</a></code>
-
-Methods:
-
-- <code title="post /local/generate_uri">client.local.<a href="./src/resources/local.ts">generateUri</a>({ ...params }) -> LocalGenerateUriResponse</code>
 
 # Cloud
 
