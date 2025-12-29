@@ -79,10 +79,6 @@ Methods:
 - <code title="post /folders/{folder_id_or_name}/documents/{document_id}">client.folders.documents.<a href="./src/resources/folders/documents.ts">add</a>(documentID, { ...params }) -> DocumentAddResponse</code>
 - <code title="delete /folders/{folder_id_or_name}/documents/{document_id}">client.folders.documents.<a href="./src/resources/folders/documents.ts">remove</a>(documentID, { ...params }) -> DocumentDeleteResponse</code>
 
-# ModelConfig
-
-## CustomModels
-
 # APIKeys
 
 Types:
@@ -235,8 +231,6 @@ Types:
 Methods:
 
 - <code title="post /query">client.query.<a href="./src/resources/query.ts">generateCompletion</a>({ ...params }) -> QueryGenerateCompletionResponse</code>
-
-# Local
 
 # Cloud
 

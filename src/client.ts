@@ -75,7 +75,6 @@ import {
   IngestRequeueResponse,
   TextRequest,
 } from './resources/ingest';
-import { Local } from './resources/local';
 import { LogListParams, LogListResponse, Logs } from './resources/logs';
 import {
   ModelCreateParams,
@@ -121,7 +120,6 @@ import {
   GraphVisualizationParams,
   GraphVisualizationResponse,
 } from './resources/graph/graph';
-import { ModelConfig } from './resources/model-config/model-config';
 import {
   Retrieve,
   RetrieveCreateDocsParams,
@@ -818,7 +816,6 @@ export class Morphik {
   models: API.Models = new API.Models(this);
   ingest: API.Ingest = new API.Ingest(this);
   folders: API.Folders = new API.Folders(this);
-  modelConfig: API.ModelConfig = new API.ModelConfig(this);
   apiKeys: API.APIKeys = new API.APIKeys(this);
   logs: API.Logs = new API.Logs(this);
   graph: API.GraphResource = new API.GraphResource(this);
@@ -827,7 +824,6 @@ export class Morphik {
   batch: API.Batch = new API.Batch(this);
   search: API.Search = new API.Search(this);
   query: API.Query = new API.Query(this);
-  local: API.Local = new API.Local(this);
   cloud: API.Cloud = new API.Cloud(this);
   documents: API.Documents = new API.Documents(this);
   chat: API.Chat = new API.Chat(this);
@@ -837,7 +833,6 @@ Morphik.Ping = Ping;
 Morphik.Models = Models;
 Morphik.Ingest = Ingest;
 Morphik.Folders = Folders;
-Morphik.ModelConfig = ModelConfig;
 Morphik.APIKeys = APIKeys;
 Morphik.Logs = Logs;
 Morphik.GraphResource = GraphResource;
@@ -846,7 +841,6 @@ Morphik.Retrieve = Retrieve;
 Morphik.Batch = Batch;
 Morphik.Search = Search;
 Morphik.Query = Query;
-Morphik.Local = Local;
 Morphik.Cloud = Cloud;
 Morphik.Documents = Documents;
 Morphik.Chat = Chat;
@@ -897,8 +891,6 @@ export declare namespace Morphik {
     type FolderDetailsParams as FolderDetailsParams,
     type FolderUpsertSummaryParams as FolderUpsertSummaryParams,
   };
-
-  export { ModelConfig as ModelConfig };
 
   export {
     APIKeys as APIKeys,
@@ -954,8 +946,6 @@ export declare namespace Morphik {
     type QueryGenerateCompletionResponse as QueryGenerateCompletionResponse,
     type QueryGenerateCompletionParams as QueryGenerateCompletionParams,
   };
-
-  export { Local as Local };
 
   export {
     Cloud as Cloud,
