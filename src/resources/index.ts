@@ -95,9 +95,7 @@ export {
   type IngestIngestTextParams,
   type IngestRequeueParams,
 } from './ingest';
-export { Local } from './local';
 export { Logs, type LogListResponse, type LogListParams } from './logs';
-export { ModelConfig } from './model-config/model-config';
 export {
   Models,
   type ModelResponse,
