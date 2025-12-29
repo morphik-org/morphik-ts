@@ -75,7 +75,7 @@ import {
   IngestRequeueResponse,
   TextRequest,
 } from './resources/ingest';
-import { Local, LocalGenerateUriParams, LocalGenerateUriResponse } from './resources/local';
+import { Local } from './resources/local';
 import { LogListParams, LogListResponse, Logs } from './resources/logs';
 import {
   ModelCreateParams,
@@ -121,14 +121,7 @@ import {
   GraphVisualizationParams,
   GraphVisualizationResponse,
 } from './resources/graph/graph';
-import {
-  ModelConfig,
-  ModelConfigCreateParams,
-  ModelConfigDeleteResponse,
-  ModelConfigListResponse,
-  ModelConfigResponse,
-  ModelConfigUpdateParams,
-} from './resources/model-config/model-config';
+import { ModelConfig } from './resources/model-config/model-config';
 import {
   Retrieve,
   RetrieveCreateDocsParams,
@@ -905,14 +898,7 @@ export declare namespace Morphik {
     type FolderUpsertSummaryParams as FolderUpsertSummaryParams,
   };
 
-  export {
-    ModelConfig as ModelConfig,
-    type ModelConfigResponse as ModelConfigResponse,
-    type ModelConfigListResponse as ModelConfigListResponse,
-    type ModelConfigDeleteResponse as ModelConfigDeleteResponse,
-    type ModelConfigCreateParams as ModelConfigCreateParams,
-    type ModelConfigUpdateParams as ModelConfigUpdateParams,
-  };
+  export { ModelConfig as ModelConfig };
 
   export {
     APIKeys as APIKeys,
@@ -969,11 +955,7 @@ export declare namespace Morphik {
     type QueryGenerateCompletionParams as QueryGenerateCompletionParams,
   };
 
-  export {
-    Local as Local,
-    type LocalGenerateUriResponse as LocalGenerateUriResponse,
-    type LocalGenerateUriParams as LocalGenerateUriParams,
-  };
+  export { Local as Local };
 
   export {
     Cloud as Cloud,
