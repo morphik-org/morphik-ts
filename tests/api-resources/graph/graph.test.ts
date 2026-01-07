@@ -30,7 +30,13 @@ describe('resource graph', () => {
       folder_name: 'string',
       prompt_overrides: {
         entity_extraction: {
-          examples: [{ label: 'Example', type: 'ENTITY', properties: { foo: 'bar' } }],
+          examples: [
+            {
+              label: 'Example',
+              type: 'ENTITY',
+              properties: { foo: 'bar' },
+            },
+          ],
           prompt_template: 'Extract entities from the following text: {content}\n{examples}',
         },
         entity_resolution: {
@@ -59,7 +65,11 @@ describe('resource graph', () => {
     await expect(
       client.graph.retrieve(
         'name',
-        { end_user_id: 'end_user_id', folder_depth: 0, folder_name: 'string' },
+        {
+          end_user_id: 'end_user_id',
+          folder_depth: 0,
+          folder_name: 'string',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Morphik.NotFoundError);
@@ -94,7 +104,11 @@ describe('resource graph', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.graph.list(
-        { end_user_id: 'end_user_id', folder_depth: 0, folder_name: 'string' },
+        {
+          end_user_id: 'end_user_id',
+          folder_depth: 0,
+          folder_name: 'string',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Morphik.NotFoundError);
@@ -130,7 +144,11 @@ describe('resource graph', () => {
     await expect(
       client.graph.status(
         'name',
-        { end_user_id: 'end_user_id', folder_depth: 0, folder_name: 'string' },
+        {
+          end_user_id: 'end_user_id',
+          folder_depth: 0,
+          folder_name: 'string',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Morphik.NotFoundError);
@@ -154,7 +172,11 @@ describe('resource graph', () => {
     await expect(
       client.graph.visualization(
         'name',
-        { end_user_id: 'end_user_id', folder_depth: 0, folder_name: 'string' },
+        {
+          end_user_id: 'end_user_id',
+          folder_depth: 0,
+          folder_name: 'string',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Morphik.NotFoundError);

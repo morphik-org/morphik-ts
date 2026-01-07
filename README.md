@@ -76,7 +76,10 @@ await client.ingest.documentQuery({ file: new File(['my bytes'], 'file'), prompt
 await client.ingest.documentQuery({ file: await fetch('https://somesite/file'), prompt: 'prompt' });
 
 // Finally, if none of the above are convenient, you can use our `toFile` helper:
-await client.ingest.documentQuery({ file: await toFile(Buffer.from('my bytes'), 'file'), prompt: 'prompt' });
+await client.ingest.documentQuery({
+  file: await toFile(Buffer.from('my bytes'), 'file'),
+  prompt: 'prompt',
+});
 await client.ingest.documentQuery({
   file: await toFile(new Uint8Array([0, 1, 2]), 'file'),
   prompt: 'prompt',
