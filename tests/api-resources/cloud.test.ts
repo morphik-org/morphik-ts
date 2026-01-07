@@ -27,7 +27,11 @@ describe('resource cloud', () => {
 
   // Prism tests are disabled
   test.skip('generateUri: only required params', async () => {
-    const responsePromise = client.cloud.generateUri({ app_id: 'app_id', name: 'name', user_id: 'user_id' });
+    const responsePromise = client.cloud.generateUri({
+      app_id: 'app_id',
+      name: 'name',
+      user_id: 'user_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
