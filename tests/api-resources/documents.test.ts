@@ -74,7 +74,11 @@ describe('resource documents', () => {
     await expect(
       client.documents.getByFilename(
         'filename',
-        { end_user_id: 'end_user_id', folder_depth: 0, folder_name: 'string' },
+        {
+          end_user_id: 'end_user_id',
+          folder_depth: 0,
+          folder_name: 'string',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Morphik.NotFoundError);

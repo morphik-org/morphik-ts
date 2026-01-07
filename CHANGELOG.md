@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.8.1 (2026-01-07)
+
+Full Changelog: [v1.8.0...v1.8.1](https://github.com/morphik-org/morphik-ts/compare/v1.8.0...v1.8.1)
+
+### Chores
+
+* break long lines in snippets into multiline ([5f9a685](https://github.com/morphik-org/morphik-ts/commit/5f9a685c5620732861ca0a3d1bc91c851eb765cb))
+* **internal:** codegen related update ([7fbc717](https://github.com/morphik-org/morphik-ts/commit/7fbc717ae13a2e74befcc031cfeefbea93b1a5a7))
+
 ## 1.8.0 (2025-12-29)
 
 Full Changelog: [v1.7.0...v1.8.0](https://github.com/morphik-org/morphik-ts/compare/v1.7.0...v1.8.0)
