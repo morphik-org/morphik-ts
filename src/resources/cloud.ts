@@ -96,19 +96,19 @@ export interface CloudGenerateUriParams {
   org_id?: string | null;
 
   /**
-   * Header param:
+   * Header param
    */
   'X-Morphik-Admin-Secret'?: string;
 }
 
 export interface CloudListAppsParams {
   /**
-   * Query param:
+   * Query param
    */
   limit?: number;
 
   /**
-   * Query param:
+   * Query param
    */
   offset?: number;
 
@@ -123,7 +123,7 @@ export interface CloudListAppsParams {
   user_id?: string | null;
 
   /**
-   * Header param:
+   * Header param
    */
   'X-Morphik-Admin-Secret'?: string;
 }
