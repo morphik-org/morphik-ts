@@ -326,7 +326,7 @@ export interface DocumentPagesResponse {
 
 export interface DocumentListParams {
   /**
-   * Query param:
+   * Query param
    */
   end_user_id?: string | null;
 
@@ -337,7 +337,7 @@ export interface DocumentListParams {
   folder_depth?: number | null;
 
   /**
-   * Query param:
+   * Query param
    */
   folder_name?: string | Array<string> | null;
 
@@ -381,7 +381,7 @@ export interface DocumentGetDownloadURLParams {
 
 export interface DocumentListDocsParams {
   /**
-   * Query param:
+   * Query param
    */
   end_user_id?: string | null;
 
@@ -392,7 +392,7 @@ export interface DocumentListDocsParams {
   folder_depth?: number | null;
 
   /**
-   * Query param:
+   * Query param
    */
   folder_name?: string | Array<string> | null;
 
