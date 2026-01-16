@@ -148,7 +148,8 @@ export class Documents extends APIResource {
   }
 
   /**
-   * Update a document by replacing its content with a new file.
+   * Update a document by replacing its content with a new file and queueing
+   * re-ingestion.
    */
   updateFile(
     documentID: string,
@@ -173,7 +174,7 @@ export class Documents extends APIResource {
   }
 
   /**
-   * Update a document by replacing its text content.
+   * Update a document by replacing its text content and queueing re-ingestion.
    */
   updateText(
     documentID: string,

@@ -22,16 +22,15 @@ describe('resource cloud', () => {
 
   // Prism tests are disabled
   test.skip('deleteApp: required and optional params', async () => {
-    const response = await client.cloud.deleteApp({ app_name: 'app_name' });
+    const response = await client.cloud.deleteApp({
+      app_name: 'app_name',
+      'X-Morphik-Admin-Secret': 'X-Morphik-Admin-Secret',
+    });
   });
 
   // Prism tests are disabled
   test.skip('generateUri: only required params', async () => {
-    const responsePromise = client.cloud.generateUri({
-      app_id: 'app_id',
-      name: 'name',
-      user_id: 'user_id',
-    });
+    const responsePromise = client.cloud.generateUri({ name: 'name' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -44,12 +43,12 @@ describe('resource cloud', () => {
   // Prism tests are disabled
   test.skip('generateUri: required and optional params', async () => {
     const response = await client.cloud.generateUri({
-      app_id: 'app_id',
       name: 'name',
-      user_id: 'user_id',
+      app_id: 'app_id',
       created_by_user_id: 'created_by_user_id',
       expiry_days: 0,
       org_id: 'org_id',
+      user_id: 'user_id',
       'X-Morphik-Admin-Secret': 'X-Morphik-Admin-Secret',
     });
   });
