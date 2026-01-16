@@ -10,8 +10,15 @@ export class Cloud extends APIResource {
    * Delete all resources associated with a given cloud application.
    */
   deleteApp(params: CloudDeleteAppParams, options?: RequestOptions): APIPromise<CloudDeleteAppResponse> {
-    const { app_name } = params;
-    return this._client.delete('/apps', { query: { app_name }, ...options });
+    const { app_name, 'X-Morphik-Admin-Secret': xMorphikAdminSecret } = params;
+    return this._client.delete('/apps', {
+      query: { app_name },
+      ...options,
+      headers: buildHeaders([
+        { ...(xMorphikAdminSecret != null ? { 'X-Morphik-Admin-Secret': xMorphikAdminSecret } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -59,26 +66,27 @@ export type CloudListAppsResponse = unknown;
 
 export interface CloudDeleteAppParams {
   /**
-   * Name of the application to delete
+   * Query param: Name of the application to delete
    */
   app_name: string;
+
+  /**
+   * Header param
+   */
+  'X-Morphik-Admin-Secret'?: string;
 }
 
 export interface CloudGenerateUriParams {
-  /**
-   * Body param: ID of the application
-   */
-  app_id: string;
-
   /**
    * Body param: Name of the application
    */
   name: string;
 
   /**
-   * Body param: ID of the user who owns the app
+   * Body param: Optional client-generated app ID (UUID recommended). If omitted, the
+   * server generates one.
    */
-  user_id: string;
+  app_id?: string | null;
 
   /**
    * Body param: ID of the admin or service user that initiated the request
@@ -86,7 +94,7 @@ export interface CloudGenerateUriParams {
   created_by_user_id?: string | null;
 
   /**
-   * Body param: Number of days until the token expires
+   * Body param: Number of days until the token expires (default: 15 years)
    */
   expiry_days?: number;
 
@@ -94,6 +102,11 @@ export interface CloudGenerateUriParams {
    * Body param: Optional organization identifier for multi-tenant control planes
    */
   org_id?: string | null;
+
+  /**
+   * Body param: Optional owner user ID. If omitted, derived from the bearer token.
+   */
+  user_id?: string | null;
 
   /**
    * Header param
