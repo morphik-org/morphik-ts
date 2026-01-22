@@ -78,7 +78,12 @@ describe('resource connectors', () => {
     await expect(
       client.ee.connectors.handleOAuthCallback(
         'connector_type',
-        { code: 'code', error: 'error', error_description: 'error_description', state: 'state' },
+        {
+          code: 'code',
+          error: 'error',
+          error_description: 'error_description',
+          state: 'state',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Morphik.NotFoundError);
@@ -168,7 +173,12 @@ describe('resource connectors', () => {
     await expect(
       client.ee.connectors.listFiles(
         'connector_type',
-        { page_size: 0, page_token: 'page_token', path: 'path', q_filter: 'q_filter' },
+        {
+          page_size: 0,
+          page_token: 'page_token',
+          path: 'path',
+          q_filter: 'q_filter',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Morphik.NotFoundError);

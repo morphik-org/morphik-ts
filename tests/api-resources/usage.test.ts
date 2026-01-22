@@ -7,10 +7,10 @@ const client = new Morphik({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource workflow', () => {
+describe('resource usage', () => {
   // Prism tests are disabled
-  test.skip('status', async () => {
-    const responsePromise = client.graph.workflow.status('workflow_id');
+  test.skip('appStorageUsage', async () => {
+    const responsePromise = client.usage.appStorageUsage();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,13 +18,5 @@ describe('resource workflow', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('status: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.graph.workflow.status('workflow_id', { run_id: 'run_id' }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Morphik.NotFoundError);
   });
 });

@@ -101,39 +101,6 @@ Methods:
 
 - <code title="get /logs/">client.logs.<a href="./src/resources/logs.ts">list</a>({ ...params }) -> LogListResponse</code>
 
-# Graph
-
-Types:
-
-- <code><a href="./src/resources/graph/graph.ts">EntityExtractionPromptOverride</a></code>
-- <code><a href="./src/resources/graph/graph.ts">EntityResolutionPromptOverride</a></code>
-- <code><a href="./src/resources/graph/graph.ts">Graph</a></code>
-- <code><a href="./src/resources/graph/graph.ts">GraphPromptOverrides</a></code>
-- <code><a href="./src/resources/graph/graph.ts">GraphListResponse</a></code>
-- <code><a href="./src/resources/graph/graph.ts">GraphDeleteResponse</a></code>
-- <code><a href="./src/resources/graph/graph.ts">GraphStatusResponse</a></code>
-- <code><a href="./src/resources/graph/graph.ts">GraphVisualizationResponse</a></code>
-
-Methods:
-
-- <code title="post /graph/create">client.graph.<a href="./src/resources/graph/graph.ts">create</a>({ ...params }) -> Graph</code>
-- <code title="get /graph/{name}">client.graph.<a href="./src/resources/graph/graph.ts">retrieve</a>(name, { ...params }) -> Graph</code>
-- <code title="post /graph/{name}/update">client.graph.<a href="./src/resources/graph/graph.ts">update</a>(name, { ...params }) -> Graph</code>
-- <code title="get /graph/">client.graph.<a href="./src/resources/graph/graph.ts">list</a>({ ...params }) -> GraphListResponse</code>
-- <code title="delete /graph/{name}">client.graph.<a href="./src/resources/graph/graph.ts">delete</a>(name) -> GraphDeleteResponse</code>
-- <code title="get /graph/{name}/status">client.graph.<a href="./src/resources/graph/graph.ts">status</a>(name, { ...params }) -> GraphStatusResponse</code>
-- <code title="get /graph/{name}/visualization">client.graph.<a href="./src/resources/graph/graph.ts">visualization</a>(name, { ...params }) -> GraphVisualizationResponse</code>
-
-## Workflow
-
-Types:
-
-- <code><a href="./src/resources/graph/workflow.ts">WorkflowStatusResponse</a></code>
-
-Methods:
-
-- <code title="get /graph/workflow/{workflow_id}/status">client.graph.workflow.<a href="./src/resources/graph/workflow.ts">status</a>(workflowID, { ...params }) -> WorkflowStatusResponse</code>
-
 # Ee
 
 ## Connectors
@@ -239,12 +206,26 @@ Types:
 - <code><a href="./src/resources/cloud.ts">CloudDeleteAppResponse</a></code>
 - <code><a href="./src/resources/cloud.ts">CloudGenerateUriResponse</a></code>
 - <code><a href="./src/resources/cloud.ts">CloudListAppsResponse</a></code>
+- <code><a href="./src/resources/cloud.ts">CloudRenameAppResponse</a></code>
+- <code><a href="./src/resources/cloud.ts">CloudRotateAppTokenResponse</a></code>
 
 Methods:
 
 - <code title="delete /apps">client.cloud.<a href="./src/resources/cloud.ts">deleteApp</a>({ ...params }) -> CloudDeleteAppResponse</code>
 - <code title="post /cloud/generate_uri">client.cloud.<a href="./src/resources/cloud.ts">generateUri</a>({ ...params }) -> CloudGenerateUriResponse</code>
 - <code title="get /apps">client.cloud.<a href="./src/resources/cloud.ts">listApps</a>({ ...params }) -> unknown</code>
+- <code title="patch /apps/rename">client.cloud.<a href="./src/resources/cloud.ts">renameApp</a>({ ...params }) -> CloudRenameAppResponse</code>
+- <code title="post /apps/rotate_token">client.cloud.<a href="./src/resources/cloud.ts">rotateAppToken</a>({ ...params }) -> CloudRotateAppTokenResponse</code>
+
+# Usage
+
+Types:
+
+- <code><a href="./src/resources/usage.ts">AppStorageUsageResponse</a></code>
+
+Methods:
+
+- <code title="get /usage/app-storage">client.usage.<a href="./src/resources/usage.ts">appStorageUsage</a>() -> AppStorageUsageResponse</code>
 
 # Documents
 

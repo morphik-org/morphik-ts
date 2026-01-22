@@ -18,30 +18,32 @@ export class Documents extends APIResource {
   }
 
   /**
-   * List accessible documents with metadata filtering.
+   * Flexible document listing with aggregates, projections, and advanced pagination.
+   *
+   * Alias: `/documents` and `/documents/list_docs` share this handler.
    *
    * **Supported operators**: `$and`, `$or`, `$nor`, `$not`, `$eq`, `$ne`, `$gt`,
    * `$gte`, `$lt`, `$lte`, `$in`, `$nin`, `$exists`, `$type`, `$regex`, `$contains`.
    *
-   * **Implicit equality** (backwards compatible):
+   * **Implicit equality** (backwards compatible, JSONB containment):
    *
    * ```json
    * { "status": "active" }
    * ```
    *
-   * Uses JSONB containment, matches scalars inside arrays, JSON-serializable types
-   * only.
-   *
-   * **Explicit operators** (typed comparisons):
+   * **Explicit operators** (typed comparisons for number, decimal, datetime, date):
    *
    * ```json
-   * {
-   *   "priority": { "$eq": 42 },
-   *   "created_date": { "$gte": "2024-01-01T00:00:00Z" }
-   * }
+   * { "priority": { "$gte": 40 }, "end_date": { "$lt": "2025-01-01" } }
    * ```
    *
-   * Supports typed metadata (number, decimal, datetime, date) with safe casting.
+   * Use `document_filters` with a `filename` key to filter the filename column:
+   *
+   * ```json
+   * { "filename": { "$regex": { "pattern": "^report_.*.pdf$", "flags": "i" } } }
+   * ```
+   *
+   * Use `folder_name` and `end_user_id` query parameters to scope system metadata.
    */
   list(params: DocumentListParams, options?: RequestOptions): APIPromise<DocumentListResponse> {
     const { end_user_id, folder_depth, folder_name, ...body } = params;
@@ -112,6 +114,8 @@ export class Documents extends APIResource {
   /**
    * Flexible document listing with aggregates, projections, and advanced pagination.
    *
+   * Alias: `/documents` and `/documents/list_docs` share this handler.
+   *
    * **Supported operators**: `$and`, `$or`, `$nor`, `$not`, `$eq`, `$ne`, `$gt`,
    * `$gte`, `$lt`, `$lte`, `$in`, `$nin`, `$exists`, `$type`, `$regex`, `$contains`.
    *
@@ -125,6 +129,12 @@ export class Documents extends APIResource {
    *
    * ```json
    * { "priority": { "$gte": 40 }, "end_date": { "$lt": "2025-01-01" } }
+   * ```
+   *
+   * Use `document_filters` with a `filename` key to filter the filename column:
+   *
+   * ```json
+   * { "filename": { "$regex": { "pattern": "^report_.*.pdf$", "flags": "i" } } }
    * ```
    *
    * Use `folder_name` and `end_user_id` query parameters to scope system metadata.
@@ -148,7 +158,8 @@ export class Documents extends APIResource {
   }
 
   /**
-   * Update a document by replacing its content with a new file.
+   * Update a document by replacing its content with a new file and queueing
+   * re-ingestion.
    */
   updateFile(
     documentID: string,
@@ -173,7 +184,7 @@ export class Documents extends APIResource {
   }
 
   /**
-   * Update a document by replacing its text content.
+   * Update a document by replacing its text content and queueing re-ingestion.
    */
   updateText(
     documentID: string,
@@ -269,7 +280,39 @@ export interface SummaryResponse {
   updated_at?: string | null;
 }
 
-export type DocumentListResponse = Array<Document>;
+/**
+ * Flexible response for listing documents with aggregates.
+ */
+export interface DocumentListResponse {
+  limit: number;
+
+  returned_count: number;
+
+  skip: number;
+
+  documents?: Array<unknown>;
+
+  folder_counts?: Array<DocumentListResponse.FolderCount> | null;
+
+  has_more?: boolean;
+
+  next_skip?: number | null;
+
+  status_counts?: { [key: string]: number } | null;
+
+  total_count?: number | null;
+}
+
+export namespace DocumentListResponse {
+  /**
+   * Count of documents grouped by folder name.
+   */
+  export interface FolderCount {
+    count: number;
+
+    folder: string | null;
+  }
+}
 
 export type DocumentDownloadFileResponse = unknown;
 
@@ -326,7 +369,7 @@ export interface DocumentPagesResponse {
 
 export interface DocumentListParams {
   /**
-   * Query param:
+   * Query param
    */
   end_user_id?: string | null;
 
@@ -337,27 +380,69 @@ export interface DocumentListParams {
   folder_depth?: number | null;
 
   /**
-   * Query param:
+   * Query param
    */
   folder_name?: string | Array<string> | null;
+
+  /**
+   * Body param: When true, only documents with completed processing status are
+   * returned and counted
+   */
+  completed_only?: boolean;
 
   /**
    * Body param: Metadata filters with operator support: $and, $or, $nor, $not, $eq,
    * $ne, $gt, $gte, $lt, $lte, $in, $nin, $exists, $type, $regex, $contains.
    * Implicit equality uses JSONB containment; explicit operators support typed
-   * comparisons.
+   * comparisons. Reserved key: 'filename' filters the filename column.
    */
   document_filters?: { [key: string]: unknown } | null;
 
   /**
-   * Body param: Maximum number of documents to return.
+   * Body param: Optional list of fields to project for each document (dot notation
+   * supported). Derived fields such as 'page_count' are also supported.
+   */
+  fields?: Array<string> | null;
+
+  /**
+   * Body param: Include document counts grouped by folder when true
+   */
+  include_folder_counts?: boolean;
+
+  /**
+   * Body param: Include document counts grouped by processing status when true
+   */
+  include_status_counts?: boolean;
+
+  /**
+   * Body param: Include total number of matching documents when true
+   */
+  include_total_count?: boolean;
+
+  /**
+   * Body param: Maximum number of documents to return
    */
   limit?: number;
 
   /**
-   * Body param: Number of documents to skip before returning results.
+   * Body param: When false, only aggregates are returned
+   */
+  return_documents?: boolean;
+
+  /**
+   * Body param: Number of documents to skip
    */
   skip?: number;
+
+  /**
+   * Body param: Field to sort the results by
+   */
+  sort_by?: 'created_at' | 'updated_at' | 'filename' | 'external_id' | null;
+
+  /**
+   * Body param: Sort direction for the results
+   */
+  sort_direction?: 'asc' | 'desc';
 }
 
 export interface DocumentGetByFilenameParams {
@@ -381,7 +466,7 @@ export interface DocumentGetDownloadURLParams {
 
 export interface DocumentListDocsParams {
   /**
-   * Query param:
+   * Query param
    */
   end_user_id?: string | null;
 
@@ -392,7 +477,7 @@ export interface DocumentListDocsParams {
   folder_depth?: number | null;
 
   /**
-   * Query param:
+   * Query param
    */
   folder_name?: string | Array<string> | null;
 
@@ -406,7 +491,7 @@ export interface DocumentListDocsParams {
    * Body param: Metadata filters with operator support: $and, $or, $nor, $not, $eq,
    * $ne, $gt, $gte, $lt, $lte, $in, $nin, $exists, $type, $regex, $contains.
    * Implicit equality uses JSONB containment; explicit operators support typed
-   * comparisons.
+   * comparisons. Reserved key: 'filename' filters the filename column.
    */
   document_filters?: { [key: string]: unknown } | null;
 

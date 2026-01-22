@@ -22,12 +22,15 @@ describe('resource cloud', () => {
 
   // Prism tests are disabled
   test.skip('deleteApp: required and optional params', async () => {
-    const response = await client.cloud.deleteApp({ app_name: 'app_name' });
+    const response = await client.cloud.deleteApp({
+      app_name: 'app_name',
+      'X-Morphik-Admin-Secret': 'X-Morphik-Admin-Secret',
+    });
   });
 
   // Prism tests are disabled
   test.skip('generateUri: only required params', async () => {
-    const responsePromise = client.cloud.generateUri({ app_id: 'app_id', name: 'name', user_id: 'user_id' });
+    const responsePromise = client.cloud.generateUri({ name: 'name' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -40,12 +43,12 @@ describe('resource cloud', () => {
   // Prism tests are disabled
   test.skip('generateUri: required and optional params', async () => {
     const response = await client.cloud.generateUri({
-      app_id: 'app_id',
       name: 'name',
-      user_id: 'user_id',
+      app_id: 'app_id',
       created_by_user_id: 'created_by_user_id',
       expiry_days: 0,
       org_id: 'org_id',
+      user_id: 'user_id',
       'X-Morphik-Admin-Secret': 'X-Morphik-Admin-Secret',
     });
   });
@@ -68,10 +71,62 @@ describe('resource cloud', () => {
     await expect(
       client.cloud.listApps(
         {
+          app_id_filter: 'app_id_filter',
+          app_name_filter: 'app_name_filter',
           limit: 1,
           offset: 0,
           org_id: 'org_id',
           user_id: 'user_id',
+          'X-Morphik-Admin-Secret': 'X-Morphik-Admin-Secret',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Morphik.NotFoundError);
+  });
+
+  // Prism tests are disabled
+  test.skip('renameApp: only required params', async () => {
+    const responsePromise = client.cloud.renameApp({ new_name: 'new_name' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('renameApp: required and optional params', async () => {
+    const response = await client.cloud.renameApp({
+      new_name: 'new_name',
+      app_id: 'app_id',
+      app_name: 'app_name',
+      'X-Morphik-Admin-Secret': 'X-Morphik-Admin-Secret',
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('rotateAppToken', async () => {
+    const responsePromise = client.cloud.rotateAppToken();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('rotateAppToken: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.cloud.rotateAppToken(
+        {
+          app_id: 'app_id',
+          app_name: 'app_name',
+          expiry_days: 1,
           'X-Morphik-Admin-Secret': 'X-Morphik-Admin-Secret',
         },
         { path: '/_stainless_unknown_path' },
