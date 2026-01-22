@@ -107,32 +107,8 @@ Types:
 
 - <code><a href="./src/resources/graph/graph.ts">EntityExtractionPromptOverride</a></code>
 - <code><a href="./src/resources/graph/graph.ts">EntityResolutionPromptOverride</a></code>
-- <code><a href="./src/resources/graph/graph.ts">Graph</a></code>
-- <code><a href="./src/resources/graph/graph.ts">GraphPromptOverrides</a></code>
-- <code><a href="./src/resources/graph/graph.ts">GraphListResponse</a></code>
-- <code><a href="./src/resources/graph/graph.ts">GraphDeleteResponse</a></code>
-- <code><a href="./src/resources/graph/graph.ts">GraphStatusResponse</a></code>
-- <code><a href="./src/resources/graph/graph.ts">GraphVisualizationResponse</a></code>
-
-Methods:
-
-- <code title="post /graph/create">client.graph.<a href="./src/resources/graph/graph.ts">create</a>({ ...params }) -> Graph</code>
-- <code title="get /graph/{name}">client.graph.<a href="./src/resources/graph/graph.ts">retrieve</a>(name, { ...params }) -> Graph</code>
-- <code title="post /graph/{name}/update">client.graph.<a href="./src/resources/graph/graph.ts">update</a>(name, { ...params }) -> Graph</code>
-- <code title="get /graph/">client.graph.<a href="./src/resources/graph/graph.ts">list</a>({ ...params }) -> GraphListResponse</code>
-- <code title="delete /graph/{name}">client.graph.<a href="./src/resources/graph/graph.ts">delete</a>(name) -> GraphDeleteResponse</code>
-- <code title="get /graph/{name}/status">client.graph.<a href="./src/resources/graph/graph.ts">status</a>(name, { ...params }) -> GraphStatusResponse</code>
-- <code title="get /graph/{name}/visualization">client.graph.<a href="./src/resources/graph/graph.ts">visualization</a>(name, { ...params }) -> GraphVisualizationResponse</code>
 
 ## Workflow
-
-Types:
-
-- <code><a href="./src/resources/graph/workflow.ts">WorkflowStatusResponse</a></code>
-
-Methods:
-
-- <code title="get /graph/workflow/{workflow_id}/status">client.graph.workflow.<a href="./src/resources/graph/workflow.ts">status</a>(workflowID, { ...params }) -> WorkflowStatusResponse</code>
 
 # Ee
 

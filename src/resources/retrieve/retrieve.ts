@@ -99,21 +99,6 @@ export interface RetrieveCreateDocsParams {
   folder_name?: string | Array<string> | null;
 
   /**
-   * Name of the graph to use for knowledge graph-enhanced retrieval
-   */
-  graph_name?: string | null;
-
-  /**
-   * Number of relationship hops to traverse in the graph
-   */
-  hop_depth?: number | null;
-
-  /**
-   * Whether to include relationship paths in the response
-   */
-  include_paths?: boolean | null;
-
-  /**
    * Maximum number of chunks or documents to return.
    */
   k?: number;

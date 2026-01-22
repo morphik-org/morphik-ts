@@ -67,21 +67,9 @@ export {
   type FolderUpsertSummaryParams,
 } from './folders/folders';
 export {
-  GraphResource,
+  Graph,
   type EntityExtractionPromptOverride,
   type EntityResolutionPromptOverride,
-  type Graph,
-  type GraphPromptOverrides,
-  type GraphListResponse,
-  type GraphDeleteResponse,
-  type GraphStatusResponse,
-  type GraphVisualizationResponse,
-  type GraphCreateParams,
-  type GraphRetrieveParams,
-  type GraphUpdateParams,
-  type GraphListParams,
-  type GraphStatusParams,
-  type GraphVisualizationParams,
 } from './graph/graph';
 export {
   Ingest,
