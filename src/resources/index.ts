@@ -26,9 +26,13 @@ export {
   type CloudDeleteAppResponse,
   type CloudGenerateUriResponse,
   type CloudListAppsResponse,
+  type CloudRenameAppResponse,
+  type CloudRotateAppTokenResponse,
   type CloudDeleteAppParams,
   type CloudGenerateUriParams,
   type CloudListAppsParams,
+  type CloudRenameAppParams,
+  type CloudRotateAppTokenParams,
 } from './cloud';
 export {
   Documents,
@@ -67,11 +71,6 @@ export {
   type FolderUpsertSummaryParams,
 } from './folders/folders';
 export {
-  Graph,
-  type EntityExtractionPromptOverride,
-  type EntityResolutionPromptOverride,
-} from './graph/graph';
-export {
   Ingest,
   type TextRequest,
   type IngestBatchIngestFilesResponse,
@@ -101,3 +100,4 @@ export {
   type RetrieveCreateDocsParams,
 } from './retrieve/retrieve';
 export { Search, type SearchDocumentsResponse, type SearchDocumentsParams } from './search';
+export { Usage, type AppStorageUsageResponse } from './usage';

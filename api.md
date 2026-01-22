@@ -101,15 +101,6 @@ Methods:
 
 - <code title="get /logs/">client.logs.<a href="./src/resources/logs.ts">list</a>({ ...params }) -> LogListResponse</code>
 
-# Graph
-
-Types:
-
-- <code><a href="./src/resources/graph/graph.ts">EntityExtractionPromptOverride</a></code>
-- <code><a href="./src/resources/graph/graph.ts">EntityResolutionPromptOverride</a></code>
-
-## Workflow
-
 # Ee
 
 ## Connectors
@@ -215,12 +206,26 @@ Types:
 - <code><a href="./src/resources/cloud.ts">CloudDeleteAppResponse</a></code>
 - <code><a href="./src/resources/cloud.ts">CloudGenerateUriResponse</a></code>
 - <code><a href="./src/resources/cloud.ts">CloudListAppsResponse</a></code>
+- <code><a href="./src/resources/cloud.ts">CloudRenameAppResponse</a></code>
+- <code><a href="./src/resources/cloud.ts">CloudRotateAppTokenResponse</a></code>
 
 Methods:
 
 - <code title="delete /apps">client.cloud.<a href="./src/resources/cloud.ts">deleteApp</a>({ ...params }) -> CloudDeleteAppResponse</code>
 - <code title="post /cloud/generate_uri">client.cloud.<a href="./src/resources/cloud.ts">generateUri</a>({ ...params }) -> CloudGenerateUriResponse</code>
 - <code title="get /apps">client.cloud.<a href="./src/resources/cloud.ts">listApps</a>({ ...params }) -> unknown</code>
+- <code title="patch /apps/rename">client.cloud.<a href="./src/resources/cloud.ts">renameApp</a>({ ...params }) -> CloudRenameAppResponse</code>
+- <code title="post /apps/rotate_token">client.cloud.<a href="./src/resources/cloud.ts">rotateAppToken</a>({ ...params }) -> CloudRotateAppTokenResponse</code>
+
+# Usage
+
+Types:
+
+- <code><a href="./src/resources/usage.ts">AppStorageUsageResponse</a></code>
+
+Methods:
+
+- <code title="get /usage/app-storage">client.usage.<a href="./src/resources/usage.ts">appStorageUsage</a>() -> AppStorageUsageResponse</code>
 
 # Documents
 

@@ -41,6 +41,10 @@ import {
   CloudGenerateUriResponse,
   CloudListAppsParams,
   CloudListAppsResponse,
+  CloudRenameAppParams,
+  CloudRenameAppResponse,
+  CloudRotateAppTokenParams,
+  CloudRotateAppTokenResponse,
 } from './resources/cloud';
 import {
   Document,
@@ -88,6 +92,7 @@ import {
 import { Ping, PingCheckResponse, PingStatusResponse } from './resources/ping';
 import { Query, QueryGenerateCompletionParams, QueryGenerateCompletionResponse } from './resources/query';
 import { Search, SearchDocumentsParams, SearchDocumentsResponse } from './resources/search';
+import { AppStorageUsageResponse, Usage } from './resources/usage';
 import { Ee } from './resources/ee/ee';
 import {
   Folder,
@@ -103,11 +108,6 @@ import {
   FolderUpsertSummaryParams,
   Folders,
 } from './resources/folders/folders';
-import {
-  EntityExtractionPromptOverride,
-  EntityResolutionPromptOverride,
-  Graph,
-} from './resources/graph/graph';
 import {
   Retrieve,
   RetrieveCreateDocsParams,
@@ -806,13 +806,13 @@ export class Morphik {
   folders: API.Folders = new API.Folders(this);
   apiKeys: API.APIKeys = new API.APIKeys(this);
   logs: API.Logs = new API.Logs(this);
-  graph: API.Graph = new API.Graph(this);
   ee: API.Ee = new API.Ee(this);
   retrieve: API.Retrieve = new API.Retrieve(this);
   batch: API.Batch = new API.Batch(this);
   search: API.Search = new API.Search(this);
   query: API.Query = new API.Query(this);
   cloud: API.Cloud = new API.Cloud(this);
+  usage: API.Usage = new API.Usage(this);
   documents: API.Documents = new API.Documents(this);
   chat: API.Chat = new API.Chat(this);
 }
@@ -823,13 +823,13 @@ Morphik.Ingest = Ingest;
 Morphik.Folders = Folders;
 Morphik.APIKeys = APIKeys;
 Morphik.Logs = Logs;
-Morphik.Graph = Graph;
 Morphik.Ee = Ee;
 Morphik.Retrieve = Retrieve;
 Morphik.Batch = Batch;
 Morphik.Search = Search;
 Morphik.Query = Query;
 Morphik.Cloud = Cloud;
+Morphik.Usage = Usage;
 Morphik.Documents = Documents;
 Morphik.Chat = Chat;
 
@@ -889,12 +889,6 @@ export declare namespace Morphik {
 
   export { Logs as Logs, type LogListResponse as LogListResponse, type LogListParams as LogListParams };
 
-  export {
-    Graph as Graph,
-    type EntityExtractionPromptOverride as EntityExtractionPromptOverride,
-    type EntityResolutionPromptOverride as EntityResolutionPromptOverride,
-  };
-
   export { Ee as Ee };
 
   export {
@@ -928,10 +922,16 @@ export declare namespace Morphik {
     type CloudDeleteAppResponse as CloudDeleteAppResponse,
     type CloudGenerateUriResponse as CloudGenerateUriResponse,
     type CloudListAppsResponse as CloudListAppsResponse,
+    type CloudRenameAppResponse as CloudRenameAppResponse,
+    type CloudRotateAppTokenResponse as CloudRotateAppTokenResponse,
     type CloudDeleteAppParams as CloudDeleteAppParams,
     type CloudGenerateUriParams as CloudGenerateUriParams,
     type CloudListAppsParams as CloudListAppsParams,
+    type CloudRenameAppParams as CloudRenameAppParams,
+    type CloudRotateAppTokenParams as CloudRotateAppTokenParams,
   };
+
+  export { Usage as Usage, type AppStorageUsageResponse as AppStorageUsageResponse };
 
   export {
     Documents as Documents,
