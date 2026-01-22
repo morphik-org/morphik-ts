@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.9.0 (2026-01-22)
+
+Full Changelog: [v1.8.0...v1.9.0](https://github.com/morphik-org/morphik-ts/compare/v1.8.0...v1.9.0)
+
+### Features
+
+* **api:** manual updates ([da13889](https://github.com/morphik-org/morphik-ts/commit/da13889a02a00ad59c20b28ff3d1774e06d5973b))
+* **api:** manual updates ([29b50fa](https://github.com/morphik-org/morphik-ts/commit/29b50fa85f69a9db38693fefe9ee47e806b9c32f))
+* **api:** manual updates ([146136b](https://github.com/morphik-org/morphik-ts/commit/146136b90f3ba1a17c2bdae3dd665a6da9b66d6c))
+
+
+### Chores
+
+* break long lines in snippets into multiline ([5f9a685](https://github.com/morphik-org/morphik-ts/commit/5f9a685c5620732861ca0a3d1bc91c851eb765cb))
+* fix typo in descriptions ([18747d3](https://github.com/morphik-org/morphik-ts/commit/18747d37a734f3593bcad22aee9faffb78e50ee1))
+* **internal:** codegen related update ([7fbc717](https://github.com/morphik-org/morphik-ts/commit/7fbc717ae13a2e74befcc031cfeefbea93b1a5a7))
+* **internal:** update `actions/checkout` version ([8bfea14](https://github.com/morphik-org/morphik-ts/commit/8bfea142b62ebea6f57eede6c425061b5e4a865a))
+* **internal:** upgrade babel, qs, js-yaml ([7f306cb](https://github.com/morphik-org/morphik-ts/commit/7f306cb8b29d38c04b4ba22336c7bdacbd3606bf))
+
 ## 1.8.0 (2025-12-29)
 
 Full Changelog: [v1.7.0...v1.8.0](https://github.com/morphik-org/morphik-ts/compare/v1.7.0...v1.8.0)
