@@ -8,9 +8,6 @@ import { RequestOptions } from '../internal/request-options';
 export class Query extends APIResource {
   /**
    * Generate completion using relevant chunks as context.
-   *
-   * When graph_name is provided, the query will leverage the knowledge graph to
-   * enhance retrieval by finding relevant entities and their connected documents.
    */
   generateCompletion(
     body: QueryGenerateCompletionParams,
@@ -79,21 +76,6 @@ export interface QueryGenerateCompletionParams {
    * of paths.
    */
   folder_name?: string | Array<string> | null;
-
-  /**
-   * Name of the graph to use for knowledge graph-enhanced retrieval
-   */
-  graph_name?: string | null;
-
-  /**
-   * Number of relationship hops to traverse in the graph
-   */
-  hop_depth?: number | null;
-
-  /**
-   * Whether to include relationship paths in the response
-   */
-  include_paths?: boolean | null;
 
   /**
    * Whether to include inline citations with filename and page number in the

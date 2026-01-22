@@ -71,6 +71,8 @@ describe('resource cloud', () => {
     await expect(
       client.cloud.listApps(
         {
+          app_id_filter: 'app_id_filter',
+          app_name_filter: 'app_name_filter',
           limit: 1,
           offset: 0,
           org_id: 'org_id',

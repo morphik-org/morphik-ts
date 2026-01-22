@@ -116,6 +116,18 @@ export interface CloudGenerateUriParams {
 
 export interface CloudListAppsParams {
   /**
+   * Query param: JSON filter expression for app IDs (supports $and/$or/$not/$nor and
+   * $eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$regex/$contains).
+   */
+  app_id_filter?: string | null;
+
+  /**
+   * Query param: JSON filter expression for app name (supports $and/$or/$not/$nor
+   * and $eq/$ne/$gt/$gte/$lt/$lte/$in/$nin/$exists/$regex/$contains).
+   */
+  app_name_filter?: string | null;
+
+  /**
    * Query param
    */
   limit?: number;

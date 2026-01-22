@@ -107,18 +107,6 @@ import {
   EntityExtractionPromptOverride,
   EntityResolutionPromptOverride,
   Graph,
-  GraphCreateParams,
-  GraphDeleteResponse,
-  GraphListParams,
-  GraphListResponse,
-  GraphPromptOverrides,
-  GraphResource,
-  GraphRetrieveParams,
-  GraphStatusParams,
-  GraphStatusResponse,
-  GraphUpdateParams,
-  GraphVisualizationParams,
-  GraphVisualizationResponse,
 } from './resources/graph/graph';
 import {
   Retrieve,
@@ -818,7 +806,7 @@ export class Morphik {
   folders: API.Folders = new API.Folders(this);
   apiKeys: API.APIKeys = new API.APIKeys(this);
   logs: API.Logs = new API.Logs(this);
-  graph: API.GraphResource = new API.GraphResource(this);
+  graph: API.Graph = new API.Graph(this);
   ee: API.Ee = new API.Ee(this);
   retrieve: API.Retrieve = new API.Retrieve(this);
   batch: API.Batch = new API.Batch(this);
@@ -835,7 +823,7 @@ Morphik.Ingest = Ingest;
 Morphik.Folders = Folders;
 Morphik.APIKeys = APIKeys;
 Morphik.Logs = Logs;
-Morphik.GraphResource = GraphResource;
+Morphik.Graph = Graph;
 Morphik.Ee = Ee;
 Morphik.Retrieve = Retrieve;
 Morphik.Batch = Batch;
@@ -902,21 +890,9 @@ export declare namespace Morphik {
   export { Logs as Logs, type LogListResponse as LogListResponse, type LogListParams as LogListParams };
 
   export {
-    GraphResource as GraphResource,
+    Graph as Graph,
     type EntityExtractionPromptOverride as EntityExtractionPromptOverride,
     type EntityResolutionPromptOverride as EntityResolutionPromptOverride,
-    type Graph as Graph,
-    type GraphPromptOverrides as GraphPromptOverrides,
-    type GraphListResponse as GraphListResponse,
-    type GraphDeleteResponse as GraphDeleteResponse,
-    type GraphStatusResponse as GraphStatusResponse,
-    type GraphVisualizationResponse as GraphVisualizationResponse,
-    type GraphCreateParams as GraphCreateParams,
-    type GraphRetrieveParams as GraphRetrieveParams,
-    type GraphUpdateParams as GraphUpdateParams,
-    type GraphListParams as GraphListParams,
-    type GraphStatusParams as GraphStatusParams,
-    type GraphVisualizationParams as GraphVisualizationParams,
   };
 
   export { Ee as Ee };
