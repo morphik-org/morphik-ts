@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.9.1 (2026-01-24)
+
+Full Changelog: [v1.9.0...v1.9.1](https://github.com/morphik-org/morphik-ts/compare/v1.9.0...v1.9.1)
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([8513ce5](https://github.com/morphik-org/morphik-ts/commit/8513ce589bdffbd702a3cc9fa868ad499f216969))
+
 ## 1.9.0 (2026-01-22)
 
 Full Changelog: [v1.8.0...v1.9.0](https://github.com/morphik-org/morphik-ts/compare/v1.8.0...v1.9.0)
