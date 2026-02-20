@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource retrieve', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createDocs', async () => {
     const responsePromise = client.retrieve.createDocs({});
     const rawResponse = await responsePromise.asResponse();

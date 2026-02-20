@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource cloud', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('deleteApp: only required params', async () => {
     const responsePromise = client.cloud.deleteApp({ app_name: 'app_name' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource cloud', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('deleteApp: required and optional params', async () => {
     const response = await client.cloud.deleteApp({
       app_name: 'app_name',
@@ -28,7 +28,7 @@ describe('resource cloud', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('generateUri: only required params', async () => {
     const responsePromise = client.cloud.generateUri({ name: 'name' });
     const rawResponse = await responsePromise.asResponse();
@@ -40,7 +40,7 @@ describe('resource cloud', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('generateUri: required and optional params', async () => {
     const response = await client.cloud.generateUri({
       name: 'name',
@@ -53,7 +53,7 @@ describe('resource cloud', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listApps', async () => {
     const responsePromise = client.cloud.listApps();
     const rawResponse = await responsePromise.asResponse();
@@ -65,7 +65,7 @@ describe('resource cloud', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listApps: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -84,7 +84,7 @@ describe('resource cloud', () => {
     ).rejects.toThrow(Morphik.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('renameApp: only required params', async () => {
     const responsePromise = client.cloud.renameApp({ new_name: 'new_name' });
     const rawResponse = await responsePromise.asResponse();
@@ -96,7 +96,7 @@ describe('resource cloud', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('renameApp: required and optional params', async () => {
     const response = await client.cloud.renameApp({
       new_name: 'new_name',
@@ -106,7 +106,7 @@ describe('resource cloud', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('rotateAppToken', async () => {
     const responsePromise = client.cloud.rotateAppToken();
     const rawResponse = await responsePromise.asResponse();
@@ -118,7 +118,7 @@ describe('resource cloud', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('rotateAppToken: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource ping', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('check', async () => {
     const responsePromise = client.ping.check();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource ping', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('status', async () => {
     const responsePromise = client.ping.status();
     const rawResponse = await responsePromise.asResponse();
