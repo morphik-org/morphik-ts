@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource query', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('generateCompletion', async () => {
     const responsePromise = client.query.generateCompletion({});
     const rawResponse = await responsePromise.asResponse();

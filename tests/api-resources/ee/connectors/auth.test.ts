@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource auth', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('finalizeManualAuth: only required params', async () => {
     const responsePromise = client.ee.connectors.auth.finalizeManualAuth('connector_type', {
       credentials: { foo: 'bar' },
@@ -22,14 +22,14 @@ describe('resource auth', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('finalizeManualAuth: required and optional params', async () => {
     const response = await client.ee.connectors.auth.finalizeManualAuth('connector_type', {
       credentials: { foo: 'bar' },
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getInitiateAuthURL', async () => {
     const responsePromise = client.ee.connectors.auth.getInitiateAuthURL('connector_type');
     const rawResponse = await responsePromise.asResponse();
@@ -41,7 +41,7 @@ describe('resource auth', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getInitiateAuthURL: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

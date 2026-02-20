@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource connectors', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('disconnect: only required params', async () => {
     const responsePromise = client.ee.connectors.disconnect({ connector_type: 'connector_type' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,12 +20,12 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('disconnect: required and optional params', async () => {
     const response = await client.ee.connectors.disconnect({ connector_type: 'connector_type' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('finalizeAuth: only required params', async () => {
     const responsePromise = client.ee.connectors.finalizeAuth({
       auth_response_data: { foo: 'bar' },
@@ -40,7 +40,7 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('finalizeAuth: required and optional params', async () => {
     const response = await client.ee.connectors.finalizeAuth({
       auth_response_data: { foo: 'bar' },
@@ -48,7 +48,7 @@ describe('resource connectors', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getAuthStatus', async () => {
     const responsePromise = client.ee.connectors.getAuthStatus('connector_type');
     const rawResponse = await responsePromise.asResponse();
@@ -60,7 +60,7 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('handleOAuthCallback', async () => {
     const responsePromise = client.ee.connectors.handleOAuthCallback('connector_type');
     const rawResponse = await responsePromise.asResponse();
@@ -72,7 +72,7 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('handleOAuthCallback: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -89,7 +89,7 @@ describe('resource connectors', () => {
     ).rejects.toThrow(Morphik.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('ingestFile: only required params', async () => {
     const responsePromise = client.ee.connectors.ingestFile('connector_type', { file_id: 'file_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -101,7 +101,7 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('ingestFile: required and optional params', async () => {
     const response = await client.ee.connectors.ingestFile('connector_type', {
       file_id: 'file_id',
@@ -110,7 +110,7 @@ describe('resource connectors', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('ingestRepository: only required params', async () => {
     const responsePromise = client.ee.connectors.ingestRepository('connector_type', {
       repo_path: 'repo_path',
@@ -124,7 +124,7 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('ingestRepository: required and optional params', async () => {
     const response = await client.ee.connectors.ingestRepository('connector_type', {
       repo_path: 'repo_path',
@@ -138,7 +138,7 @@ describe('resource connectors', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('initiateAuth: only required params', async () => {
     const responsePromise = client.ee.connectors.initiateAuth({ connector_type: 'connector_type' });
     const rawResponse = await responsePromise.asResponse();
@@ -150,12 +150,12 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('initiateAuth: required and optional params', async () => {
     const response = await client.ee.connectors.initiateAuth({ connector_type: 'connector_type' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listFiles', async () => {
     const responsePromise = client.ee.connectors.listFiles('connector_type');
     const rawResponse = await responsePromise.asResponse();
@@ -167,7 +167,7 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listFiles: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -184,7 +184,7 @@ describe('resource connectors', () => {
     ).rejects.toThrow(Morphik.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listFilesViaBody: only required params', async () => {
     const responsePromise = client.ee.connectors.listFilesViaBody({ connector_type: 'connector_type' });
     const rawResponse = await responsePromise.asResponse();
@@ -196,7 +196,7 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listFilesViaBody: required and optional params', async () => {
     const response = await client.ee.connectors.listFilesViaBody({
       connector_type: 'connector_type',
@@ -205,7 +205,7 @@ describe('resource connectors', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('status: only required params', async () => {
     const responsePromise = client.ee.connectors.status({ connector_type: 'connector_type' });
     const rawResponse = await responsePromise.asResponse();
@@ -217,7 +217,7 @@ describe('resource connectors', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('status: required and optional params', async () => {
     const response = await client.ee.connectors.status({ connector_type: 'connector_type' });
   });

@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource usage', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('appStorageUsage', async () => {
     const responsePromise = client.usage.appStorageUsage();
     const rawResponse = await responsePromise.asResponse();

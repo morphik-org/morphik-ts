@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource documents', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('add: only required params', async () => {
     const responsePromise = client.folders.documents.add('document_id', {
       folder_id_or_name: 'folder_id_or_name',
@@ -22,14 +22,14 @@ describe('resource documents', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('add: required and optional params', async () => {
     const response = await client.folders.documents.add('document_id', {
       folder_id_or_name: 'folder_id_or_name',
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('remove: only required params', async () => {
     const responsePromise = client.folders.documents.remove('document_id', {
       folder_id_or_name: 'folder_id_or_name',
@@ -43,7 +43,7 @@ describe('resource documents', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('remove: required and optional params', async () => {
     const response = await client.folders.documents.remove('document_id', {
       folder_id_or_name: 'folder_id_or_name',
