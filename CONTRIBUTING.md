@@ -60,7 +60,7 @@ $ yarn link morphik
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global morphik
+$ pnpm link --global morphik
 ```
 
 ## Running tests
