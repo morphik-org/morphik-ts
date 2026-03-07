@@ -169,7 +169,7 @@ describe('resource documents', () => {
   // Mock server tests are disabled
   test.skip('updateFile: only required params', async () => {
     const responsePromise = client.documents.updateFile('document_id', {
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -183,7 +183,7 @@ describe('resource documents', () => {
   // Mock server tests are disabled
   test.skip('updateFile: required and optional params', async () => {
     const response = await client.documents.updateFile('document_id', {
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
       metadata: 'metadata',
       metadata_types: 'metadata_types',
       use_colpali: true,
