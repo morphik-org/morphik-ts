@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.9.1 (2026-03-10)
+
+Full Changelog: [v1.9.0...v1.9.1](https://github.com/morphik-org/morphik-ts/compare/v1.9.0...v1.9.1)
+
+### Bug Fixes
+
+* **client:** avoid memory leak with abort signals ([d4ab61c](https://github.com/morphik-org/morphik-ts/commit/d4ab61c33f1d02a5253e27841bb775a6ceea147d))
+* **client:** avoid removing abort listener too early ([a4fdb09](https://github.com/morphik-org/morphik-ts/commit/a4fdb095674574af92643d5212923579b73f84cc))
+* **client:** preserve URL params already embedded in path ([ef75c1e](https://github.com/morphik-org/morphik-ts/commit/ef75c1e49160235ba0c9f2300d16f84a1391e995))
+* **docs/contributing:** correct pnpm link command ([874ab6d](https://github.com/morphik-org/morphik-ts/commit/874ab6dd5315f49a5070a61b2c88f3ad009191ae))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([f9782ef](https://github.com/morphik-org/morphik-ts/commit/f9782ef5701800dc198f716cbaeda3caf1030ec5))
+* **ci:** upgrade `actions/github-script` ([8513ce5](https://github.com/morphik-org/morphik-ts/commit/8513ce589bdffbd702a3cc9fa868ad499f216969))
+* **client:** do not parse responses with empty content-length ([3169d51](https://github.com/morphik-org/morphik-ts/commit/3169d51148b52561338eea977226341cfb7c0831))
+* **client:** restructure abort controller binding ([b48b2b0](https://github.com/morphik-org/morphik-ts/commit/b48b2b0502d295c9a0cb4955437caddccc995bea))
+* **internal/client:** fix form-urlencoded requests ([866c221](https://github.com/morphik-org/morphik-ts/commit/866c221aacbcf220b11e12b83feeacea9578645e))
+* **internal:** avoid type checking errors with ts-reset ([ba8958a](https://github.com/morphik-org/morphik-ts/commit/ba8958a36758e190e863d6a032583fdd263ef942))
+* **internal:** codegen related update ([84e2bea](https://github.com/morphik-org/morphik-ts/commit/84e2bea715d7d26006857b480be39fc648ba6b92))
+* **internal:** move stringifyQuery implementation to internal function ([d86b7d5](https://github.com/morphik-org/morphik-ts/commit/d86b7d53cbab25dc6725b9a9580dcb167069f072))
+* **internal:** remove mock server code ([f64241c](https://github.com/morphik-org/morphik-ts/commit/f64241cbba49ce07de55752a373c796f1d5f30c5))
+* **internal:** update dependencies to address dependabot vulnerabilities ([9179190](https://github.com/morphik-org/morphik-ts/commit/91791900b38d9ab3602944f6b3133f64a132f1f6))
+* update mock server docs ([b5ae452](https://github.com/morphik-org/morphik-ts/commit/b5ae452777e9f154aac0185050dcf49cf9e97da3))
+* update placeholder string ([fbcbd63](https://github.com/morphik-org/morphik-ts/commit/fbcbd63f4aba9cc851f3c28add0380fc7389efa2))
+
 ## 1.9.0 (2026-01-22)
 
 Full Changelog: [v1.8.0...v1.9.0](https://github.com/morphik-org/morphik-ts/compare/v1.8.0...v1.9.0)
