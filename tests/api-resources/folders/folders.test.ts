@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource folders', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.folders.create({ name: 'name' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.folders.create({
       name: 'name',
@@ -30,7 +30,7 @@ describe('resource folders', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.folders.retrieve('folder_id_or_name');
     const rawResponse = await responsePromise.asResponse();
@@ -42,7 +42,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.folders.list();
     const rawResponse = await responsePromise.asResponse();
@@ -54,7 +54,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.folders.delete('folder_id_or_name');
     const rawResponse = await responsePromise.asResponse();
@@ -66,7 +66,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -74,7 +74,7 @@ describe('resource folders', () => {
     ).rejects.toThrow(Morphik.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('details', async () => {
     const responsePromise = client.folders.details({});
     const rawResponse = await responsePromise.asResponse();
@@ -86,7 +86,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getSummary', async () => {
     const responsePromise = client.folders.getSummary('folder_id_or_name');
     const rawResponse = await responsePromise.asResponse();
@@ -98,7 +98,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('listSummaries', async () => {
     const responsePromise = client.folders.listSummaries();
     const rawResponse = await responsePromise.asResponse();
@@ -110,7 +110,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('upsertSummary: only required params', async () => {
     const responsePromise = client.folders.upsertSummary('folder_id_or_name', { content: 'content' });
     const rawResponse = await responsePromise.asResponse();
@@ -122,7 +122,7 @@ describe('resource folders', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('upsertSummary: required and optional params', async () => {
     const response = await client.folders.upsertSummary('folder_id_or_name', {
       content: 'content',

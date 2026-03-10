@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource batch', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieveChunks', async () => {
     const responsePromise = client.batch.retrieveChunks({});
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource batch', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieveDocuments', async () => {
     const responsePromise = client.batch.retrieveDocuments({});
     const rawResponse = await responsePromise.asResponse();

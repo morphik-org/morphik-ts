@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource apiKeys', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.apiKeys.create({ api_key: 'api_key', provider: 'provider' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource apiKeys', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.apiKeys.create({
       api_key: 'api_key',
@@ -29,7 +29,7 @@ describe('resource apiKeys', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.apiKeys.list();
     const rawResponse = await responsePromise.asResponse();

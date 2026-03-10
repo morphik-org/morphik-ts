@@ -8,10 +8,10 @@ const client = new Morphik({
 });
 
 describe('resource ingest', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('batchIngestFiles: only required params', async () => {
     const responsePromise = client.ingest.batchIngestFiles({
-      files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
+      files: [await toFile(Buffer.from('Example data'), 'README.md')],
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -22,10 +22,10 @@ describe('resource ingest', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('batchIngestFiles: required and optional params', async () => {
     const response = await client.ingest.batchIngestFiles({
-      files: [await toFile(Buffer.from('# my file contents'), 'README.md')],
+      files: [await toFile(Buffer.from('Example data'), 'README.md')],
       end_user_id: 'end_user_id',
       folder_name: 'folder_name',
       metadata: 'metadata',
@@ -34,10 +34,10 @@ describe('resource ingest', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('documentQuery: only required params', async () => {
     const responsePromise = client.ingest.documentQuery({
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
       prompt: 'prompt',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -49,20 +49,20 @@ describe('resource ingest', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('documentQuery: required and optional params', async () => {
     const response = await client.ingest.documentQuery({
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
       prompt: 'prompt',
       ingestion_options: 'ingestion_options',
       response_schema: 'response_schema',
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('ingestFile: only required params', async () => {
     const responsePromise = client.ingest.ingestFile({
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -73,10 +73,10 @@ describe('resource ingest', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('ingestFile: required and optional params', async () => {
     const response = await client.ingest.ingestFile({
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
       end_user_id: 'end_user_id',
       folder_name: 'folder_name',
       metadata: 'metadata',
@@ -85,7 +85,7 @@ describe('resource ingest', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('ingestText: only required params', async () => {
     const responsePromise = client.ingest.ingestText({ content: 'content' });
     const rawResponse = await responsePromise.asResponse();
@@ -97,7 +97,7 @@ describe('resource ingest', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('ingestText: required and optional params', async () => {
     const response = await client.ingest.ingestText({
       content: 'content',
@@ -110,7 +110,7 @@ describe('resource ingest', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('requeue', async () => {
     const responsePromise = client.ingest.requeue({});
     const rawResponse = await responsePromise.asResponse();

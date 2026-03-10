@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource chunks', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create', async () => {
     const responsePromise = client.retrieve.chunks.create({});
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource chunks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createGrouped', async () => {
     const responsePromise = client.retrieve.chunks.createGrouped({});
     const rawResponse = await responsePromise.asResponse();

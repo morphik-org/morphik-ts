@@ -8,7 +8,7 @@ const client = new Morphik({
 });
 
 describe('resource search', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('documents: only required params', async () => {
     const responsePromise = client.search.documents({ query: 'x' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource search', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('documents: required and optional params', async () => {
     const response = await client.search.documents({
       query: 'x',
